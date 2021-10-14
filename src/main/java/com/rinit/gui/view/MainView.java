@@ -1,21 +1,19 @@
 
 package com.rinit.gui.view;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-
 import javax.swing.BoxLayout;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import com.rinit.gui.event.IEventHandler;
-import com.rinit.gui.view.panels.PanelsView;
 
 public class MainView extends JFrame {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1151303248940123808L;
 	
 	private IEventHandler eventHandler;
 	
@@ -39,10 +37,10 @@ public class MainView extends JFrame {
 	}
 	
 	private void addElements() {
-		PanelsView panelsView = new PanelsView(this.eventHandler);
+		TabsView tabsView = new TabsView(this.eventHandler);
 		CommandLineView commandLineView = new CommandLineView(this.eventHandler);
 		HelpBarView helpBarView = new HelpBarView();
-		this.add(panelsView);
+		this.add(tabsView);
 		this.add(commandLineView);
 		this.add(helpBarView);
 	}

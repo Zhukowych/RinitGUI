@@ -1,3 +1,4 @@
+
 package com.rinit.gui.event;
 
 public enum Event {
@@ -8,5 +9,9 @@ public enum Event {
 	GO_RIGHT_PANEL,
 	SWITCH_PANELS,
 	
-	SWITCH_TO_INPUT_MODE
+	SWITCH_TO_INPUT_MODE,
+	SWITCH_TO_DEFAULT_MODE,
+	SUBMIT_COMMAND,
+	
+	OPEN_TAB
 }

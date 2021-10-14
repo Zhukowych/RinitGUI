@@ -1,6 +1,8 @@
 package com.rinit.gui.model.viewModel;
 
-public class CommandLineViewModel {
+import com.rinit.gui.event.IEventContext;
+
+public class CommandViewModel implements IEventContext {
 	
 	private String command;
 	

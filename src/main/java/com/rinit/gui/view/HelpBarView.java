@@ -7,6 +7,11 @@ import javax.swing.JPanel;
 
 public class HelpBarView extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3376412077704053070L;
+	
 	private static final int PREFERED_HEIGHT = 20;
 	private Dimension preferedDimension = new Dimension((int)this.getMaximumSize().getWidth(), PREFERED_HEIGHT);
 	

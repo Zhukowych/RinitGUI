@@ -14,5 +14,10 @@ public class CommandLineModel extends AbstractModel {
 		this.eventHandler.setKeyMode(Mode.INSERT);
 		this.eventHandler.performEvent(Event.SWITCH_TO_INPUT_MODE, this, null);
 	}
+	
+	public void switchToDefaultMode() {
+		this.eventHandler.setKeyMode(Mode.DEFAULT);
+		this.eventHandler.performEvent(Event.SWITCH_TO_DEFAULT_MODE, this, null);
+	}
 
 }
