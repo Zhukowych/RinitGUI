@@ -22,6 +22,7 @@ public class CommandLineController extends AbstractController {
 	public CommandLineController(IEventHandler eventHandler, ModelFacade modelFacade) {
 		super(eventHandler, modelFacade);
 		this.commandLineModel = modelFacade.getCommandLineModel();
+		this.binModel = modelFacade.getBinModel();
 	}
 
 	private void goToCommandLine() {

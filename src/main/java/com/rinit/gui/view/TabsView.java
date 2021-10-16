@@ -1,13 +1,23 @@
 package com.rinit.gui.view;
 
 import javax.swing.BoxLayout;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import com.rinit.gui.event.Event;
+import com.rinit.gui.event.IEventContext;
 import com.rinit.gui.event.IEventHandler;
+import com.rinit.gui.event.IListener;
+import com.rinit.gui.model.viewModel.CliBinViewModel;
 import com.rinit.gui.view.panels.PanelsView;
 
 public class TabsView extends AbstractView {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1647809133407144350L;
+
 	private JTabbedPane tabbedPane = new JTabbedPane();
 	private PanelsView panelsView;
 	
@@ -21,6 +31,23 @@ public class TabsView extends AbstractView {
 	public void configureTabbedPane() {
 		this.tabbedPane.addTab("File explorer", panelsView);
 		this.add(this.tabbedPane);
+	}
+	
+	private void openTab(CliBinViewModel viewModel) {
+		System.out.print(viewModel.getView());
+		this.tabbedPane.addTab("test", viewModel.getView());
+		this.tabbedPane.setSelectedIndex(this.tabbedPane.getTabCount()-1);
+	}
+
+	@Override
+	protected void subscribeForEvents() {
+		this.eventHandler.subscribe(new IListener() {
+			
+			public void eventPerformed(IEventContext eventInfo) {
+				openTab((CliBinViewModel)eventInfo);
+			}
+			
+		}, Event.OPEN_TAB);
 	}
 	
 }

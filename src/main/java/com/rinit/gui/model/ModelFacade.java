@@ -8,13 +8,15 @@ import com.rinit.gui.model.panels.PanelsModel;
 public class ModelFacade {
 	
 	private PanelsModel panelsModel;	
+	private TabsModel tabsModel;
 	private CommandLineModel commandLineModel;
 	private BinModel binModel;
 	
 	public ModelFacade(IEventHandler eventHandler) {
 		this.panelsModel = new PanelsModel(eventHandler);
+		this.tabsModel = new TabsModel(eventHandler);
 		this.commandLineModel = new CommandLineModel(eventHandler);
-		this.binModel = new BinModel(eventHandler);
+		this.binModel = new BinModel(eventHandler, this);
 	}
 	
 	public PanelsModel getPanelsModel() {
@@ -27,6 +29,10 @@ public class ModelFacade {
 
 	public BinModel getBinModel() {
 		return this.binModel;
+	}
+
+	public TabsModel getTabsModel() {
+		return tabsModel;
 	}
 	
 }

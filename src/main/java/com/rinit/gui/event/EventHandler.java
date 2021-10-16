@@ -29,6 +29,12 @@ public class EventHandler implements IEventHandler {
 	public void subscribe(IListener listener, Event event) {
 		this.listeners.get(event).add(listener);
 	}
+
+	public void subscribeForKeyEvent(IListener listener, KeyStroke stroke) {
+		for (Mode mode : Mode.values()) {
+			this.subscribeForKeyEvent(listener, stroke, mode);
+		}
+	}
 	
 	public void subscribeForKeyEvent(IListener listener, KeyStroke stroke, Mode mode) {
 		Map<KeyStroke, List<IListener>> listenersByKeys = this.listenersByModes.get(mode);

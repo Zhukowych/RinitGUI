@@ -10,6 +10,9 @@ public abstract class AbstractView extends JPanel {
 	
 	public AbstractView(IEventHandler eventHandler) {
 		this.eventHandler = eventHandler;
+		this.subscribeForEvents();
 	}
+	
+	protected abstract void subscribeForEvents();
 	
 }
