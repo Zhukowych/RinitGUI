@@ -34,7 +34,6 @@ public class TabsView extends AbstractView {
 	}
 	
 	private void openTab(CliBinViewModel viewModel) {
-		System.out.print(viewModel.getView());
 		this.tabbedPane.addTab("test", viewModel.getView());
 		this.tabbedPane.setSelectedIndex(this.tabbedPane.getTabCount()-1);
 	}

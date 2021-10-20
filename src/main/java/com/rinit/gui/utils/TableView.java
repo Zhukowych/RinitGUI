@@ -1,6 +1,8 @@
 package com.rinit.gui.utils;
 
+import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -28,13 +30,23 @@ public class TableView extends JPanel {
 		this.tableModel.setColumnIdentifiers(this.columns);
 		this.table = new JTable(this.tableModel);
 		this.table.getTableHeader().setReorderingAllowed(false);
+		this.table.setFont(new Font("Arial", Font.BOLD, 12));
 		this.add(new JScrollPane(this.table));	
 		this.configureColumnsWidth();
 	}
 	
+	public void addRow(Vector<String> row) {
+		row.add(0, "123");
+		this.tableModel.addRow(row);
+	}
+	
 	private void configureColumnsWidth() {
 		 TableColumnModel columnModel = this.table.getColumnModel();
-		 System.out.println(this.getMaximumSize().getWidth());
+		 columnModel.getColumn(0).setPreferredWidth(50);
+		 for (int i = 1; i < this.table.getColumnCount(); i++) {
+			 columnModel.getColumn(i).setPreferredWidth(1000);
+		 }
+
 	}
 	
 	private Object[] createColumns(String[] columns) {

@@ -10,10 +10,11 @@ public class UploadBin extends AbstractCliBin {
 	
 	private static final String LIBRARY = "lib";
 	private static final String BIN = "bin";
+	private static final String PHYSICAL_FILE = "pfile";
+	private static final String DRIVER = "driver";
 	
 	private String[] params;
 	private ModelFacade modelFacade;
-	
 	private AbstractCliBinView view;
 	
 	
@@ -21,6 +22,7 @@ public class UploadBin extends AbstractCliBin {
 		this.params = params;
 		this.modelFacade = modelFacade;
 		this.setView();
+		this.injectModelFacades();
 	}
 	
 	@Override
@@ -28,12 +30,20 @@ public class UploadBin extends AbstractCliBin {
 		return this.view;
 	}
 	
+	private void injectModelFacades() {
+		UploadBinLogic.setModelFacade(this.modelFacade);
+	}
+	
 	private void setView() {
 		if (this.params[0].equals(UploadBin.LIBRARY)) {
 			this.view = new UploadLibView();
-		} else {
+		} else if (this.params[0].equals(UploadBin.BIN)) {
 			this.view = new UploadBinView();
-		} 
+		} else if (this.params[0].equals(UploadBin.PHYSICAL_FILE)) {
+			this.view = new UploadPhysicalFileView();
+		} else if(this.params[0].equals(UploadBin.DRIVER)) {
+			this.view = new UploadDriverView();
+		}
 	}
 
 }

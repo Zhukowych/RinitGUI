@@ -4,6 +4,7 @@ import java.awt.Component;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import com.rinit.gui.clibin.AbstractCliBinView;
 import com.rinit.gui.utils.JFilePicker;

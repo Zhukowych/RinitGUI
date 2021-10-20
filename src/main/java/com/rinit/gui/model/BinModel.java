@@ -1,4 +1,4 @@
-package com.rinit.gui.model.bin;
+package com.rinit.gui.model;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -10,8 +10,6 @@ import com.rinit.gui.clibin.AbstractCliBin;
 import com.rinit.gui.clibin.upload.UploadBin;
 import com.rinit.gui.event.Event;
 import com.rinit.gui.event.IEventHandler;
-import com.rinit.gui.model.AbstractModel;
-import com.rinit.gui.model.ModelFacade;
 import com.rinit.gui.model.viewModel.CliBinViewModel;
 
 public class BinModel extends AbstractModel{
@@ -26,6 +24,7 @@ public class BinModel extends AbstractModel{
 	}
 	
 	public void execute(String command) {
+
 		AbstractCliBin bin = this.getBin(this.getBinName(command), this.getParameters(command));
 		CliBinViewModel viewModel = new CliBinViewModel();
 		viewModel.setView(bin.getView());
@@ -38,7 +37,8 @@ public class BinModel extends AbstractModel{
 			Constructor<? extends AbstractCliBin> cons  = bin.getConstructor(String[].class, ModelFacade.class);
 			Object params_ = (Object)params;
 			Object modelFacade = (Object)this.modelFacade;
-			return cons.newInstance(params_, modelFacade);
+			Object fd = cons.newInstance(params_, modelFacade);
+			return (AbstractCliBin) fd;
 		} catch (InstantiationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

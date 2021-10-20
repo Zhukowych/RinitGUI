@@ -35,10 +35,16 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Dell/eclipse-workspace/RinitGUI/file_dto.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Dell/eclipse-workspace/RinitGUI/services_interfaces.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Dell/eclipse-workspace/RinitGUI/exception.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Dell/eclipse-workspace/RinitGUI/rinit_client.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Dell/eclipse-workspace/RinitGUI/extentions.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dell/.m2/repository/org/springframework/spring-test/5.3.8/spring-test-5.3.8.jar" sourcepath="C:/Users/Dell/.m2/repository/org/springframework/spring-test/5.3.8/spring-test-5.3.8-sources.jar">
+		<attributes>
+			<attribute name="test" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="org.springframework"/>
+			<attribute name="maven.artifactId" value="spring-test"/>
+			<attribute name="maven.version" value="5.3.8"/>
+			<attribute name="maven.scope" value="test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="/Rinit"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -9,9 +9,9 @@ import com.rinit.gui.event.IEventContext;
 import com.rinit.gui.event.IEventHandler;
 import com.rinit.gui.event.IListener;
 import com.rinit.gui.event.Mode;
+import com.rinit.gui.model.BinModel;
 import com.rinit.gui.model.CommandLineModel;
 import com.rinit.gui.model.ModelFacade;
-import com.rinit.gui.model.bin.BinModel;
 import com.rinit.gui.model.viewModel.CommandViewModel;
 
 public class CommandLineController extends AbstractController {

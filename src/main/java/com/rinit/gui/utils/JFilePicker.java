@@ -1,6 +1,6 @@
 package com.rinit.gui.utils;
 
-import java.awt.Dimension;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,12 +10,13 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
  
 public class JFilePicker extends JPanel {
-    
-	private static final int PREFERED_HEIGHT = 40;
-	private Dimension preferedDimension = new Dimension((int)this.getMaximumSize().getWidth() - 30, PREFERED_HEIGHT);
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3480111468892213262L;
 	
 	private String textFieldLabel;
     private String buttonLabel;
@@ -34,14 +35,10 @@ public class JFilePicker extends JPanel {
      
     public JFilePicker(String textFieldLabel, String buttonLabel) {
         this.layout = new GroupLayout(this);
-        this.layout.setAutoCreateGaps(true); 
-        this.layout.setAutoCreateContainerGaps(true); 
         this.setLayout(this.layout);
         
     	this.textFieldLabel = textFieldLabel;
     	this.buttonLabel = buttonLabel;
-		 
-        this.fileChooser = new JFileChooser();
          
         
         // creates the GUI
@@ -56,8 +53,11 @@ public class JFilePicker extends JPanel {
         });
          
         this.layout.setHorizontalGroup(this.layout.createSequentialGroup()
+        		.addGap(5)
         		.addComponent(this.label)
+        		.addGap(5)
         		.addComponent(this.textField)
+        		.addGap(5)
         		.addComponent(this.button));
         
         this.layout.setVerticalGroup(this.layout.createSequentialGroup()
@@ -70,7 +70,8 @@ public class JFilePicker extends JPanel {
     }
      
     private void buttonActionPerformed(ActionEvent evt) {
-        if (mode == MODE_OPEN) {
+        this.fileChooser = new JFileChooser();
+    	if (mode == MODE_OPEN) {
             if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
                 textField.setText(fileChooser.getSelectedFile().getAbsolutePath());
             }
