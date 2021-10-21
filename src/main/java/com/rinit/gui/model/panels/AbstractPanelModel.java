@@ -57,6 +57,10 @@ public abstract class AbstractPanelModel {
 		}
 	}
 	
+	public FileDTO getSelectedFile() {
+		return this.fileList.getSelectedFile();
+	}
+	
 	protected abstract void updateView();
 	protected abstract void updateViewSelection();
 	

@@ -17,10 +17,8 @@ public class UploadBin extends AbstractCliBin {
 	private ModelFacade modelFacade;
 	private AbstractCliBinView view;
 	
-	
 	public UploadBin(String[] params, ModelFacade modelFacade) {
-		this.params = params;
-		this.modelFacade = modelFacade;
+		super(params, modelFacade);
 		this.setView();
 		this.injectModelFacades();
 	}

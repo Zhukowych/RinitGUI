@@ -44,5 +44,5 @@ public class PanelsModel {
 	public AbstractPanelModel getSelectedPanelModel() {
 		return this.selectedPanelModel;
 	}
-	
+		
 }

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.rinit.gui.clibin.AbstractCliBin;
+import com.rinit.gui.clibin.read.ReadBin;
 import com.rinit.gui.clibin.upload.UploadBin;
 import com.rinit.gui.event.Event;
 import com.rinit.gui.event.IEventHandler;
@@ -63,6 +64,7 @@ public class BinModel extends AbstractModel{
 	
 	private void addDefaultBin() {
 		bins.put(UploadBin.NAME, UploadBin.class);
+		bins.put(ReadBin.NAME, ReadBin.class);
 	}
 
 	private String getBinName(String command) {
