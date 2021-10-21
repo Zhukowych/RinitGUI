@@ -12,5 +12,7 @@ public abstract class AbstractCliFileDriver {
 		this.readingFile = readingFile;
 		this.modelFacade = modelFacade;
 	}
+
+	public abstract AbstractCliFileDriverView getView();
 	
 }

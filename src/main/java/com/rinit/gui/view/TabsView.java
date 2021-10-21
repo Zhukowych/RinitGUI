@@ -37,6 +37,10 @@ public class TabsView extends AbstractView {
 		this.tabbedPane.addTab("test", viewModel.getView());
 		this.tabbedPane.setSelectedIndex(this.tabbedPane.getTabCount()-1);
 	}
+	
+	private void closeTab() {
+		this.tabbedPane.remove(this.tabbedPane.getSelectedIndex());
+	}
 
 	@Override
 	protected void subscribeForEvents() {
@@ -47,6 +51,15 @@ public class TabsView extends AbstractView {
 			}
 			
 		}, Event.OPEN_TAB);
+		
+		this.eventHandler.subscribe(new IListener() {
+			
+			public void eventPerformed(IEventContext eventInfo) {
+				closeTab();
+			}
+			
+		}, Event.CLOSE_TAB);
+	
 	}
 	
 }

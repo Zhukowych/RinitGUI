@@ -1,6 +1,7 @@
 package com.rinit.gui.model.fileDriver;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,20 +13,23 @@ import com.rinit.gui.model.fileDriver.cliDrivers.DefaultCliDriver;
 
 public class FileDriverModel extends AbstractModel {
 
+	private ModelFacade modelFacade;
 	private Map<String, Class<? extends AbstractCliFileDriver>> defaultCliFileDriver = new HashMap<String, Class<? extends AbstractCliFileDriver>>();
 	
-	public FileDriverModel(IEventHandler eventHandler) {
+	public FileDriverModel(IEventHandler eventHandler, ModelFacade modelFacade) {
 		super(eventHandler);
+		this.modelFacade = modelFacade;
 		this.addDefaultCliFileDriver();
 	}
 
-	public AbstractCliFileDriver getCliFileDriverForExtention(FileDTO readingFile, String extention) throws NoSuchMethodException, SecurityException{
-		Class<? extends AbstractCliFileDriver> driver = this.defaultCliFileDriver.get(extention);
+	public AbstractCliFileDriver getCliFileDriverForExtention(FileDTO readingFile) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		Class<? extends AbstractCliFileDriver> driver = this.defaultCliFileDriver.get(readingFile.getExtention());
 		if (driver == null)
 			driver = this.defaultCliFileDriver.get(DefaultCliDriver.NAME);
-		
 		Constructor<? extends AbstractCliFileDriver> cons  = driver.getConstructor(FileDTO.class, ModelFacade.class);
-		Object _readingFile = (Object)this.
+		Object _readingFile = (Object)readingFile;
+		Object _modelFacade = (Object)this.modelFacade;
+		return cons.newInstance(_readingFile, _modelFacade);
 	}
 
 	private void addDefaultCliFileDriver() {

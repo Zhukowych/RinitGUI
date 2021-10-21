@@ -5,6 +5,7 @@ import com.rinit.debugger.server.dto.FileDTO;
 import com.rinit.gui.clibin.AbstractCliBin;
 import com.rinit.gui.clibin.AbstractCliBinView;
 import com.rinit.gui.model.ModelFacade;
+import com.rinit.gui.model.fileDriver.AbstractCliFileDriver;
 
 public class ReadBin extends AbstractCliBin  {
 
@@ -14,6 +15,7 @@ public class ReadBin extends AbstractCliBin  {
 	private String fileName;
 	private RinitClient rinitClient;
 	private FileDTO readingFile;
+	private AbstractCliFileDriver readingFileDriver;
 	
 	public ReadBin(String[] params, ModelFacade modelFacade) {
 		super(params, modelFacade);
@@ -24,7 +26,7 @@ public class ReadBin extends AbstractCliBin  {
 
 	@Override
 	public AbstractCliBinView getView() {
-		return new ReadBinView();
+		return new ReadBinView(this.readingFile, this.readingFileDriver);
 	}
 	
 	private void splitParams() {
@@ -34,6 +36,11 @@ public class ReadBin extends AbstractCliBin  {
 
 	private void setReadingFile() {
 		this.readingFile = this.rinitClient.getFileService().getFileByPathAndName(this.filePath, this.fileName).get(0);
+		try {
+			this.readingFileDriver = this.modelFacade.getFileDriverModel().getCliFileDriverForExtention(readingFile);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

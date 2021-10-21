@@ -16,20 +16,19 @@ import com.rinit.gui.model.viewModel.CliBinViewModel;
 public class BinModel extends AbstractModel{
 	
 	private ModelFacade modelFacade;
+	private TabsModel tabsModel;
 	private Map<String, Class<? extends AbstractCliBin>> bins = new HashMap<String, Class<? extends AbstractCliBin>>();
 	
 	public BinModel(IEventHandler eventHandler, ModelFacade modelFacade) {
 		super(eventHandler);
 		this.modelFacade = modelFacade;
+		this.tabsModel = this.modelFacade.getTabsModel();
 		this.addDefaultBin();
 	}
 	
 	public void execute(String command) {
-
 		AbstractCliBin bin = this.getBin(this.getBinName(command), this.getParameters(command));
-		CliBinViewModel viewModel = new CliBinViewModel();
-		viewModel.setView(bin.getView());
-		this.eventHandler.performEvent(Event.OPEN_TAB, this, viewModel);
+		this.tabsModel.addTab(bin);
 	}
 	
 	private AbstractCliBin getBin(String binName, String[] params) {

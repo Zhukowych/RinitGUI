@@ -1,6 +1,7 @@
 package com.rinit.gui.model;
 
 import com.rinit.gui.event.IEventHandler;
+import com.rinit.gui.model.fileDriver.FileDriverModel;
 import com.rinit.gui.model.panels.PanelsModel;
 
 
@@ -10,14 +11,16 @@ public class ModelFacade {
 	private TabsModel tabsModel;
 	private PanelsModel panelsModel;	
 	private CommandLineModel commandLineModel;
+	private FileDriverModel fileDriverModel;
 	private RinitClientModel rinitClientModel;
 	
 	public ModelFacade(IEventHandler eventHandler) {
+		this.tabsModel = new TabsModel(eventHandler); // must be before bin model
 		this.binModel = new BinModel(eventHandler, this);
-		this.tabsModel = new TabsModel(eventHandler);
 		this.panelsModel = new PanelsModel(eventHandler);
 		this.commandLineModel = new CommandLineModel(eventHandler);
 		this.rinitClientModel = new RinitClientModel(eventHandler);
+		this.fileDriverModel = new FileDriverModel(eventHandler, this);
 	}
 
 	public BinModel getBinModel() {
@@ -25,7 +28,7 @@ public class ModelFacade {
 	}
 
 	public TabsModel getTabsModel() {
-		return tabsModel;
+		return this.tabsModel;
 	}
 	
 	public PanelsModel getPanelsModel() {
@@ -38,6 +41,10 @@ public class ModelFacade {
 
 	public RinitClientModel getRinitClientModel() {
 		return rinitClientModel;
+	}
+
+	public FileDriverModel getFileDriverModel() {
+		return fileDriverModel;
 	}
 	
 }

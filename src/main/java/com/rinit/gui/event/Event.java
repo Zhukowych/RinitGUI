@@ -13,5 +13,6 @@ public enum Event {
 	SWITCH_TO_DEFAULT_MODE,
 	SUBMIT_COMMAND,
 	
-	OPEN_TAB
+	OPEN_TAB,
+	CLOSE_TAB
 }

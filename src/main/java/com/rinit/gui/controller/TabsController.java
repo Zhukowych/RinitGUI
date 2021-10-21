@@ -20,7 +20,7 @@ public class TabsController extends AbstractController {
 	}
 
 	private void closeTab() {
-		
+		this.tabsModel.closeTab();
 	}
 	
 	@Override
