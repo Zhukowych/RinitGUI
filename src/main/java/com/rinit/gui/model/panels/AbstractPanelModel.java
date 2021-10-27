@@ -29,6 +29,11 @@ public abstract class AbstractPanelModel {
 		this.setInitialFiles();
 	}
 	
+	public void reUpdateFiles() {
+		this.fileList.setFiles(this.getFilesByPath());
+		this.updateView();
+	}
+	
 	protected void setInitialFiles() {
 		this.fileList.setFiles(this.getFilesByPath());
 		this.updateView();
@@ -59,6 +64,10 @@ public abstract class AbstractPanelModel {
 	
 	public FileDTO getSelectedFile() {
 		return this.fileList.getSelectedFile();
+	}
+
+	public String getCurrentPath() {
+		return this.fileList.getCurrentPath();
 	}
 	
 	protected abstract void updateView();

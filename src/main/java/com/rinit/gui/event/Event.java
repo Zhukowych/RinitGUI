@@ -14,5 +14,7 @@ public enum Event {
 	SUBMIT_COMMAND,
 	
 	OPEN_TAB,
-	CLOSE_TAB
+	CLOSE_TAB,
+	SELECT_TAB
+	
 }

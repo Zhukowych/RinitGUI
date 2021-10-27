@@ -23,8 +23,17 @@ public class TabsController extends AbstractController {
 		this.tabsModel.closeTab();
 	}
 	
+	private void moveLeft() {
+		this.tabsModel.moveLeft();
+	}
+	
+	private void moveRight() {
+		this.tabsModel.moveRight();
+	}
+	
 	@Override
 	protected void subscribeForEvents() {
+
 		this.eventHandler.subscribeForKeyEvent(new IListener() {
 
 			public void eventPerformed(IEventContext eventInfo) {
@@ -32,6 +41,24 @@ public class TabsController extends AbstractController {
 			}
 			
 		}, KeyStroke.getKeyStroke(KeyEvent.VK_W, KeyEvent.CTRL_DOWN_MASK));
+	
+		this.eventHandler.subscribeForKeyEvent(new IListener() {
+
+			public void eventPerformed(IEventContext eventInfo) {
+				moveLeft();
+			}
+			
+		}, KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, KeyEvent.CTRL_DOWN_MASK));
+	
+		this.eventHandler.subscribeForKeyEvent(new IListener() {
+
+			public void eventPerformed(IEventContext eventInfo) {
+				moveRight();
+			}
+			
+		}, KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, KeyEvent.CTRL_DOWN_MASK));
+	
+	
 	}
 
 }

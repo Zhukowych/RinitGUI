@@ -1,11 +1,16 @@
 package com.rinit.gui.clibin;
 
+import java.awt.Dimension;
+
+import javax.swing.JDialog;
+
 import com.rinit.gui.model.ModelFacade;
 
 public abstract class AbstractCliBin {
 	
 	protected String[] params;
 	protected ModelFacade modelFacade;
+	protected JDialog popUp;
 	
 	public AbstractCliBin(String[] params, ModelFacade modelFacade) {
 		this.params = params;
@@ -13,5 +18,8 @@ public abstract class AbstractCliBin {
 	}
 	
 	public abstract AbstractCliBinView getView();
+	
+	public abstract boolean isPopUp();
+	public abstract Dimension getPopUpSize();
 	
 }

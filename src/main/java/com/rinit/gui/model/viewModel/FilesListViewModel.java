@@ -63,6 +63,14 @@ public class FilesListViewModel implements IEventContext{
 		if (this.selectedIndex != 0)
 			this.selectedIndex--;
 	}
+	
+	public String getCurrentPath() {
+		StringBuilder builder = new StringBuilder();
+		for (String dir : this.paths) {
+			builder.append(dir);
+		}
+		return builder.toString();
+	}
 
 	
 }

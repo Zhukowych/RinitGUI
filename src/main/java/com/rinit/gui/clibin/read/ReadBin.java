@@ -1,5 +1,7 @@
 package com.rinit.gui.clibin.read;
 
+import java.awt.Dimension;
+
 import com.rinit.debugger.server.client.RinitClient;
 import com.rinit.debugger.server.dto.FileDTO;
 import com.rinit.gui.clibin.AbstractCliBin;
@@ -27,6 +29,17 @@ public class ReadBin extends AbstractCliBin  {
 	@Override
 	public AbstractCliBinView getView() {
 		return new ReadBinView(this.readingFile, this.readingFileDriver);
+	}
+	
+	@Override
+	public boolean isPopUp() {
+		return false;
+	}
+
+	@Override
+	public Dimension getPopUpSize() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	private void splitParams() {

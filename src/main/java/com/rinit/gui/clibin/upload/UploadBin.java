@@ -1,5 +1,7 @@
 package com.rinit.gui.clibin.upload;
 
+import java.awt.Dimension;
+
 import com.rinit.gui.clibin.AbstractCliBin;
 import com.rinit.gui.clibin.AbstractCliBinView;
 import com.rinit.gui.model.ModelFacade;
@@ -26,6 +28,16 @@ public class UploadBin extends AbstractCliBin {
 	@Override
 	public AbstractCliBinView getView() {
 		return this.view;
+	}
+	
+	@Override
+	public boolean isPopUp() {
+		return false;
+	}
+
+	@Override
+	public Dimension getPopUpSize() {
+		return null;
 	}
 	
 	private void injectModelFacades() {

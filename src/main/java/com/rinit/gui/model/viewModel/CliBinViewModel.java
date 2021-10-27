@@ -1,18 +1,14 @@
 package com.rinit.gui.model.viewModel;
 
+import java.awt.Dimension;
+
 import com.rinit.gui.clibin.AbstractCliBinView;
 import com.rinit.gui.event.IEventContext;
 
 public class CliBinViewModel implements IEventContext {
 	
-	private AbstractCliBinView view;
-
-	public AbstractCliBinView getView() {
-		return view;
-	}
-
-	public void setView(AbstractCliBinView view) {
-		this.view = view;
-	}
+	public boolean isPopup;
+	public Dimension popupSize;
+	public AbstractCliBinView view;
 	
 }

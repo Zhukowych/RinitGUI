@@ -19,6 +19,7 @@ public class PanelsModel {
 		this.eventHandler = eventHandler;
 		this.leftPanelModel = new LeftPanelModel(eventHandler);
 		this.rightPanelModel = new RightPanelModel(eventHandler);
+		this.setPanel(Panel.RIGHT);
 	}
 	
 	public void setPanel(Panel goToPanel) {
@@ -35,5 +36,18 @@ public class PanelsModel {
 	public AbstractPanelModel getSelectedPanelModel() {
 		return this.selectedPanelModel;
 	}
-		
+
+	public String getCurrentPath() {
+		return this.getSelectedPanelModel().getCurrentPath();
+	}
+	
+	public void reUpdatePanels() {
+		if (this.leftPanelModel.getCurrentPath().equals(this.rightPanelModel.getCurrentPath())) {
+			this.leftPanelModel.reUpdateFiles();
+			this.rightPanelModel.reUpdateFiles();
+		} else {
+			this.selectedPanelModel.reUpdateFiles();
+		}
+	}
+	
 }
