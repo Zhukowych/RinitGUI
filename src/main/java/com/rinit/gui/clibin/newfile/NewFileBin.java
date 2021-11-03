@@ -1,3 +1,4 @@
+
 package com.rinit.gui.clibin.newfile;
 
 import java.awt.Dimension;

@@ -10,9 +10,8 @@ import com.rinit.gui.clibin.AbstractCliBin;
 import com.rinit.gui.clibin.newfile.NewFileBin;
 import com.rinit.gui.clibin.read.ReadBin;
 import com.rinit.gui.clibin.upload.UploadBin;
-import com.rinit.gui.event.Event;
+import com.rinit.gui.dev.core.DevCliBins;
 import com.rinit.gui.event.IEventHandler;
-import com.rinit.gui.model.viewModel.CliBinViewModel;
 
 public class BinModel extends AbstractModel{
 	
@@ -63,9 +62,11 @@ public class BinModel extends AbstractModel{
 	}
 	
 	private void addDefaultBin() {
-		bins.put(UploadBin.NAME, UploadBin.class);
-		bins.put(ReadBin.NAME, ReadBin.class);
-		bins.put(NewFileBin.NAME, NewFileBin.class);
+		DevCliBins devCliBins = new DevCliBins();
+		this.bins.putAll(devCliBins.getDevBins());
+		this.bins.put(UploadBin.NAME, UploadBin.class);
+		this.bins.put(ReadBin.NAME, ReadBin.class);
+		this.bins.put(NewFileBin.NAME, NewFileBin.class);
 	}
 
 	private String getBinName(String command) {

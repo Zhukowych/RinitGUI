@@ -10,6 +10,7 @@ import com.rinit.gui.event.IEventHandler;
 import com.rinit.gui.model.AbstractModel;
 import com.rinit.gui.model.ModelFacade;
 import com.rinit.gui.model.fileDriver.cliDrivers.DefaultCliDriver;
+import com.rinit.gui.model.fileDriver.dev.DevDrivers;
 
 public class FileDriverModel extends AbstractModel {
 
@@ -33,6 +34,8 @@ public class FileDriverModel extends AbstractModel {
 	}
 
 	private void addDefaultCliFileDriver() {
+		DevDrivers devDrivers = new DevDrivers();
+		this.defaultCliFileDriver.putAll(devDrivers.getCliFileDrivers());
 		this.defaultCliFileDriver.put(DefaultCliDriver.NAME, DefaultCliDriver.class);
 	}
 

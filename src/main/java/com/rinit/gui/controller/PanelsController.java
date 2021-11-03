@@ -51,7 +51,7 @@ public class PanelsController {
 	
 	private void enterOnFile() {
 		FileDTO selectedFile = this.panelsModel.getSelectedPanelModel().getSelectedFile();
-		if (selectedFile.getExtention().contains(Extentions.DIRECTORY) && !selectedFile.getExtention().equals(UtilExtentions.HIGH))
+		if (selectedFile.getExtention().contains(Extentions.DIRECTORY) || selectedFile.getExtention().equals(UtilExtentions.HIGH))
 			this.panelsModel.getSelectedPanelModel().goDeepHight();
 		else  
 			this.binModel.execute(this.createReadCommandForFile(selectedFile));

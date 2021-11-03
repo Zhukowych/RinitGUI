@@ -33,13 +33,12 @@ public class ReadBin extends AbstractCliBin  {
 	
 	@Override
 	public boolean isPopUp() {
-		return false;
+		return this.readingFileDriver.isPopup();
 	}
 
 	@Override
 	public Dimension getPopUpSize() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.readingFileDriver.getPopUpSize();
 	}
 	
 	private void splitParams() {

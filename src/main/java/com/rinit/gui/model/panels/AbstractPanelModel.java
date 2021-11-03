@@ -67,7 +67,7 @@ public abstract class AbstractPanelModel {
 	}
 
 	public String getCurrentPath() {
-		return this.fileList.getCurrentPath();
+		return this.fileList.peekFromPathStack();
 	}
 	
 	protected abstract void updateView();

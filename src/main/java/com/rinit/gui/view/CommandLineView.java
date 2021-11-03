@@ -60,6 +60,7 @@ public class CommandLineView extends JPanel {
 		this.eventHandler.subscribeForKeyEvent(new IListener() {
 
 			public void eventPerformed(IEventContext eventInfo) {
+				System.out.println(123123);
 				submitCommand();
 			}
 		

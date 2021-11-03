@@ -1,5 +1,7 @@
 package com.rinit.gui.model.fileDriver.cliDrivers;
 
+import java.awt.Dimension;
+
 import com.rinit.debugger.server.dto.FileDTO;
 import com.rinit.gui.model.ModelFacade;
 import com.rinit.gui.model.fileDriver.AbstractCliFileDriver;
@@ -21,6 +23,22 @@ public class DefaultCliDriver extends AbstractCliFileDriver {
 	@Override
 	public AbstractCliFileDriverView getView() {
 		return new DefaultCliDriverView(this.logic);
+	}
+
+	@Override
+	public String getName() {
+		return DefaultCliDriver.NAME;
+	}
+
+	@Override
+	public boolean isPopup() {
+		return false;
+	}
+
+	@Override
+	public Dimension getPopUpSize() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
