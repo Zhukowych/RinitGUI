@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.rinit.gui.clibin.AbstractCliBin;
+import com.rinit.gui.clibin.mkdir.MkDirBin;
 import com.rinit.gui.clibin.newfile.NewFileBin;
 import com.rinit.gui.clibin.read.ReadBin;
 import com.rinit.gui.clibin.upload.UploadBin;
@@ -25,10 +26,14 @@ public class BinModel extends AbstractModel{
 		this.tabsModel = this.modelFacade.getTabsModel();
 		this.addDefaultBin();
 	}
-	
+
 	public void execute(String command) {
 		AbstractCliBin bin = this.getBin(this.getBinName(command), this.getParameters(command));
 		this.tabsModel.addTab(bin);
+	}
+
+	public Map<String, Class<? extends AbstractCliBin>> getBins() {
+		return this.bins;
 	}
 	
 	private AbstractCliBin getBin(String binName, String[] params) {
@@ -64,6 +69,7 @@ public class BinModel extends AbstractModel{
 	private void addDefaultBin() {
 		DevCliBins devCliBins = new DevCliBins();
 		this.bins.putAll(devCliBins.getDevBins());
+		this.bins.put(MkDirBin.NAME, MkDirBin.class);
 		this.bins.put(UploadBin.NAME, UploadBin.class);
 		this.bins.put(ReadBin.NAME, ReadBin.class);
 		this.bins.put(NewFileBin.NAME, NewFileBin.class);

@@ -17,6 +17,7 @@ public class ReadBinView extends AbstractCliBinView {
 	private FileDTO readingFile;
 	private AbstractCliFileDriver readingFileDriver;
 	
+	public ReadBinView() {}
 	
 	public ReadBinView(FileDTO readingFile, AbstractCliFileDriver readingFileDriver) {
 		this.readingFile = readingFile;

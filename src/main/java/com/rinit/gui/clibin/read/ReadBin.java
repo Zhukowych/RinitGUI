@@ -2,6 +2,8 @@ package com.rinit.gui.clibin.read;
 
 import java.awt.Dimension;
 
+import javax.swing.KeyStroke;
+
 import com.rinit.debugger.server.client.RinitClient;
 import com.rinit.debugger.server.dto.FileDTO;
 import com.rinit.gui.clibin.AbstractCliBin;
@@ -18,6 +20,8 @@ public class ReadBin extends AbstractCliBin  {
 	private RinitClient rinitClient;
 	private FileDTO readingFile;
 	private AbstractCliFileDriver readingFileDriver;
+	
+	public ReadBin() {}
 	
 	public ReadBin(String[] params, ModelFacade modelFacade) {
 		super(params, modelFacade);
@@ -53,6 +57,18 @@ public class ReadBin extends AbstractCliBin  {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public KeyStroke getKeyBinding() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

@@ -1,15 +1,34 @@
-package com.rinit.gui.dev.bin.debuggerBin;
+package com.rinit.gui.dev.bin.debugger;
 
 import java.awt.Dimension;
+
+import javax.swing.KeyStroke;
 
 import com.rinit.gui.clibin.AbstractCliBin;
 import com.rinit.gui.clibin.AbstractCliBinView;
 import com.rinit.gui.model.ModelFacade;
 
 public class DebuggerBin extends AbstractCliBin {
+ 
+	public static final String NAME = "debug";
 
+	private DebuggerBinLogic logic;
+	private DebuggerBinView view;
+	
+	public DebuggerBin() {}
+	
 	public DebuggerBin(String[] params, ModelFacade modelFacade) {
-		super(params, modelFacade);
+		this.logic = new DebuggerBinLogic(modelFacade);
+	}
+	
+	@Override
+	public String getName() {
+		return NAME;
+	}
+
+	@Override
+	public KeyStroke getKeyBinding() {
+		return null;
 	}
 
 	@Override
@@ -20,13 +39,11 @@ public class DebuggerBin extends AbstractCliBin {
 
 	@Override
 	public boolean isPopUp() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public Dimension getPopUpSize() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -2,8 +2,9 @@
 package com.rinit.gui.clibin.newfile;
 
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 
-import javax.swing.JDialog;
+import javax.swing.KeyStroke;
 
 import com.rinit.gui.clibin.AbstractCliBin;
 import com.rinit.gui.clibin.AbstractCliBinView;
@@ -14,6 +15,8 @@ public class NewFileBin extends AbstractCliBin {
 	public static final String NAME = "new";
 
 	private NewFileLogic logic;
+	
+	public NewFileBin() {}
 	
 	public NewFileBin(String[] params, ModelFacade modelFacade) {
 		super(params, modelFacade);
@@ -33,6 +36,16 @@ public class NewFileBin extends AbstractCliBin {
 	@Override
 	public Dimension getPopUpSize() {
 		return new Dimension(600, 200);
+	}
+
+	@Override
+	public String getName() {
+		return NAME;
+	}
+
+	@Override
+	public KeyStroke getKeyBinding() {
+		return KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK);
 	}
 
 }

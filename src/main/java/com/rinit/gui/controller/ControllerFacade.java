@@ -17,11 +17,15 @@ public class ControllerFacade {
 	@SuppressWarnings("unused")
 	private TabsController tabsController;
 	
+	@SuppressWarnings("unused")
+	private BinController binController;
+	
 	
 	public ControllerFacade(IEventHandler eventHandler, ModelFacade modelFacade) {
 		this.panelsController = new PanelsController(eventHandler,  modelFacade);
 		this.commandLineController = new CommandLineController(eventHandler, modelFacade);
 		this.tabsController = new TabsController(eventHandler, modelFacade);
+		this.binController = new BinController(eventHandler, modelFacade);
 	}
 	
 }

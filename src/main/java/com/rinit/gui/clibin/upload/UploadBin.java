@@ -2,6 +2,8 @@ package com.rinit.gui.clibin.upload;
 
 import java.awt.Dimension;
 
+import javax.swing.KeyStroke;
+
 import com.rinit.gui.clibin.AbstractCliBin;
 import com.rinit.gui.clibin.AbstractCliBinView;
 import com.rinit.gui.model.ModelFacade;
@@ -18,6 +20,8 @@ public class UploadBin extends AbstractCliBin {
 	private String[] params;
 	private ModelFacade modelFacade;
 	private AbstractCliBinView view;
+	
+	public UploadBin() {}
 	
 	public UploadBin(String[] params, ModelFacade modelFacade) {
 		super(params, modelFacade);
@@ -54,6 +58,18 @@ public class UploadBin extends AbstractCliBin {
 		} else if(this.params[0].equals(UploadBin.DRIVER)) {
 			this.view = new UploadDriverView();
 		}
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public KeyStroke getKeyBinding() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

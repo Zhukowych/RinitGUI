@@ -23,6 +23,7 @@ public class FilesListViewModel implements IEventContext{
 			partsPath = partsPath + part + "/";
 			this.paths.push(partsPath);
 		}
+		System.out.println(this.paths);
 	}
 	
 	public void setSelectedIndex(int selectedIndex) {

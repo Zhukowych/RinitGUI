@@ -66,6 +66,12 @@ public class PanelsController {
 		FileDTO selectedFile = this.panelsModel.getSelectedPanelModel().getSelectedFile();
 		this.binModel.execute(this.createReadCommandForFile(selectedFile));
 	}
+	
+	private void deleteFile() {
+		this.panelsModel.getSelectedPanelModel().deleteSelectedFile();
+		this.panelsModel.reUpdatePanels();
+		this.panelsModel.getSelectedPanelModel().goUp();
+	}
 
 	private void bindKeys() {
 		this.eventHandler.subscribeForKeyEvent(new IListener() {
@@ -116,6 +122,15 @@ public class PanelsController {
 			}
 			
 		}, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, KeyEvent.SHIFT_DOWN_MASK), Mode.DEFAULT);
+		
+		this.eventHandler.subscribeForKeyEvent(new IListener() {
+			
+			@Override
+			public void eventPerformed(IEventContext eventInfo) {
+				deleteFile();
+			}
+			
+		}, KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), Mode.DEFAULT);
 		
 	}
 	

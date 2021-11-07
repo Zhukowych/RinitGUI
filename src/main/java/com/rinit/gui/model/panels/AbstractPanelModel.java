@@ -62,6 +62,10 @@ public abstract class AbstractPanelModel {
 		}
 	}
 	
+	public void deleteSelectedFile() {
+		fileService.deleteFile(this.fileList.getSelectedFile());
+	}
+	
 	public FileDTO getSelectedFile() {
 		return this.fileList.getSelectedFile();
 	}
