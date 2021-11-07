@@ -13,6 +13,7 @@ import com.rinit.gui.event.IListener;
 import com.rinit.gui.event.Mode;
 import com.rinit.gui.model.BinModel;
 import com.rinit.gui.model.ModelFacade;
+import com.rinit.gui.model.fileDriver.FileDriverModel;
 import com.rinit.gui.model.panels.AbstractPanelModel;
 import com.rinit.gui.model.panels.Panel;
 import com.rinit.gui.model.panels.PanelsModel;
@@ -23,11 +24,13 @@ public class PanelsController {
 	private IEventHandler eventHandler;
 	private PanelsModel panelsModel;
 	private BinModel binModel;
+	private FileDriverModel driverModel;
 	
 	public PanelsController(IEventHandler eventHandler, ModelFacade modelFacade) {
 		this.eventHandler = eventHandler;
 		this.panelsModel = modelFacade.getPanelsModel();
 		this.binModel = modelFacade.getBinModel();
+		this.driverModel = modelFacade.getFileDriverModel();
 		this.bindKeys();
 	}
 	
@@ -51,10 +54,17 @@ public class PanelsController {
 	
 	private void enterOnFile() {
 		FileDTO selectedFile = this.panelsModel.getSelectedPanelModel().getSelectedFile();
-		if (selectedFile.getExtention().contains(Extentions.DIRECTORY) || selectedFile.getExtention().equals(UtilExtentions.HIGH))
-			this.panelsModel.getSelectedPanelModel().goDeepHight();
+		if (selectedFile.getExtention().contains(Extentions.DIRECTORY) || this.driverModel.isExtentionDirable(selectedFile.getExtention()))
+			this.panelsModel.getSelectedPanelModel().goDeepHight(true);
+		else if (selectedFile.getExtention().equals(UtilExtentions.HIGH))
+			this.panelsModel.getSelectedPanelModel().goDeepHight(false);			
 		else  
 			this.binModel.execute(this.createReadCommandForFile(selectedFile));
+	}
+	
+	private void forceEnterOnFile() {
+		FileDTO selectedFile = this.panelsModel.getSelectedPanelModel().getSelectedFile();
+		this.binModel.execute(this.createReadCommandForFile(selectedFile));
 	}
 
 	private void bindKeys() {
@@ -97,6 +107,15 @@ public class PanelsController {
 			}
 			
 		}, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), Mode.DEFAULT);
+
+		this.eventHandler.subscribeForKeyEvent(new IListener() {
+
+			@Override
+			public void eventPerformed(IEventContext eventInfo) {
+				forceEnterOnFile();
+			}
+			
+		}, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, KeyEvent.SHIFT_DOWN_MASK), Mode.DEFAULT);
 		
 	}
 	

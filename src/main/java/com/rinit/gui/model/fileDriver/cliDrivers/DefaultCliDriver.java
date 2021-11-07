@@ -37,8 +37,12 @@ public class DefaultCliDriver extends AbstractCliFileDriver {
 
 	@Override
 	public Dimension getPopUpSize() {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean isDirable() {
+		return true;
 	}
 
 }

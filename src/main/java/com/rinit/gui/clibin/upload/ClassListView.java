@@ -50,7 +50,7 @@ public class ClassListView extends JPanel {
 	}
 	
 	private void addClass() {
-		this.table.addRow(this.createEmptyVector());
+		this.table.addRow(new String[] {""});
 	}
 	
 	private Vector<String> createEmptyVector(){

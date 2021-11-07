@@ -20,6 +20,7 @@ public abstract class AbstractCliFileDriver {
 	public abstract String getName();
 	public abstract AbstractCliFileDriverView getView();
 	public abstract boolean isPopup();
+	public abstract boolean isDirable();
 	public abstract Dimension getPopUpSize();
 	
 }

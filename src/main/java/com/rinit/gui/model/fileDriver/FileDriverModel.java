@@ -33,6 +33,22 @@ public class FileDriverModel extends AbstractModel {
 		return cons.newInstance(_readingFile, _modelFacade);
 	}
 
+	public boolean isExtentionDirable(String extention) {
+		Class<? extends AbstractCliFileDriver> driverClass = this.defaultCliFileDriver.get(extention);
+		if (driverClass == null)
+			return false;
+		AbstractCliFileDriver cliDriver = null;
+		try {
+			cliDriver = driverClass.getDeclaredConstructor().newInstance();
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+		}
+		if (cliDriver == null) 
+			return false;
+		
+		return cliDriver.isDirable();
+	}
+	
 	private void addDefaultCliFileDriver() {
 		DevDrivers devDrivers = new DevDrivers();
 		this.defaultCliFileDriver.putAll(devDrivers.getCliFileDrivers());

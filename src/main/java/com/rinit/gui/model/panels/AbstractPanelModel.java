@@ -53,9 +53,9 @@ public abstract class AbstractPanelModel {
 		this.updateViewSelection();
 	}
 
-	public void goDeepHight() {
+	public void goDeepHight(boolean isDirable) {
 		FileDTO file = this.fileList.getSelectedFile();
-		if(file.getExtention().contains(Extentions.DIRECTORY)) {
+		if(file.getExtention().contains(Extentions.DIRECTORY) || isDirable) {
 			this.goDeep(file);
 		}else if(file.getExtention().contentEquals(UtilExtentions.HIGH)){
 			this.goHigh();

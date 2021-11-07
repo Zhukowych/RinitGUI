@@ -11,10 +11,15 @@ public class RequestCliDriver extends AbstractCliFileDriver {
 
 	private static final String NAME = "request";
 
+	private RequestCliDriverLogic logic;
+	private AbstractCliFileDriverView view;
+	
 	public RequestCliDriver() {}
 	
 	public RequestCliDriver(FileDTO readingFile, ModelFacade modelFacade) {
 		super(readingFile, modelFacade);
+		this.logic = new RequestCliDriverLogic(readingFile, modelFacade);
+		this.view = new RequestCliDriverView(this.logic);
 	}
 	
 	@Override
@@ -24,18 +29,22 @@ public class RequestCliDriver extends AbstractCliFileDriver {
 
 	@Override
 	public AbstractCliFileDriverView getView() {
-		return new RequestCliDriverView();
+		return this.view;
 	}
 
 	@Override
 	public boolean isPopup() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public Dimension getPopUpSize() {
 		return new Dimension(600, 400);
+	}
+
+	@Override
+	public boolean isDirable() {
+		return true;
 	}
 
 }
