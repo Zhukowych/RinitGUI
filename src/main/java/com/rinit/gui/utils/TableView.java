@@ -31,6 +31,8 @@ public class TableView extends JPanel {
 	private Object[] columns;
 	private DefaultTableModel tableModel;
 	
+	public TableView() {}
+	
 	public TableView(String[] columns) {
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.columns = this.createColumns(columns);

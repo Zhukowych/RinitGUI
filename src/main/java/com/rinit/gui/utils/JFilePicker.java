@@ -53,7 +53,6 @@ public class JFilePicker extends JPanel {
         });
          
         this.layout.setHorizontalGroup(this.layout.createSequentialGroup()
-        		.addGap(5)
         		.addComponent(this.label)
         		.addGap(5)
         		.addComponent(this.textField)

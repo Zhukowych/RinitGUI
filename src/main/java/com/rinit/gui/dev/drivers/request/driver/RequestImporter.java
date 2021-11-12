@@ -1,6 +1,5 @@
-package com.rinit.gui.dev.drivers.request;
+package com.rinit.gui.dev.drivers.request.driver;
 
-import com.rinit.debugger.server.dto.FileDTO;
 import com.rinit.debugger.server.utils.XMLReader;
 
 public class RequestImporter {
@@ -8,9 +7,9 @@ public class RequestImporter {
 	private RequestDriver file;
 	private XMLReader reaader;
 	
-	public RequestImporter(RequestDriver file, FileDTO dto) {
+	public RequestImporter(RequestDriver file) {
 		this.file = file;
-		this.reaader = new XMLReader(dto.getContent());
+		this.reaader = new XMLReader(this.file.getDto().getContent());
 	}
 	
 	public void parse() {

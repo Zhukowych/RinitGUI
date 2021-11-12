@@ -41,6 +41,7 @@ public class MkDirBinView extends AbstractCliBinView {
 	}
 	
 	private void constructGUI() {
+		
 		this.layout.setHorizontalGroup(this.layout.createParallelGroup(Alignment.LEADING) 
 				.addGroup(this.layout.createSequentialGroup()
 						.addComponent(this.dirNameLabel)

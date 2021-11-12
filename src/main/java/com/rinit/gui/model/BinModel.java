@@ -69,8 +69,8 @@ public class BinModel extends AbstractModel{
 	private void addDefaultBin() {
 		DevCliBins devCliBins = new DevCliBins();
 		this.bins.putAll(devCliBins.getDevBins());
-		this.bins.put(MkDirBin.NAME, MkDirBin.class);
 		this.bins.put(UploadBin.NAME, UploadBin.class);
+		this.bins.put(MkDirBin.NAME, MkDirBin.class);
 		this.bins.put(ReadBin.NAME, ReadBin.class);
 		this.bins.put(NewFileBin.NAME, NewFileBin.class);
 	}

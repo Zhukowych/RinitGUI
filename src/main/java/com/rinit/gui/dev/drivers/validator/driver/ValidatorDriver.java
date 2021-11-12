@@ -1,8 +1,10 @@
 package com.rinit.gui.dev.drivers.validator.driver;
 
 import com.rinit.debugger.server.file.AbstractDriver;
+import com.rinit.gui.dev.bin.debugger.bin.DebuggerDriver;
+import com.rinit.gui.dev.bin.debugger.bin.RunContext;
 
-public class ValidatorDriver extends AbstractDriver {
+public class ValidatorDriver extends AbstractDriver implements DebuggerDriver {
 
 	private int requiredHttpCode;
 	
@@ -26,6 +28,12 @@ public class ValidatorDriver extends AbstractDriver {
 
 	public void setRequiredHttpCode(int requiredHttpCode) {
 		this.requiredHttpCode = requiredHttpCode;
+	}
+
+	@Override
+	public void run(RunContext context) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

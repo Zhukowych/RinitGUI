@@ -143,8 +143,10 @@ public class RequestParamsCliDriverView extends AbstractCliFileDriverView {
 		}
 		
 		public void setInitialData(RequestParamsSubmitData initialData) {
-			this.getParamsTable.addAll(initialData.getParams);
-			this.postParamsTable.addAll(initialData.postParams);
+			if (initialData.getParams != null)
+				this.getParamsTable.addAll(initialData.getParams);
+			if (initialData.postParams != null)
+				this.postParamsTable.addAll(initialData.postParams);
 		}
 		
 		private TableView getCurrenctTable() {

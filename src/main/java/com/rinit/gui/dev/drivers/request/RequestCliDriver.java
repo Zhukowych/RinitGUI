@@ -3,6 +3,8 @@ package com.rinit.gui.dev.drivers.request;
 import java.awt.Dimension;
 
 import com.rinit.debugger.server.dto.FileDTO;
+import com.rinit.debugger.server.file.AbstractDriver;
+import com.rinit.gui.dev.drivers.request.driver.RequestDriver;
 import com.rinit.gui.model.ModelFacade;
 import com.rinit.gui.model.fileDriver.AbstractCliFileDriver;
 import com.rinit.gui.model.fileDriver.AbstractCliFileDriverView;
@@ -45,6 +47,11 @@ public class RequestCliDriver extends AbstractCliFileDriver {
 	@Override
 	public boolean isDirable() {
 		return true;
+	}
+
+	@Override
+	public Class<? extends AbstractDriver> getDriver() {
+		return RequestDriver.class;
 	}
 
 }

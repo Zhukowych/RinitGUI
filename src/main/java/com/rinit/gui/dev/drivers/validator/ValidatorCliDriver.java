@@ -3,6 +3,8 @@ package com.rinit.gui.dev.drivers.validator;
 import java.awt.Dimension;
 
 import com.rinit.debugger.server.dto.FileDTO;
+import com.rinit.debugger.server.file.AbstractDriver;
+import com.rinit.gui.dev.drivers.validator.driver.ValidatorDriver;
 import com.rinit.gui.model.ModelFacade;
 import com.rinit.gui.model.fileDriver.AbstractCliFileDriver;
 import com.rinit.gui.model.fileDriver.AbstractCliFileDriverView;
@@ -45,6 +47,11 @@ public class ValidatorCliDriver extends AbstractCliFileDriver {
 	@Override
 	public Dimension getPopUpSize() {
 		return new Dimension(600, 400);
+	}
+
+	@Override
+	public Class<? extends AbstractDriver> getDriver() {
+		return ValidatorDriver.class;
 	}
 
 }

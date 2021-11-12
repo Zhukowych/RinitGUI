@@ -7,13 +7,16 @@ import java.util.Map;
 import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;
 
+import com.rinit.debugger.server.file.AbstractDriver;
 import com.rinit.gui.model.fileDriver.AbstractCliFileDriver;
 
 public class DevDrivers {
 	
 	private Map<String, Class<? extends AbstractCliFileDriver>> cliFileDrivers = new HashMap<String, Class<? extends AbstractCliFileDriver>>();
+	private Map<String, Class<? extends AbstractDriver>> fileDrivers = new HashMap<String, Class<? extends AbstractDriver>>();
 
 	public DevDrivers() {
+		this.createDevCliDrivers();
 		this.createDevDrivers();
 	}
 	
@@ -21,12 +24,33 @@ public class DevDrivers {
 		return this.cliFileDrivers;
 	}
 	
-	private void createDevDrivers() {
+	public Map<String, Class<? extends AbstractDriver>> getFileDrivers() {
+		return fileDrivers;
+	}
+
+	public void createDevDrivers() {
+		Reflections reflections = new Reflections("com.rinit.gui.dev.drivers", new SubTypesScanner(false));
+		for(Class<? extends AbstractDriver> driverClass : reflections.getSubTypesOf(AbstractDriver.class)) {
+			AbstractDriver driver = this.getDriverClass(driverClass);
+			this.fileDrivers.put(driver.getName(), driverClass);
+		}
+	}
+	
+	private void createDevCliDrivers() {
 		Reflections reflections = new Reflections("com.rinit.gui.dev.drivers", new SubTypesScanner(false));
 		for(Class<? extends AbstractCliFileDriver> cliFileDriverClass : reflections.getSubTypesOf(AbstractCliFileDriver.class)) {
 			AbstractCliFileDriver cliFileDriver = this.getCliFileDriverClass(cliFileDriverClass);
 			this.cliFileDrivers.put(cliFileDriver.getName(), cliFileDriverClass);
 		}
+	}
+	
+	public AbstractDriver getDriverClass(Class<? extends AbstractDriver> driverClass) {
+		try {
+			return driverClass.getConstructor().newInstance();
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public AbstractCliFileDriver getCliFileDriverClass(Class<? extends AbstractCliFileDriver> cliFileDriverClass) {

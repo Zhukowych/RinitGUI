@@ -3,6 +3,7 @@ package com.rinit.gui.model.fileDriver.cliDrivers;
 import java.awt.Dimension;
 
 import com.rinit.debugger.server.dto.FileDTO;
+import com.rinit.debugger.server.file.AbstractDriver;
 import com.rinit.gui.model.ModelFacade;
 import com.rinit.gui.model.fileDriver.AbstractCliFileDriver;
 import com.rinit.gui.model.fileDriver.AbstractCliFileDriverView;
@@ -12,6 +13,8 @@ public class DefaultCliDriver extends AbstractCliFileDriver {
 	public static final String NAME = "default";
 
 	private DefaultFileDriverLogic logic;
+
+	public DefaultCliDriver() {}
 	
 	public DefaultCliDriver(FileDTO readingFile, ModelFacade modelFacade) {
 		super(readingFile, modelFacade);
@@ -43,6 +46,11 @@ public class DefaultCliDriver extends AbstractCliFileDriver {
 	@Override
 	public boolean isDirable() {
 		return true;
+	}
+
+	@Override
+	public Class<? extends AbstractDriver> getDriver() {
+		return null;
 	}
 
 }

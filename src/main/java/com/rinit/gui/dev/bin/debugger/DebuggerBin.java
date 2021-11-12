@@ -19,6 +19,7 @@ public class DebuggerBin extends AbstractCliBin {
 	
 	public DebuggerBin(String[] params, ModelFacade modelFacade) {
 		this.logic = new DebuggerBinLogic(modelFacade);
+		this.view = new DebuggerBinView(this.logic);
 	}
 	
 	@Override
@@ -33,8 +34,7 @@ public class DebuggerBin extends AbstractCliBin {
 
 	@Override
 	public AbstractCliBinView getView() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.view;
 	}
 
 	@Override

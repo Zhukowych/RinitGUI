@@ -3,11 +3,18 @@ package com.rinit.gui.dev.drivers.requestParams;
 import java.awt.Dimension;
 
 import com.rinit.debugger.server.dto.FileDTO;
+import com.rinit.debugger.server.file.AbstractDriver;
+import com.rinit.gui.dev.drivers.requestParams.dirver.RequestParamsDriver;
 import com.rinit.gui.model.ModelFacade;
 import com.rinit.gui.model.fileDriver.AbstractCliFileDriver;
 import com.rinit.gui.model.fileDriver.AbstractCliFileDriverView;
 
 public class RequestParamsCliDriver extends AbstractCliFileDriver {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5743667048596982665L;
 
 	private static final String NAME = "request.params";
 	
@@ -45,6 +52,11 @@ public class RequestParamsCliDriver extends AbstractCliFileDriver {
 	@Override
 	public Dimension getPopUpSize() {
 		return new Dimension(600, 400);
+	}
+
+	@Override
+	public Class<? extends AbstractDriver> getDriver() {
+		return RequestParamsDriver.class;
 	}
 
 }

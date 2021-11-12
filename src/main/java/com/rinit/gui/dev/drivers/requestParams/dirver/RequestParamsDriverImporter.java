@@ -9,11 +9,15 @@ public class RequestParamsDriverImporter {
 
 	public RequestParamsDriverImporter(RequestParamsDriver file) {
 		this.file = file;
-		this.reaader = new XMLReader(file.getContent());
-
+		if (!file.getContent().isEmpty())
+			this.reaader = new XMLReader(file.getContent());
+		else
+			this.reaader = null;
 	}
 	
 	public void parse() {
+		if (file.getContent().isEmpty())
+			return;
 		this.file.setMethod(this.reaader.getTagValueByName("method", "requestParams"));
 		this.file.setGetParams(this.reaader.getTableData("getParams", new String[] {"key", "value"}));
 		this.file.setPostParams(this.reaader.getTableData("postParams", new String[] {"key", "value"}));

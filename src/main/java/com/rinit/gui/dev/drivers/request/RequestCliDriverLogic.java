@@ -3,6 +3,7 @@ package com.rinit.gui.dev.drivers.request;
 import com.rinit.debugger.server.dto.FileDTO;
 import com.rinit.debugger.server.exception.ServiceException;
 import com.rinit.debugger.server.services.interfaces.IFileService;
+import com.rinit.gui.dev.drivers.request.driver.RequestDriver;
 import com.rinit.gui.model.ModelFacade;
 
 public class RequestCliDriverLogic {

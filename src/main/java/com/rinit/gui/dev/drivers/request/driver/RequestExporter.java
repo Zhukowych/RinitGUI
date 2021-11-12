@@ -1,4 +1,4 @@
-package com.rinit.gui.dev.drivers.request;
+package com.rinit.gui.dev.drivers.request.driver;
 
 import com.rinit.gui.utils.XMLBuilder;
 
@@ -10,7 +10,7 @@ public class RequestExporter {
 		this.file = file;
 	}
 	
-	public String toString() {
+	public String export() {
 		XMLBuilder builder = new XMLBuilder();
 		return builder.addTag("request", 
 					builder.addGroup(

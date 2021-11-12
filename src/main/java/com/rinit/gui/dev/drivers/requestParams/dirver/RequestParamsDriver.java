@@ -1,8 +1,10 @@
 package com.rinit.gui.dev.drivers.requestParams.dirver;
 
 import com.rinit.debugger.server.file.AbstractDriver;
+import com.rinit.gui.dev.bin.debugger.bin.DebuggerDriver;
+import com.rinit.gui.dev.bin.debugger.bin.RunContext;
 
-public class RequestParamsDriver extends AbstractDriver {
+public class RequestParamsDriver extends AbstractDriver implements DebuggerDriver {
 
 	private String method;
 	private String[][] getParams;
@@ -18,6 +20,11 @@ public class RequestParamsDriver extends AbstractDriver {
 	public String buildContent() {
 		RequestParamsDriverExporter exporter = new RequestParamsDriverExporter(this);
 		return exporter.export();
+	}
+	
+	@Override
+	public boolean isDirable() {
+		return true;
 	}
 
 	public String getMethod() {
@@ -42,6 +49,12 @@ public class RequestParamsDriver extends AbstractDriver {
 
 	public void setPostParams(String[][] postParams) {
 		this.postParams = postParams;
+	}
+
+	@Override
+	public void run(RunContext context) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

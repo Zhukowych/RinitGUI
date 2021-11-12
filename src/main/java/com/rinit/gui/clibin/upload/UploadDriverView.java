@@ -1,86 +1,80 @@
 package com.rinit.gui.clibin.upload;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.GroupLayout.Alignment;
 
-import com.rinit.gui.clibin.AbstractCliBinView;
-import com.rinit.gui.exceptions.LogicException;
 import com.rinit.gui.utils.JFilePicker;
 
-public class UploadDriverView extends AbstractCliBinView {
+public class UploadDriverView extends JPanel {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6608068197425790073L;
+	private static final long serialVersionUID = -5462867873823932519L;
 
-	private GroupLayout layout; 
-
-    private JTextField driverName = new JTextField();
-    private JTextField driverClassPath = new JTextField();
-    private JTextField driverCliClassPath = new JTextField();
-    private JFilePicker filePicker = new JFilePicker("Pick a file", "Browse...");
-	private JButton submitButton = new JButton("Submit");
-
+    private GroupLayout layout;
 	
-	public UploadDriverView() {
+    private JLabel extentionLabel = new JLabel("Extention");
+    private JTextField extention = new JTextField();
+    
+    private JLabel classPathLabel = new JLabel("Class path");
+    private JTextField classPath = new JTextField();
+
+    private JFilePicker jarFile = new JFilePicker("Jar file path", "Browse");
+    
+    private JButton submitButton = new JButton("Save");
+    
+	private UploadDriverLogic logic;
+	
+	public UploadDriverView(UploadDriverLogic logic) {
+		this.logic = logic;
+
 		this.layout = new GroupLayout(this);
-	    this.layout.setAutoCreateContainerGaps(true);
+		this.layout.setAutoCreateGaps(true);
+		this.layout.setAutoCreateContainerGaps(true);
+		
 		this.setLayout(this.layout);
-	    
+
 		this.constructGUI();
 		this.bindListeners();
+		
 	}
 	
-	private void constructGUI() {
+	public void constructGUI() {
+		this.jarFile.setMode(JFilePicker.MODE_SAVE);
 		
-		this.filePicker.setMode(JFilePicker.MODE_SAVE);
-		this.submitButton.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		this.layout.setHorizontalGroup(this.layout.createParallelGroup(Alignment.LEADING) 
+				.addGroup(this.layout.createSequentialGroup()
+						.addComponent(this.extentionLabel)
+						.addComponent(this.extention))
+				.addGroup(this.layout.createSequentialGroup()
+						.addComponent(this.classPathLabel)
+						.addComponent(this.classPath))
+				.addComponent(jarFile)
+				.addComponent(this.submitButton));
 		
-	    this.layout.setHorizontalGroup(this.layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-	    		.addGroup(this.layout.createSequentialGroup()
-	    				.addComponent(this.driverName))
-	    		.addGroup(this.layout.createSequentialGroup()
-	    				.addComponent(this.driverClassPath))
-	    		.addGroup(this.layout.createSequentialGroup()
-	    				.addComponent(this.driverCliClassPath))
-	    		.addGroup(this.layout.createSequentialGroup()
-	    				.addComponent(this.filePicker))
-	    		.addGroup(this.layout.createSequentialGroup()
-	    				.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-	    				.addComponent(this.submitButton))
-	    );
-    
 		this.layout.setVerticalGroup(this.layout.createSequentialGroup()
 				.addGroup(this.layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-						.addComponent(this.driverName))
-				.addGap(2)
+						.addComponent(this.extentionLabel)
+						.addComponent(this.extention))
 				.addGroup(this.layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-						.addComponent(this.driverClassPath))
-				.addGap(2)
-				.addGroup(this.layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-						.addComponent(this.driverCliClassPath))
-				.addGap(2)
-				.addGroup(this.layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-						.addComponent(this.filePicker))
-				.addGap(2)
-				.addGroup(this.layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-						.addComponent(this.submitButton))
-		);
-		
-		
+						.addComponent(this.classPathLabel)
+						.addComponent(this.classPath))
+				.addComponent(this.jarFile)
+				.addComponent(this.submitButton));
 	}
 
 	private void bindListeners() {
 		this.submitButton.addActionListener(new ActionListener() {
 			
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				submit();
 			}
@@ -89,11 +83,8 @@ public class UploadDriverView extends AbstractCliBinView {
 	}
 	
 	private void submit() {
-		try {
-			UploadBinLogic.uploadDriver(this.driverName.getText(), this.driverClassPath.getText(), this.driverCliClassPath.getText(), this.filePicker.getSelectedFilePath());
-		} catch (LogicException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE, null);
-		}
+		UploadDriverSubmitData submitData = new UploadDriverSubmitData(this.extention.getText(), this.classPath.getText(), this.jarFile.getSelectedFilePath());
+		this.logic.uploadDriver(submitData);
 	}
 	
 }
