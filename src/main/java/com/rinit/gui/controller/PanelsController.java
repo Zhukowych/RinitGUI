@@ -7,6 +7,7 @@ import javax.swing.KeyStroke;
 
 import com.rinit.debugger.server.core.Extentions;
 import com.rinit.debugger.server.dto.FileDTO;
+import com.rinit.gui.event.Event;
 import com.rinit.gui.event.IEventContext;
 import com.rinit.gui.event.IEventHandler;
 import com.rinit.gui.event.IListener;
@@ -17,6 +18,7 @@ import com.rinit.gui.model.fileDriver.FileDriverModel;
 import com.rinit.gui.model.panels.AbstractPanelModel;
 import com.rinit.gui.model.panels.Panel;
 import com.rinit.gui.model.panels.PanelsModel;
+import com.rinit.gui.model.viewModel.CurrentPathViewMode;
 import com.rinit.gui.utils.UtilExtentions;
 
 public class PanelsController {
@@ -32,24 +34,29 @@ public class PanelsController {
 		this.binModel = modelFacade.getBinModel();
 		this.driverModel = modelFacade.getFileDriverModel();
 		this.bindKeys();
+		this.updateCurrentPath();
 	}
 	
 	private void goToLeftPanel() {
 		this.panelsModel.setPanel(Panel.LEFT);
+		this.updateCurrentPath();
 	}
 	
 	private void goToRightPanel() {
 		this.panelsModel.setPanel(Panel.RIGHT);
+		this.updateCurrentPath();
 	}
 	
 	private void goUp() {
 		this.ifPanelNotSelected();
 		this.panelsModel.getSelectedPanelModel().goUp();
+		this.updateCurrentPath();
 	}
 	
 	private void goDown() {
 		this.ifPanelNotSelected();
 		this.panelsModel.getSelectedPanelModel().goDown();
+		this.updateCurrentPath();
 	}
 	
 	private void enterOnFile() {
@@ -60,6 +67,7 @@ public class PanelsController {
 			this.panelsModel.getSelectedPanelModel().goDeepHight(false);			
 		else  
 			this.binModel.execute(this.createReadCommandForFile(selectedFile));
+		this.updateCurrentPath();
 	}
 	
 	private void forceEnterOnFile() {
@@ -71,6 +79,10 @@ public class PanelsController {
 		this.panelsModel.getSelectedPanelModel().deleteSelectedFile();
 		this.panelsModel.reUpdatePanels();
 		this.panelsModel.getSelectedPanelModel().goUp();
+	}
+	
+	private void updateCurrentPath() {
+		this.eventHandler.performEvent(Event.CURRENT_PATH_UPDATE, this, new  CurrentPathViewMode(this.panelsModel.getCurrentPath()));
 	}
 
 	private void bindKeys() {

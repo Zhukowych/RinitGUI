@@ -1,6 +1,8 @@
 
 package com.rinit.gui.view;
 
+import java.awt.Color;
+
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -20,7 +22,7 @@ public class MainView extends JFrame {
 	public MainView(IEventHandler eventHandler) {
 		this.eventHandler = eventHandler;
 		this.setTitle("Runit GUI client");
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setExtendedState(MAXIMIZED_BOTH);
 		this.setLookAndFeel();
 		this.setSize(1000, 600);
@@ -29,7 +31,6 @@ public class MainView extends JFrame {
 		this.setFocusable(true);
         this.setFocusTraversalKeysEnabled(false);		
     	this.setFocusable(true);
-        
 	}	
 	
 	public void open() {

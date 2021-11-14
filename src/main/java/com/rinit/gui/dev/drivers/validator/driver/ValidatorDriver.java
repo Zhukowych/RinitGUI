@@ -1,8 +1,13 @@
 package com.rinit.gui.dev.drivers.validator.driver;
 
+import org.apache.http.client.methods.CloseableHttpResponse;
+
 import com.rinit.debugger.server.file.AbstractDriver;
 import com.rinit.gui.dev.bin.debugger.bin.DebuggerDriver;
-import com.rinit.gui.dev.bin.debugger.bin.RunContext;
+import com.rinit.gui.dev.bin.debugger.bin.context.RequestContext;
+import com.rinit.gui.dev.bin.debugger.bin.context.RequestReportContext;
+import com.rinit.gui.dev.bin.debugger.bin.context.RunContext;
+import com.rinit.gui.dev.bin.debugger.bin.report.ReportItem;
 
 public class ValidatorDriver extends AbstractDriver implements DebuggerDriver {
 
@@ -32,8 +37,23 @@ public class ValidatorDriver extends AbstractDriver implements DebuggerDriver {
 
 	@Override
 	public void run(RunContext context) {
-		// TODO Auto-generated method stub
-		
+		RequestContext requestContext = context.getContext(RequestContext.class);
+		RequestReportContext reportContext = context.getContext(RequestReportContext.class);
+		CloseableHttpResponse response = requestContext.peekRequest().getResponse();
+		int statusCode = response.getStatusLine().getStatusCode();
+		reportContext.addReport(this.createReport(statusCode));
+	}
+
+	@Override
+	public void outRun(RunContext context) {}
+	
+	private ReportItem createReport(int statusCode) {
+		ReportItem item = new ReportItem();
+		item.elementName = this.getName();
+		item.elementType = this.getExtention();
+		item.shortReport = "Done";
+		item.fullReport = "Done";
+		return item;
 	}
 
 }

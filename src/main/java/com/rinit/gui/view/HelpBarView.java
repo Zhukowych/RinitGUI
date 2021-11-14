@@ -1,5 +1,6 @@
 package com.rinit.gui.view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JLabel;
@@ -19,6 +20,7 @@ public class HelpBarView extends JPanel {
 		this.setMaximumSize(preferedDimension);
 		this.setPreferredSize(preferedDimension);
 		this.add(new JLabel("13123123"));
+		this.setBackground(Color.BLACK);
 	}
 	
 }

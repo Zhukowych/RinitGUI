@@ -2,7 +2,9 @@ package com.rinit.gui.dev.drivers.request.driver;
 
 import com.rinit.debugger.server.file.AbstractDriver;
 import com.rinit.gui.dev.bin.debugger.bin.DebuggerDriver;
-import com.rinit.gui.dev.bin.debugger.bin.RunContext;
+import com.rinit.gui.dev.bin.debugger.bin.RequestBuilder;
+import com.rinit.gui.dev.bin.debugger.bin.context.RequestContext;
+import com.rinit.gui.dev.bin.debugger.bin.context.RunContext;
 
 public class RequestDriver extends AbstractDriver implements DebuggerDriver {
 
@@ -54,9 +56,22 @@ public class RequestDriver extends AbstractDriver implements DebuggerDriver {
 		this.path = path;
 	}
 	
+	private String toURL() {
+		return String.format("%s://%s%s", this.protocol, this.adress, this.path);
+	}
+	
 	@Override
 	public void run(RunContext context) {
-		System.out.println("Yes!!");
+		RequestContext requestContext = context.getContext(RequestContext.class);
+		RequestBuilder requestBuilder = requestContext.createNewRequest();
+		requestBuilder.setUrl(this.toURL());
+		System.out.println("start");
+	}
+
+	@Override
+	public void outRun(RunContext context) {
+		System.out.println("end");
+		
 	}
 
 }

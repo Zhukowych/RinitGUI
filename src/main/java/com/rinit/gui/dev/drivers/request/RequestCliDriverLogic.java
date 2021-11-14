@@ -34,17 +34,18 @@ public class RequestCliDriverLogic {
 	
 	private RequestDriver createRequestFile(RequestSubmitData submitData) {
 		RequestDriver file = new RequestDriver();
+		file.fromDTO(this.readingFile);
 		file.setProtocol(submitData.protocol);
 		file.setAdress(submitData.adress);
 		file.setPath(submitData.path);
+		
 		return file;
 	}
 	
 	private void saveRequestFile(RequestDriver file) {
 		IFileService fileService = this.modelFacade.getRinitClientModel().getClient().getFileService();
-		this.readingFile.cwrite(file.getContent());
 		try {
-			fileService.saveFile(this.readingFile);
+			fileService.saveFile(file);
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}

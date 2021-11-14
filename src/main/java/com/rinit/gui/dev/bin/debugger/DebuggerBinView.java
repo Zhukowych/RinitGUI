@@ -9,7 +9,7 @@ import javax.swing.JProgressBar;
 
 import com.rinit.gui.clibin.AbstractCliBinView;
 import com.rinit.gui.dev.bin.debugger.bin.RequestReportCallBack;
-import com.rinit.gui.dev.bin.debugger.bin.ShortReport;
+import com.rinit.gui.dev.bin.debugger.bin.report.ReportItem;
 import com.rinit.gui.utils.TableView;
 
 public class DebuggerBinView extends AbstractCliBinView {
@@ -111,8 +111,8 @@ public class DebuggerBinView extends AbstractCliBinView {
 		}
 
 		@Override
-		public void addReport(ShortReport shortReport) {
-			System.out.println(shortReport);
+		public void addReport(ReportItem report) {
+			this.addRow(new String[] {report.elementName, report.elementType, report.shortReport, report.time});
 		}
 		
 	}

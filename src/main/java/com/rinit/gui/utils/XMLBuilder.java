@@ -1,5 +1,7 @@
 package com.rinit.gui.utils;
 
+import java.util.List;
+
 public class XMLBuilder {
 	
 	public String addTag(String tagName, String tagValue) {
@@ -19,6 +21,13 @@ public class XMLBuilder {
 		for(String tag : tags) {
 			builder.append(tag);
 		}
+		return builder.toString();
+	}
+	
+	public<T> String concat(List<T> objects) {
+		StringBuilder builder = new StringBuilder();
+		for (Object obj : objects)
+			builder.append(obj.toString());
 		return builder.toString();
 	}
 	

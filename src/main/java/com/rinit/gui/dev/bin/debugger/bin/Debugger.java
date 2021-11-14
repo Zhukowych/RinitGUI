@@ -6,8 +6,14 @@ import java.util.List;
 import java.util.Stack;
 
 import com.rinit.debugger.server.dto.FileDTO;
+import com.rinit.debugger.server.exception.ServiceException;
 import com.rinit.debugger.server.file.AbstractDriver;
 import com.rinit.debugger.server.services.interfaces.IFileService;
+import com.rinit.gui.dev.bin.debugger.bin.context.RequestContext;
+import com.rinit.gui.dev.bin.debugger.bin.context.RequestReportContext;
+import com.rinit.gui.dev.bin.debugger.bin.context.RunContext;
+import com.rinit.gui.dev.drivers.debugreport.driver.DebugReportDriver;
+import com.rinit.gui.dev.drivers.directory.DirectoryDriver;
 import com.rinit.gui.exceptions.DriverNotFoundException;
 import com.rinit.gui.model.ModelFacade;
 import com.rinit.gui.model.fileDriver.FileDriverModel;
@@ -16,7 +22,11 @@ public class Debugger {
 	
 	private ModelFacade modelFacade;
 	private RequestReportCallBack requestReportCallBack;
+	
 	private Stack<Deque<FileDTO>> fileStack = new Stack<Deque<FileDTO>>();
+	private Stack<FileDTO> openedDirableFiles = new Stack<FileDTO>();
+	
+	private String initialPath;
 	private FileDriverModel fileDriverModel;
 	private IFileService fileServiceClient;
 	private RunContext runContext;
@@ -34,8 +44,30 @@ public class Debugger {
 	
 	public void run() {
 		this.runContext = this.createInitialRunContext();
-		String initialPath = this.modelFacade.getPanelsModel().getCurrentPath();
+		this.initialPath = this.modelFacade.getPanelsModel().getCurrentPath();
 		this.moveToChildrenPaths(initialPath);
+		this.doReport();
+	}
+	
+	private void doReport() {
+		DirectoryDriver dir = this.createReportDir();
+		RequestReportContext reportContext = this.runContext.getContext(RequestReportContext.class);
+		DebugReportDriver report = reportContext.getReportItem(); 
+		report.setPath(dir.getChildrenPath());
+		report.setName(String.format("report_%s", Long.toString(System.currentTimeMillis())));
+		try {
+			this.fileServiceClient.saveFile(report);
+		} catch (ServiceException e) {}
+	}
+	
+	private DirectoryDriver createReportDir() {
+		DirectoryDriver dir = new DirectoryDriver();
+		dir.setPath(this.initialPath);
+		dir.setName("reports");
+		try {
+			this.fileServiceClient.createOrCheckFile(dir);
+		} catch (ServiceException e) {e.printStackTrace();}
+		return dir;
 	}
 	
 	private RunContext createInitialRunContext() {
@@ -51,14 +83,14 @@ public class Debugger {
 		this.fileStack.push(this.getPathFilesDeque(this.fileServiceClient.getFilesByPath(initialPath)));
 		while(!this.fileStack.empty()) {
 			while(this.fileStack.peek().peek() != null) {
-				this.processPathElement(this.fileStack.peek().pop());
+				this.processUpPathElement(this.fileStack.peek().pop());
 			}
-			if (this.fileStack.peek().isEmpty())
-				this.fileStack.pop();
+			if (this.fileStack.peek().isEmpty()) 
+				this.processDown();
 		}
 	}
 
-	private void processPathElement(FileDTO dto) {
+	private void processUpPathElement(FileDTO dto) {
 		AbstractDriver file = null;
 		try {
 			file = this.fileDriverModel.getDriverForFile(dto);
@@ -70,17 +102,39 @@ public class Debugger {
 		
 		if (this.fileDriverModel.isExtentionDirable(dto.getExtention())) {
 			this.fileStack.push(this.getPathFilesDeque(this.fileServiceClient.getFilesByPath(dto.getChildrenPath())));
+			this.openedDirableFiles.push(dto);
 		}
-			
 	}
+	
+	private void processDown(){
+		this.fileStack.pop();
+		if (this.openedDirableFiles.size()==0)
+			return;
+		
+		AbstractDriver file = null;
+		try {
+			file = this.fileDriverModel.getDriverForFile(this.openedDirableFiles.pop());
+		} catch (DriverNotFoundException e) {}
+		
+		if (file != null)
+			this.outRunDebuggerDriver(file);
+	}
+	
 	
 	private void runDebuggerDriver(AbstractDriver file) {
 		Class<?> debuggerFileClass = file.getClass();
 		if (DebuggerDriver.class.isAssignableFrom(debuggerFileClass)) {
 			DebuggerDriver debuggerDriver = (DebuggerDriver)file;
 			debuggerDriver.run(this.runContext);
-		}
-		
+		}		
+	}
+	
+	private void outRunDebuggerDriver(AbstractDriver file) {
+		Class<?> debuggerFileClass = file.getClass();
+		if (DebuggerDriver.class.isAssignableFrom(debuggerFileClass)) {
+			DebuggerDriver debuggerDriver = (DebuggerDriver)file;
+			debuggerDriver.outRun(this.runContext);
+		}	
 	}
 	
 	private Deque<FileDTO> getPathFilesDeque(List<FileDTO> pathFiles){

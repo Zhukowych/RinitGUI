@@ -2,7 +2,11 @@ package com.rinit.gui.dev.drivers.requestParams.dirver;
 
 import com.rinit.debugger.server.file.AbstractDriver;
 import com.rinit.gui.dev.bin.debugger.bin.DebuggerDriver;
-import com.rinit.gui.dev.bin.debugger.bin.RunContext;
+import com.rinit.gui.dev.bin.debugger.bin.RequestBuilder;
+import com.rinit.gui.dev.bin.debugger.bin.context.RequestContext;
+import com.rinit.gui.dev.bin.debugger.bin.context.RequestReportContext;
+import com.rinit.gui.dev.bin.debugger.bin.context.RunContext;
+import com.rinit.gui.dev.bin.debugger.bin.report.ReportItem;
 
 public class RequestParamsDriver extends AbstractDriver implements DebuggerDriver {
 
@@ -53,8 +57,27 @@ public class RequestParamsDriver extends AbstractDriver implements DebuggerDrive
 
 	@Override
 	public void run(RunContext context) {
-		// TODO Auto-generated method stub
-		
+		RequestContext requestContext = context.getContext(RequestContext.class);
+		RequestReportContext reportContext = context.getContext(RequestReportContext.class);
+		RequestBuilder builder = requestContext.peekRequest();
+		builder.setMethod(this.getMethod());
+		builder.doRequest();
+		reportContext.addReport(this.createReport());
 	}
 
+	@Override
+	public void outRun(RunContext context) {
+		RequestContext requestContext = context.getContext(RequestContext.class);
+		requestContext.popRequest();
+	}
+
+	private ReportItem createReport() {
+		ReportItem item = new ReportItem();
+		item.elementName = this.getName();
+		item.elementType = this.getExtention();
+		item.shortReport = "Done";
+		item.fullReport = "Done";
+		return item;
+	}
+	
 }

@@ -1,5 +1,6 @@
 package com.rinit.gui.view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -32,6 +33,8 @@ public class TabsView extends AbstractView {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.panelsView = new PanelsView(eventHandler);
 		this.configureTabbedPane();
+		this.setBackground(Color.BLACK);
+		this.tabbedPane.setBorder(null);
 	}	
 	
 	public void configureTabbedPane() {

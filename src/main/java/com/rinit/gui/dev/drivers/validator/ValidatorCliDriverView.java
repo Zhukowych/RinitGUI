@@ -4,10 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.GroupLayout.Alignment;
 
 import com.rinit.gui.model.fileDriver.AbstractCliFileDriverView;
 
@@ -22,6 +23,9 @@ public class ValidatorCliDriverView extends AbstractCliFileDriverView {
     
     private JLabel requiedHttpCodeLabel = new JLabel("Required code:");
     private JTextField requiedHttpCode = new JTextField();
+    
+    private JCheckBox realization = new JCheckBox("Realization");  
+    
     private JButton submitButton = new JButton("Save");
     
     private ValidatorCliDriverLogic logic;
@@ -52,12 +56,14 @@ public class ValidatorCliDriverView extends AbstractCliFileDriverView {
 				.addGroup(this.layout.createSequentialGroup()
 						.addComponent(this.requiedHttpCodeLabel)
 						.addComponent(this.requiedHttpCode))
+				.addComponent(this.realization)
 				.addComponent(this.submitButton));
 		
 		this.layout.setVerticalGroup(this.layout.createSequentialGroup()
 				.addGroup(this.layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addComponent(this.requiedHttpCodeLabel)
 						.addComponent(this.requiedHttpCode))
+				.addComponent(this.realization)
 				.addComponent(this.submitButton));
 	} 
 	

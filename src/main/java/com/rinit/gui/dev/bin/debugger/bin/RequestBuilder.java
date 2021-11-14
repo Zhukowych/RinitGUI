@@ -1,12 +1,12 @@
 package com.rinit.gui.dev.bin.debugger.bin;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.URL;
 
-import javax.net.ssl.HttpsURLConnection;
-
-import com.rinit.debugger.server.utils.CollectionUtils;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 
 public class RequestBuilder {
 	
@@ -15,7 +15,7 @@ public class RequestBuilder {
 	private String[][] getParameters;
 	private String[][] postParamaters;
 	
-	private HttpsURLConnection connection;
+	private CloseableHttpResponse response;
 	
 	public void setUrl(String url) {
 		this.url = url;
@@ -33,24 +33,44 @@ public class RequestBuilder {
 		this.postParamaters = postParamaters;
 	}
 	
-	public void doRequest() throws IOException {
-		URL url = new URL(this.url);
-		this.connection = (HttpsURLConnection) url.openConnection();
-		this.connection.setRequestMethod(this.method);
-		
+	public CloseableHttpResponse getResponse() {
+		return response;
 	}
 
-	private void addRequestParameters() {
-		CollectionUtils.ndArrayToMap(this.postParamaters);
-		this.connection.setDoInput(true);
-		DataOutputStream out = new DataOutputStream(con.getOutputStream());
-		out.writeBytes(ParameterStringBuilder.getParamsString(parameters));
-		out.flush();
-		out.close();
+	public void doRequest(){
+		HttpUriRequest request = this.createRequest();
+		try {
+			this.executeRequest(request);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	private String paramsToString(Map<String> string) {
-		StringBuilder bui;
+	private HttpUriRequest createRequest() {
+		System.out.println(this.method);
+		if (this.method.equals("GET")) {
+			return this.createGetRequest();
+		} else {
+			
+		}
+		return null;
 	}
 	
+	private HttpUriRequest createGetRequest() {
+		HttpGet request = new HttpGet(this.url);
+		return request;
+		
+	}
+	
+	private HttpUriRequest createPostRequest() {
+		return null;
+	}
+	
+	private void executeRequest(HttpUriRequest request) throws IOException {
+		try (CloseableHttpClient httpClient = HttpClients.createDefault()){
+			this.response = httpClient.execute(request);
+		}
+	}
+
+		
 }
