@@ -46,7 +46,7 @@ public class CommandLineView extends JPanel {
 		this.setPreferredSize(preferedDimension);	
 		this.setBackground(Color.BLACK);
 		this.currentPathLabel.setForeground(Color.WHITE);
-		this.currentPathLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
+		this.currentPathLabel.setFont(new Font("Consolas", Font.PLAIN, 14));
 		this.commandLine.setFont(font);
 		this.commandLine.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		this.commandLine.setBackground(Color.BLACK);

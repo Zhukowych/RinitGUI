@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.rinit.gui.clibin.AbstractCliBin;
+import com.rinit.gui.clibin.edfile.EditFileCliBin;
 import com.rinit.gui.clibin.mkdir.MkDirBin;
 import com.rinit.gui.clibin.newfile.NewFileBin;
 import com.rinit.gui.clibin.read.ReadBin;
@@ -73,6 +74,7 @@ public class BinModel extends AbstractModel{
 		this.bins.put(MkDirBin.NAME, MkDirBin.class);
 		this.bins.put(ReadBin.NAME, ReadBin.class);
 		this.bins.put(NewFileBin.NAME, NewFileBin.class);
+		this.bins.put(EditFileCliBin.NAME, EditFileCliBin.class);
 	}
 
 	private String getBinName(String command) {

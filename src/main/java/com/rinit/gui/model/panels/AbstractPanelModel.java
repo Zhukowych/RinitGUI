@@ -5,6 +5,7 @@ import java.util.List;
 import com.rinit.debugger.server.client.RinitClient;
 import com.rinit.debugger.server.core.Extentions;
 import com.rinit.debugger.server.dto.FileDTO;
+import com.rinit.debugger.server.exception.ServiceException;
 import com.rinit.debugger.server.services.interfaces.IFileService;
 import com.rinit.gui.event.IEventHandler;
 import com.rinit.gui.model.viewModel.FilesListViewModel;
@@ -62,6 +63,32 @@ public abstract class AbstractPanelModel {
 		}
 	}
 	
+	public void increasePosition() {
+		if (this.fileList.getSelectedIndex() == 0)
+			return;
+		
+		FileDTO selectedFile = this.getSelectedFile();
+		selectedFile.setPosition(selectedFile.getPosition() - 1);
+		this.saveFile(this.getSelectedFile());
+		this.reUpdateFiles();
+		this.fileList.setSelectedIndex(this.fileList.indexOf(selectedFile));
+		this.updateViewSelection();
+	}
+	
+	public void decreasePosition() {
+		if (this.fileList.getSelectedIndex() == 0)
+			return;
+
+
+		FileDTO selectedFile = this.getSelectedFile();
+		selectedFile.setPosition(selectedFile.getPosition() + 1);
+		this.saveFile(this.getSelectedFile());
+		this.reUpdateFiles();
+		this.fileList.setSelectedIndex(this.fileList.indexOf(selectedFile));
+		this.updateViewSelection();
+
+	}
+	
 	public void deleteSelectedFile() {
 		fileService.deleteFile(this.fileList.getSelectedFile());
 	}
@@ -102,4 +129,12 @@ public abstract class AbstractPanelModel {
 		this.updateViewSelection();
 	}
 	
+	private void saveFile(FileDTO dto) {
+		try {
+			this.fileService.saveFile(dto);
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

@@ -9,6 +9,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
+import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
 import com.rinit.gui.event.Event;
 import com.rinit.gui.event.IEventContext;

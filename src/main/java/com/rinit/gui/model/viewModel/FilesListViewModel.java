@@ -72,6 +72,14 @@ public class FilesListViewModel implements IEventContext{
 			this.selectedIndex--;
 	}
 	
+	public int indexOf(FileDTO dto) {
+		for (FileDTO file : this.files) {
+			if (dto.getName().equals(file.getName()))
+				return this.files.indexOf(file);
+		}
+		return -1;
+	}
+	
 	public String getCurrentPath() {
 		StringBuilder builder = new StringBuilder();
 		for (String dir : this.paths) {

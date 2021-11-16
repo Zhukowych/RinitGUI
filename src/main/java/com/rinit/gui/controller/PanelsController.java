@@ -81,6 +81,14 @@ public class PanelsController {
 		this.panelsModel.getSelectedPanelModel().goUp();
 	}
 	
+	private void increatePosition() {
+		this.panelsModel.getSelectedPanelModel().increasePosition();
+	}
+	
+	private void decreasePosition() {
+		this.panelsModel.getSelectedPanelModel().decreasePosition();
+	}
+	
 	private void updateCurrentPath() {
 		this.eventHandler.performEvent(Event.CURRENT_PATH_UPDATE, this, new  CurrentPathViewMode(this.panelsModel.getCurrentPath()));
 	}
@@ -143,6 +151,24 @@ public class PanelsController {
 			}
 			
 		}, KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), Mode.DEFAULT);
+		
+		this.eventHandler.subscribeForKeyEvent(new IListener() {
+			
+			@Override
+			public void eventPerformed(IEventContext eventInfo) {
+				increatePosition();
+			}
+			
+		}, KeyStroke.getKeyStroke(KeyEvent.VK_UP, KeyEvent.CTRL_DOWN_MASK), Mode.DEFAULT);
+	
+		this.eventHandler.subscribeForKeyEvent(new IListener() {
+			
+			@Override
+			public void eventPerformed(IEventContext eventInfo) {
+				decreasePosition();
+			}
+			
+		}, KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, KeyEvent.CTRL_DOWN_MASK), Mode.DEFAULT);
 		
 	}
 	

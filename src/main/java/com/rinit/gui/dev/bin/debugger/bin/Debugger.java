@@ -9,6 +9,8 @@ import com.rinit.debugger.server.dto.FileDTO;
 import com.rinit.debugger.server.exception.ServiceException;
 import com.rinit.debugger.server.file.AbstractDriver;
 import com.rinit.debugger.server.services.interfaces.IFileService;
+import com.rinit.gui.dev.bin.debugger.bin.context.AbstractionContext;
+import com.rinit.gui.dev.bin.debugger.bin.context.ModelContext;
 import com.rinit.gui.dev.bin.debugger.bin.context.RequestContext;
 import com.rinit.gui.dev.bin.debugger.bin.context.RequestReportContext;
 import com.rinit.gui.dev.bin.debugger.bin.context.RunContext;
@@ -74,8 +76,13 @@ public class Debugger {
 		RunContext runContext = new RunContext();
 		RequestContext requestContext = new RequestContext();
 		RequestReportContext requestReportContext = new RequestReportContext(this.requestReportCallBack);
+		AbstractionContext abstractionContext = new AbstractionContext();
+		ModelContext modelContext = new ModelContext();
+		modelContext.modelFacade = this.modelFacade;
 		runContext.addContext(requestReportContext);
 		runContext.addContext(requestContext);
+		runContext.addContext(abstractionContext);
+		runContext.addContext(modelContext);
 		return runContext;
 	}
 	

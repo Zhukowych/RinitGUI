@@ -8,6 +8,7 @@ import javax.swing.KeyStroke;
 
 import com.rinit.gui.clibin.AbstractCliBin;
 import com.rinit.gui.clibin.AbstractCliBinView;
+import com.rinit.gui.clibin.newfile.NewFileLogic.LogicType;
 import com.rinit.gui.model.ModelFacade;
 
 public class NewFileBin extends AbstractCliBin {
@@ -20,7 +21,7 @@ public class NewFileBin extends AbstractCliBin {
 	
 	public NewFileBin(String[] params, ModelFacade modelFacade) {
 		super(params, modelFacade);
-		this.logic = new NewFileLogic(modelFacade);
+		this.logic = new NewFileLogic(modelFacade, LogicType.NEW);
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public class NewFileBin extends AbstractCliBin {
 
 	@Override
 	public KeyStroke getKeyBinding() {
-		return KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK);
+		return KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0);
 	}
 
 }
