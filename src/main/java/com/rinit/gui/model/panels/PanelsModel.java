@@ -36,6 +36,13 @@ public class PanelsModel {
 	public AbstractPanelModel getSelectedPanelModel() {
 		return this.selectedPanelModel;
 	}
+	
+	public AbstractPanelModel getNotSelectedModel() {
+		if (this.selectedPanelModel == this.leftPanelModel)
+			return this.rightPanelModel;
+		else
+			return this.leftPanelModel;
+	}
 
 	public String getCurrentPath() {
 		return this.getSelectedPanelModel().getCurrentPath();

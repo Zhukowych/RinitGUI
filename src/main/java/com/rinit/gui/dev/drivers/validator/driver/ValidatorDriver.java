@@ -53,6 +53,7 @@ public class ValidatorDriver extends AbstractDriver implements DebuggerDriver {
 		item.elementType = this.getExtention();
 		item.shortReport = "Done";
 		item.fullReport = "Done";
+		item.time = "0ms";
 		return item;
 	}
 

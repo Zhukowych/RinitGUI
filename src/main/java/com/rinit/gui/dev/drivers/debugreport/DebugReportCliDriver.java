@@ -25,6 +25,8 @@ public class DebugReportCliDriver extends AbstractCliFileDriver {
 	
 	public DebugReportCliDriver(FileDTO readingFile, ModelFacade modelFacade) {
 		super(readingFile, modelFacade);
+		this.logic = new DebugReportCliDriverLogic(readingFile, modelFacade);
+		this.view = new DebugReportCliDriverView(logic);
 	}
 
 	@Override

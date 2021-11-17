@@ -13,8 +13,8 @@ public class DebugReportDriver extends AbstractDriver {
 	
 	@Override
 	protected void buildFromDTO() {
-		// TODO Auto-generated method stub
-		
+		DebugReportImporter importer = new DebugReportImporter(this);
+		importer.parse();
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class DebugReportDriver extends AbstractDriver {
 		this.reportItems.add(item);
 	}
 	
-	public List<ReportItem> getReportItem(){
+	public List<ReportItem> getReportItems(){
 		return this.reportItems;
 	}
 	

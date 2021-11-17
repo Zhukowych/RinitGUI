@@ -32,5 +32,9 @@ public class ReportItem {
 					)
 				);
 	}
+	
+	public String[] toRow() {
+		return new String[] {this.elementName, this.elementType, this.shortReport, this.time};
+	}
 		
 }

@@ -27,7 +27,7 @@ public class TableView extends JPanel {
 	
 	public static final String DELETE = "deleteqweq";
 	
-	private JTable table;
+	protected JTable table;
 	private Object[] columns;
 	private DefaultTableModel tableModel;
 	
@@ -43,6 +43,13 @@ public class TableView extends JPanel {
 		this.table.setFont(new Font("Arial", Font.BOLD, 12));
 		this.add(new JScrollPane(this.table));	
 		this.bindListeners();
+	}
+	
+	public void removeAll() {
+		int rowCount = this.tableModel.getRowCount();
+		for (int i = rowCount - 1; i >= 0; i--) {
+			this.tableModel.removeRow(i);
+		}
 	}
 	
 	public void addRow(String[] row) {

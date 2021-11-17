@@ -25,5 +25,12 @@ public abstract class AbstractCliBin {
 	public abstract AbstractCliBinView getView();
 	public abstract boolean isPopUp();
 	public abstract Dimension getPopUpSize();
+	public void run() {
+		
+	}
+	
+	public boolean visible() {
+		return true;
+	}
 	
 }

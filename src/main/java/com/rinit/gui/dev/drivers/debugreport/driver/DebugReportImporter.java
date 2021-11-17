@@ -1,6 +1,7 @@
 package com.rinit.gui.dev.drivers.debugreport.driver;
 
 import com.rinit.debugger.server.utils.XMLReader;
+import com.rinit.gui.dev.bin.debugger.bin.report.ReportItem;
 
 public class DebugReportImporter {
 	
@@ -15,8 +16,11 @@ public class DebugReportImporter {
 	public void parse() {
 		if(!this.reader.isOk())
 			return;
-		String[][] table = reader.getTableData("report", new String[] {"name", "type", "shortReport", "fullReport", "time"});
-
+		String[][] table = reader.getTableData("reportItem", new String[] {"name", "type", "shortReport", "fullReport", "time"});
+		for(String[] row : table) {
+			ReportItem reportItem = new ReportItem(row[0], row[1], row[2], row[3], row[4]);
+			this.file.addReportItem(reportItem);
+		}
 	}
 	
 }

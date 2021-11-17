@@ -77,6 +77,7 @@ public class RequestParamsDriver extends AbstractDriver implements DebuggerDrive
 		item.elementType = this.getExtention();
 		item.shortReport = "Done";
 		item.fullReport = "Done";
+		item.time = "123";
 		return item;
 	}
 	

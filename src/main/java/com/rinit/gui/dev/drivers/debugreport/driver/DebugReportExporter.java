@@ -12,7 +12,7 @@ public class DebugReportExporter {
 	
 	public String export() {
 		XMLBuilder builder = new XMLBuilder();
-		return builder.addTag("report", builder.concat(this.file.getReportItem()));
+		return builder.addTag("report", builder.concat(this.file.getReportItems()));
 	}
 	
 }
