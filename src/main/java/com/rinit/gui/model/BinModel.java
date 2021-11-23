@@ -12,6 +12,7 @@ import com.rinit.gui.clibin.edfile.EditFileCliBin;
 import com.rinit.gui.clibin.mkdir.MkDirBin;
 import com.rinit.gui.clibin.newfile.NewFileBin;
 import com.rinit.gui.clibin.read.ReadBin;
+import com.rinit.gui.clibin.renmove.RenMoveCliBin;
 import com.rinit.gui.clibin.upload.UploadBin;
 import com.rinit.gui.dev.core.DevCliBins;
 import com.rinit.gui.event.IEventHandler;
@@ -50,22 +51,16 @@ public class BinModel extends AbstractModel{
 			Object fd = cons.newInstance(params_, modelFacade);
 			return (AbstractCliBin) fd;
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -80,6 +75,7 @@ public class BinModel extends AbstractModel{
 		this.bins.put(NewFileBin.NAME, NewFileBin.class);
 		this.bins.put(EditFileCliBin.NAME, EditFileCliBin.class);
 		this.bins.put(CopyCliBin.NAME, CopyCliBin.class);
+		this.bins.put(RenMoveCliBin.NAME, RenMoveCliBin.class);
 	}
 
 	private String getBinName(String command) {

@@ -1,11 +1,7 @@
 package com.rinit.gui.model.panels;
 
-import java.util.List;
-
-import com.rinit.debugger.server.dto.FileDTO;
 import com.rinit.gui.event.Event;
 import com.rinit.gui.event.IEventHandler;
-import com.rinit.gui.model.viewModel.FilesListViewModel;
 
 public class LeftPanelModel extends AbstractPanelModel {
 

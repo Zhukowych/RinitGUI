@@ -1,16 +1,18 @@
 package com.rinit.gui.clibin.newfile;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 import com.rinit.gui.clibin.AbstractCliBinView;
 import com.rinit.gui.exceptions.LogicException;
+import com.rinit.gui.view.Colors;
+import com.rinit.gui.view.ui.CLabel;
+import com.rinit.gui.view.ui.RInput;
 
 public class NewFileBinView extends AbstractCliBinView {
 
@@ -20,19 +22,19 @@ public class NewFileBinView extends AbstractCliBinView {
 	private static final long serialVersionUID = -6483883371320067253L;
 
 	private NewFileLogic logic;
-	
+		
     private GroupLayout layout;
-    private JLabel currentPathLabel = new JLabel("Add file to: ");
-    private JLabel currentPath;
+    private CLabel currentPathLabel = new CLabel("Add file to: ");
+    private CLabel currentPath;
     
-    private JLabel nameLabel = new JLabel("name");
-    private JTextField fileName = new JTextField(); 
+    private CLabel nameLabel = new CLabel("name");
+    private RInput fileName = new RInput(); 
     
-    private JLabel extentionLabel = new JLabel("ext");
-    private JTextField fileExtention = new JTextField(); 
+    private CLabel extentionLabel = new CLabel("ext");
+    private RInput fileExtention = new RInput(); 
 	
-    private JLabel positionLabel = new JLabel("pos");
-    private JTextField filePosition = new JTextField(); 
+    private CLabel positionLabel = new CLabel("pos"); 
+    private RInput filePosition = new RInput(); 
 	
    
     private JButton submit = new JButton("submit");
@@ -44,7 +46,9 @@ public class NewFileBinView extends AbstractCliBinView {
 		this.layout.setAutoCreateGaps(true);
 		this.layout.setAutoCreateContainerGaps(true);
 		
-		this.currentPath = new JLabel(this.logic.getPathWhereAddFile());
+		this.currentPath = new CLabel(this.logic.getPathWhereAddFile());
+		
+		this.setBackground(Colors.POPUP_BACKGROUND);
 		
 		this.constructGUI();
 		this.bindListeners();
@@ -53,6 +57,7 @@ public class NewFileBinView extends AbstractCliBinView {
 	
 	private void getInitialData() {
 		NewFileSubmitData initialData = this.logic.getInitialData();
+		this.filePosition.setText("0");
 		if (initialData == null)
 			return;
 		this.fileName.setText(initialData.fileName);
@@ -74,7 +79,7 @@ public class NewFileBinView extends AbstractCliBinView {
 				.addGroup(this.layout.createSequentialGroup()
 						.addComponent(this.positionLabel)
 						.addComponent(this.filePosition))
-				.addGroup(this.layout.createSequentialGroup()
+				.addGroup(GroupLayout.Alignment.CENTER, this.layout.createSequentialGroup()
 						.addComponent(this.submit))
 				);
 		

@@ -7,6 +7,7 @@ public class PanelsModel {
 	
 	private IEventHandler eventHandler;
 	
+	@SuppressWarnings("unused")
 	private Panel currentPanel;
 
 	private AbstractPanelModel selectedPanelModel;
@@ -49,12 +50,8 @@ public class PanelsModel {
 	}
 	
 	public void reUpdatePanels() {
-		if (this.leftPanelModel.getCurrentPath().equals(this.rightPanelModel.getCurrentPath())) {
-			this.leftPanelModel.reUpdateFiles();
-			this.rightPanelModel.reUpdateFiles();
-		} else {
-			this.selectedPanelModel.reUpdateFiles();
-		}
+		this.leftPanelModel.reUpdateFiles();
+		this.rightPanelModel.reUpdateFiles();
 	}
 	
 }

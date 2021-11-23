@@ -9,7 +9,6 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import com.rinit.gui.dev.bin.debugger.bin.RequestReportCallBack;
@@ -17,7 +16,10 @@ import com.rinit.gui.dev.bin.debugger.bin.report.ReportItem;
 import com.rinit.gui.dev.drivers.debugreport.driver.DebugReportDriver;
 import com.rinit.gui.model.fileDriver.AbstractCliFileDriverView;
 import com.rinit.gui.utils.TableView;
+import com.rinit.gui.view.Colors;
 import com.rinit.gui.view.ui.CLabel;
+import com.rinit.gui.view.ui.RInput;
+
 
 public class DebugReportCliDriverView extends AbstractCliFileDriverView {
 
@@ -29,10 +31,10 @@ public class DebugReportCliDriverView extends AbstractCliFileDriverView {
 	private GroupLayout layout;
 	
 	private CLabel nameLabel = new CLabel("Name");
-	private JTextField name = new JTextField();
+	private RInput name = new RInput();
 	
 	private CLabel typeLabel = new CLabel("Type");	
-	private JTextField type = new JTextField();
+	private RInput type = new RInput();
 	
 	private JButton filter = new JButton("Filter");
 	private JButton clearFilter = new JButton("Clear filter");
@@ -55,13 +57,16 @@ public class DebugReportCliDriverView extends AbstractCliFileDriverView {
 	}
 	
 	private void getInitialData() {
-		DebugReportDriver report = this.logic.getInitialData();
-		for (ReportItem item : report.getReportItems()) {
-			this.table.addReport(item);
-		}
+		try{
+			DebugReportDriver report = this.logic.getInitialData();
+			for (ReportItem item : report.getReportItems()) {
+				this.table.addReport(item);
+			}
+		}catch (Exception e) {}
 	}
 	
 	private void constructGUI() {
+		this.setBackground(Colors.POPUP_BACKGROUND);
 		
 		this.layout.setHorizontalGroup(this.layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 									.addGroup(this.layout.createSequentialGroup()
@@ -99,12 +104,15 @@ public class DebugReportCliDriverView extends AbstractCliFileDriverView {
 		});
 	}
 	
+	public RequestReportCallBack getTableCallBack() {
+		return this.table;
+	}
+	
 	private void filter() {
 		this.table.removeAll();
-		DebugReportDriver report = this.logic.getInitialData();
-		for (ReportItem item : report.getReportItems()) {
+		for (ReportItem item : this.table.getItems()) {
 			if (item.elementName.contains(this.name.getText()) && item.elementType.contains(this.type.getText()))
-				this.table.addReport(item);
+				this.table.addVisibleItems(item);
 		}
 	}
 	
@@ -112,7 +120,9 @@ public class DebugReportCliDriverView extends AbstractCliFileDriverView {
 		this.table.removeAll();
 		this.name.setText("");
 		this.type.setText("");
-		this.getInitialData();
+		for (ReportItem item : this.table.getItems()) {
+			this.table.addVisibleItems(item);
+		}
 	}
 	
 	@SuppressWarnings("serial")
@@ -130,6 +140,14 @@ public class DebugReportCliDriverView extends AbstractCliFileDriverView {
 		public void addReport(ReportItem reportItem) {
 			this.reportItems.add(reportItem);
 			this.addRow(reportItem.toRow());
+		}
+		
+		public void addVisibleItems(ReportItem item) {
+			this.addRow(item.toRow());
+		}
+		
+		public List<ReportItem> getItems(){
+			return this.reportItems;
 		}
 
 		public void bindListeners() {

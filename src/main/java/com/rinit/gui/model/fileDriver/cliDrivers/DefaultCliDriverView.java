@@ -1,6 +1,7 @@
 package com.rinit.gui.model.fileDriver.cliDrivers;
 
 import java.awt.Component;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import com.rinit.debugger.server.dto.FileDTO;
 import com.rinit.gui.exceptions.LogicException;
 import com.rinit.gui.model.fileDriver.AbstractCliFileDriverView;
 
@@ -55,7 +55,6 @@ public class DefaultCliDriverView extends AbstractCliFileDriverView {
 		try {
 			this.logic.save(this.textArea.getText());
 		} catch (LogicException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

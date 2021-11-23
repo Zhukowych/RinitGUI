@@ -10,6 +10,11 @@ import com.rinit.gui.model.fileDriver.AbstractCliFileDriverView;
 
 public class DefaultCliDriver extends AbstractCliFileDriver {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8496458234633934555L;
+
 	public static final String NAME = "default";
 
 	private DefaultFileDriverLogic logic;

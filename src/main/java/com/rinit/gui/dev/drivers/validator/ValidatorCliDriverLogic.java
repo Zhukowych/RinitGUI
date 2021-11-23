@@ -23,8 +23,10 @@ public class ValidatorCliDriverLogic {
 		ValidatorSubmitData initialData = new ValidatorSubmitData();
 		if (this.file.getRequiredHttpCode() == 0) 
 			initialData.requiredHttpCode = 404;
-		else
+		else {
 			initialData.requiredHttpCode = this.file.getRequiredHttpCode();
+			initialData.requiredContent = this.file.getRequiredContent();
+		}
 		return initialData;
 		
 	}
@@ -44,6 +46,7 @@ public class ValidatorCliDriverLogic {
 	
 	private void updateFile(ValidatorSubmitData submitData) {
 		this.file.setRequiredHttpCode(submitData.requiredHttpCode);
+		this.file.setRequiredContent(submitData.requiredContent);
 	}
 	
 }

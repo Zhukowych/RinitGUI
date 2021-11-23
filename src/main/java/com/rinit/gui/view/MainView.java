@@ -1,8 +1,6 @@
 
 package com.rinit.gui.view;
 
-import java.awt.Color;
-
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.UIManager;

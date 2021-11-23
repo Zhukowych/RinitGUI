@@ -23,6 +23,7 @@ import com.rinit.gui.model.fileDriver.FileDriverModel;
 public class Debugger {
 	
 	private ModelFacade modelFacade;
+	private String runName;
 	private RequestReportCallBack requestReportCallBack;
 	
 	private Stack<Deque<FileDTO>> fileStack = new Stack<Deque<FileDTO>>();
@@ -44,6 +45,10 @@ public class Debugger {
 		this.requestReportCallBack = requestReportCallBack;
 	}
 	
+	public void setRunName(String runName) {
+		this.runName = runName;
+	}
+	
 	public void run() {
 		this.runContext = this.createInitialRunContext();
 		this.initialPath = this.modelFacade.getPanelsModel().getCurrentPath();
@@ -56,7 +61,7 @@ public class Debugger {
 		RequestReportContext reportContext = this.runContext.getContext(RequestReportContext.class);
 		DebugReportDriver report = reportContext.getReportItem(); 
 		report.setPath(dir.getChildrenPath());
-		report.setName(String.format("report_%s", Long.toString(System.currentTimeMillis())));
+		report.setName(String.format("report_%s", this.runName));
 		try {
 			this.fileServiceClient.saveFile(report);
 		} catch (ServiceException e) {}

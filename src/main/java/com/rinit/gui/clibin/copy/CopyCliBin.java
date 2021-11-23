@@ -61,6 +61,8 @@ public class CopyCliBin extends AbstractCliBin {
 	public void run() {
 		FileDTO fileToCopy = this.panelsModel.getSelectedPanelModel().getSelectedFile();
 		String destination = this.panelsModel.getNotSelectedModel().getCurrentPath();
+		System.out.println(fileToCopy.getChildrenPath());
+		System.out.println(destination);
 		this.fileServiceClient.copyFile(fileToCopy, destination);
 		this.panelsModel.reUpdatePanels();
 		System.out.println(destination);

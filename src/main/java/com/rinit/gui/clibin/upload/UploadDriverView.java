@@ -4,13 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.GroupLayout.Alignment;
 
 import com.rinit.gui.utils.JFilePicker;
+import com.rinit.gui.view.Colors;
+import com.rinit.gui.view.ui.RInput;
 
 public class UploadDriverView extends JPanel {
 
@@ -22,10 +23,10 @@ public class UploadDriverView extends JPanel {
     private GroupLayout layout;
 	
     private JLabel extentionLabel = new JLabel("Extention");
-    private JTextField extention = new JTextField();
+    private RInput extention = new RInput();
     
     private JLabel classPathLabel = new JLabel("Class path");
-    private JTextField classPath = new JTextField();
+    private RInput classPath = new RInput();
 
     private JFilePicker jarFile = new JFilePicker("Jar file path", "Browse");
     
@@ -48,6 +49,7 @@ public class UploadDriverView extends JPanel {
 	}
 	
 	public void constructGUI() {
+		this.setBackground(Colors.POPUP_BACKGROUND);
 		this.jarFile.setMode(JFilePicker.MODE_SAVE);
 		
 		this.layout.setHorizontalGroup(this.layout.createParallelGroup(Alignment.LEADING) 

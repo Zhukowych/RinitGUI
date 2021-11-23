@@ -1,7 +1,6 @@
 package com.rinit.gui.dev.bin.debugger;
 
 import com.rinit.gui.dev.bin.debugger.bin.Debugger;
-import com.rinit.gui.dev.bin.debugger.bin.RequestReportCallBack;
 import com.rinit.gui.model.ModelFacade;
 
 public class DebuggerBinLogic {
@@ -12,9 +11,10 @@ public class DebuggerBinLogic {
 		this.modelFacade = modelFacade;
 	} 
 	
-	public void runTest(RequestReportCallBack requestReportCallBack) {
+	public void runTest(RunData runData) {
 		Debugger debugger = new Debugger(modelFacade);
-		debugger.setRequestReportCallBack(requestReportCallBack);
+		debugger.setRequestReportCallBack(runData.requestReportCallBack);
+		debugger.setRunName(runData.runName);
 		debugger.run();
 	}
 	

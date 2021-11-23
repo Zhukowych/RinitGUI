@@ -1,18 +1,23 @@
 package com.rinit.gui.dev.drivers.requestParams;
 
 import java.awt.event.ActionEvent;
-
 import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
+import javax.swing.plaf.ComboBoxUI;
+import javax.swing.plaf.basic.BasicArrowButton;
+import javax.swing.plaf.basic.BasicComboBoxUI;
 
 import com.rinit.gui.model.fileDriver.AbstractCliFileDriverView;
 import com.rinit.gui.utils.TableView;
+import com.rinit.gui.view.Colors;
+import com.rinit.gui.view.ui.RComboBox;
+
 
 public class RequestParamsCliDriverView extends AbstractCliFileDriverView {
 
@@ -26,9 +31,9 @@ public class RequestParamsCliDriverView extends AbstractCliFileDriverView {
     private GroupLayout layout;
 
     private JLabel methodLabel = new JLabel("Method");
-    private JComboBox<String> methodSelect;
+    private RComboBox<String> methodSelect;
     private ParamsTabs paramsTabs = new ParamsTabs();
-	private JButton addParamButton = new JButton("Add paramener");
+	private JButton addParamButton = new JButton("add paramener");
     private JButton submitButton = new JButton("save");
 	
 	private RequestParamsCliDriverLogic logic;
@@ -48,6 +53,20 @@ public class RequestParamsCliDriverView extends AbstractCliFileDriverView {
 		
 	}	
 	
+	static class ColorArrowUI extends BasicComboBoxUI {
+
+	    public static ComboBoxUI createUI(JComponent c) {
+	        return new ColorArrowUI();
+	    }
+
+	    @Override protected JButton createArrowButton() {
+	    	return new BasicArrowButton(
+	                BasicArrowButton.SOUTH,
+	                Colors.INPUT_BACKGROUND, Colors.INPUT_BACKGROUND,
+	                Colors.INPUT_BACKGROUND, Colors.INPUT_BACKGROUND);
+	    }
+	}
+	
 	private void setInitialData() {
 		RequestParamsSubmitData initialData = this.logic.getInitialData();
 		this.methodSelect.setSelectedItem(initialData.method);
@@ -55,18 +74,19 @@ public class RequestParamsCliDriverView extends AbstractCliFileDriverView {
 	}
 
 	private void constructGUI() {
-		this.methodSelect = new JComboBox<String>(this.methodNames);
+		this.setBackground(Colors.POPUP_BACKGROUND);
+		
+		this.methodSelect = new RComboBox<String>(this.methodNames);
 		
 		this.layout.setHorizontalGroup(this.layout.createParallelGroup(Alignment.LEADING)
 				.addGroup(this.layout.createSequentialGroup()
 						.addComponent(this.methodLabel)
 						.addComponent(this.methodSelect))
 				.addComponent(this.paramsTabs)
-				.addGroup(this.layout.createSequentialGroup()
+				.addGroup(GroupLayout.Alignment.TRAILING, this.layout.createSequentialGroup()
 						.addComponent(this.addParamButton)
 						.addComponent(this.submitButton)
-						)
-				);
+						));
 		
 		this.layout.setVerticalGroup(this.layout.createSequentialGroup()
 				.addGroup(this.layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -76,9 +96,7 @@ public class RequestParamsCliDriverView extends AbstractCliFileDriverView {
 				.addGroup(this.layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addComponent(this.addParamButton)
 						.addComponent(this.submitButton)
-						)
-				);
-		
+						));
 		
 	}
 	

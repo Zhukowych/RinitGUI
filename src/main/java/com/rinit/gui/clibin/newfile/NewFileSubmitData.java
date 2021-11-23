@@ -12,7 +12,6 @@ public class NewFileSubmitData {
 		this.fileName = fileName;
 		this.fileExtention = fileExtention;
 		this.filePosition = filePosition;
-		System.out.println(this.fileName);
 	}
 	
 }

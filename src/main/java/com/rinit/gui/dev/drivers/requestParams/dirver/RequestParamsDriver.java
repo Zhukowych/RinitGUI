@@ -7,6 +7,7 @@ import com.rinit.gui.dev.bin.debugger.bin.context.RequestContext;
 import com.rinit.gui.dev.bin.debugger.bin.context.RequestReportContext;
 import com.rinit.gui.dev.bin.debugger.bin.context.RunContext;
 import com.rinit.gui.dev.bin.debugger.bin.report.ReportItem;
+import com.rinit.gui.utils.TimeUtils;
 
 public class RequestParamsDriver extends AbstractDriver implements DebuggerDriver {
 
@@ -61,8 +62,9 @@ public class RequestParamsDriver extends AbstractDriver implements DebuggerDrive
 		RequestReportContext reportContext = context.getContext(RequestReportContext.class);
 		RequestBuilder builder = requestContext.peekRequest();
 		builder.setMethod(this.getMethod());
+		long startTime = System.nanoTime();
 		builder.doRequest();
-		reportContext.addReport(this.createReport());
+		reportContext.addReport(this.createReport(System.nanoTime() - startTime));
 	}
 
 	@Override
@@ -71,13 +73,14 @@ public class RequestParamsDriver extends AbstractDriver implements DebuggerDrive
 		requestContext.popRequest();
 	}
 
-	private ReportItem createReport() {
+	private ReportItem createReport(long deltaTime) {
 		ReportItem item = new ReportItem();
 		item.elementName = this.getName();
 		item.elementType = this.getExtention();
 		item.shortReport = "Done";
 		item.fullReport = "Done";
-		item.time = "123";
+		item.time = String.format("%s ms",
+								Long.toString(TimeUtils.nanoToMiliSeconds(deltaTime)));
 		return item;
 	}
 	

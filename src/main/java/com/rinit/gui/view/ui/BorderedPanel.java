@@ -2,9 +2,9 @@ package com.rinit.gui.view.ui;
 
 import java.awt.Color;
 
+
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import com.rinit.gui.view.Colors;

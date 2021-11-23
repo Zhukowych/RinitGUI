@@ -11,6 +11,11 @@ import com.rinit.gui.model.fileDriver.AbstractCliFileDriverView;
 
 public class ValidatorCliDriver extends AbstractCliFileDriver {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5750860909195605890L;
+
 	private static final String NAME = "request.validator";
 	
 	private ValidatorCliDriverLogic logic;

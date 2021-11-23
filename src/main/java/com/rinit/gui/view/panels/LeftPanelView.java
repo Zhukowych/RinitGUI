@@ -1,14 +1,19 @@
 package com.rinit.gui.view.panels;
 
 import com.rinit.gui.event.Event;
+
 import com.rinit.gui.event.IEventContext;
 import com.rinit.gui.event.IEventHandler;
 import com.rinit.gui.event.IListener;
 import com.rinit.gui.model.viewModel.FilesListViewModel;
-import com.rinit.gui.model.viewModel.SelectionViewModel;
 
 public class LeftPanelView extends PanelView {
 		
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1312561893504185061L;
+
 	public LeftPanelView(IEventHandler eventHandler)  {
 		super(eventHandler);
 	}

@@ -3,18 +3,20 @@ package com.rinit.gui.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.BoxLayout;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
-import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
 import com.rinit.gui.event.Event;
 import com.rinit.gui.event.IEventContext;
 import com.rinit.gui.event.IEventHandler;
 import com.rinit.gui.event.IListener;
+import com.rinit.gui.event.Mode;
 import com.rinit.gui.model.viewModel.CliBinViewModel;
 import com.rinit.gui.model.viewModel.SelectTabModelView;
 import com.rinit.gui.view.panels.PanelsView;
@@ -66,6 +68,13 @@ public class TabsView extends AbstractView {
 		popUp.pack();
 		popUp.setSize(viewModel.popupSize.width, popUp.getPreferredSize().height);
 		popUp.setVisible(true);
+		this.eventHandler.setKeyMode(Mode.BIN);
+		popUp.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				eventHandler.setKeyMode(Mode.DEFAULT);
+			}
+		});
 	}
 	
 	private void closeTab() {

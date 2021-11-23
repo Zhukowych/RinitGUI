@@ -7,12 +7,10 @@ import com.rinit.gui.model.ModelFacade;
 public class DebugReportCliDriverLogic {
 	
 	private FileDTO readingFile;
-	private ModelFacade modelFacade;
 	private DebugReportDriver driver = new DebugReportDriver();
 	
 	public DebugReportCliDriverLogic(FileDTO readingFile, ModelFacade modelFacade) {
 		this.readingFile = readingFile;
-		this.modelFacade = modelFacade;
 		this.driver.fromDTO(this.readingFile);
 	}
 	

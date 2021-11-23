@@ -2,6 +2,7 @@ package com.rinit.gui.utils;
 
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
@@ -9,7 +10,9 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+
+import com.rinit.gui.view.Colors;
+import com.rinit.gui.view.ui.RInput;
  
 public class JFilePicker extends JPanel {
 	
@@ -22,7 +25,7 @@ public class JFilePicker extends JPanel {
     private String buttonLabel;
      
     private JLabel label;
-    private JTextField textField;
+    private RInput textField;
     private JButton button;
     
     private GroupLayout layout; 
@@ -34,6 +37,7 @@ public class JFilePicker extends JPanel {
     public static final int MODE_SAVE = 2;
      
     public JFilePicker(String textFieldLabel, String buttonLabel) {
+    	this.setBackground(Colors.POPUP_BACKGROUND);
         this.layout = new GroupLayout(this);
         this.setLayout(this.layout);
         
@@ -43,7 +47,7 @@ public class JFilePicker extends JPanel {
         
         // creates the GUI
         label = new JLabel(this.textFieldLabel); 
-        textField = new JTextField();
+        textField = new RInput();
         button = new JButton(this.buttonLabel);
          
         button.addActionListener(new ActionListener() {

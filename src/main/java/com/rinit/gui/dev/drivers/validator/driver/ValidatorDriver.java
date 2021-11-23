@@ -12,6 +12,7 @@ import com.rinit.gui.dev.bin.debugger.bin.report.ReportItem;
 public class ValidatorDriver extends AbstractDriver implements DebuggerDriver {
 
 	private int requiredHttpCode;
+	private String requiredContent;
 	
 	@Override
 	protected void buildFromDTO() {
@@ -33,6 +34,14 @@ public class ValidatorDriver extends AbstractDriver implements DebuggerDriver {
 
 	public void setRequiredHttpCode(int requiredHttpCode) {
 		this.requiredHttpCode = requiredHttpCode;
+	}
+
+	public String getRequiredContent() {
+		return requiredContent;
+	}
+
+	public void setRequiredContent(String requiredContent) {
+		this.requiredContent = requiredContent;
 	}
 
 	@Override

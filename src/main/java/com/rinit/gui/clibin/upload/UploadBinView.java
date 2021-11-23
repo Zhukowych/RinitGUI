@@ -1,13 +1,14 @@
 package com.rinit.gui.clibin.upload;
 
 import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.GroupLayout.Alignment;
 
 import com.rinit.gui.utils.JFilePicker;
+import com.rinit.gui.view.Colors;
+import com.rinit.gui.view.ui.RInput;
 
 public class UploadBinView extends JPanel {
 	
@@ -19,15 +20,16 @@ public class UploadBinView extends JPanel {
     private GroupLayout layout;
 	
     private JLabel nameLabel = new JLabel("Name");
-    private JTextField name = new JTextField();
+    private RInput name = new RInput();
     
     private JLabel classPathLabel = new JLabel("Class path");
-    private JTextField classPath = new JTextField();
+    private RInput classPath = new RInput();
 
     private JFilePicker jarFile = new JFilePicker("Jar file path", "Browse");
     
     private JButton submitButton = new JButton("Save");
     
+	@SuppressWarnings("unused")
 	private UploadBinLogic logic;
 	
 	public UploadBinView(UploadBinLogic logic) {
@@ -44,6 +46,7 @@ public class UploadBinView extends JPanel {
 	}
 
 	public void constructGUI() {
+		this.setBackground(Colors.POPUP_BACKGROUND);
 		this.jarFile.setMode(JFilePicker.MODE_SAVE);
 		
 		this.layout.setHorizontalGroup(this.layout.createParallelGroup(Alignment.LEADING) 

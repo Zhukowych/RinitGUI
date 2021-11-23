@@ -5,12 +5,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.text.html.FormSubmitEvent;
 
 import com.rinit.gui.model.fileDriver.AbstractCliFileDriverView;
+import com.rinit.gui.view.Colors;
+import com.rinit.gui.view.ui.CLabel;
+import com.rinit.gui.view.ui.RInput;
+
 
 public class RequestCliDriverView extends AbstractCliFileDriverView {
 
@@ -21,18 +21,16 @@ public class RequestCliDriverView extends AbstractCliFileDriverView {
 
     private GroupLayout layout;
 
-    private JLabel protocolLabel = new JLabel("Protocol");
-    private JTextField protocol = new JTextField();
+    private CLabel protocolLabel = new CLabel("Protocol");
+    private RInput protocol = new RInput();
     
-    private JLabel adressLabel = new JLabel("Adress");
-    private JTextField adress = new JTextField();
+    private CLabel adressLabel = new CLabel("Adress");
+    private RInput adress = new RInput();
     
-    private JLabel pathLabel = new JLabel("Path");
-    private JTextField path = new JTextField();
+    private CLabel pathLabel = new CLabel("Path");
+    private RInput path = new RInput();
 
     private JButton submitButton = new JButton("Save");
-    
-    // 
     
     private RequestCliDriverLogic logic;
     
@@ -45,7 +43,7 @@ public class RequestCliDriverView extends AbstractCliFileDriverView {
 		this.layout.setAutoCreateContainerGaps(true);
 		
 		this.setInitialData();
-		this.costructGUI();
+		this.constructGUI();
 		this.bindListeners();
 	}
 	
@@ -56,7 +54,9 @@ public class RequestCliDriverView extends AbstractCliFileDriverView {
 		this.path.setText(initialData.path);
 	}
 	
-	private void costructGUI() {
+	private void constructGUI() {
+		this.setBackground(Colors.POPUP_BACKGROUND);
+		
 		this.layout.setHorizontalGroup(this.layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(this.layout.createSequentialGroup()
 						.addComponent(this.protocolLabel)
@@ -67,9 +67,8 @@ public class RequestCliDriverView extends AbstractCliFileDriverView {
 				.addGroup(this.layout.createSequentialGroup()
 						.addComponent(this.pathLabel)
 						.addComponent(this.path))				
-				.addGroup(this.layout.createSequentialGroup()
-						.addComponent(this.submitButton))
-				);
+				.addGroup(GroupLayout.Alignment.CENTER, this.layout.createSequentialGroup()
+						.addComponent(this.submitButton)));
 		
 		this.layout.setVerticalGroup(this.layout.createSequentialGroup()
 				.addGroup(this.layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -82,8 +81,7 @@ public class RequestCliDriverView extends AbstractCliFileDriverView {
 						.addComponent(this.pathLabel)
 						.addComponent(this.path))
 				.addGroup(this.layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-						.addComponent(this.submitButton))
-				);
+						.addComponent(this.submitButton)));
 		
 	}
 

@@ -11,6 +11,11 @@ import com.rinit.gui.model.fileDriver.AbstractCliFileDriverView;
 
 public class RequestCliDriver extends AbstractCliFileDriver {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4641719955338568196L;
+
 	private static final String NAME = "request";
 
 	private RequestCliDriverLogic logic;

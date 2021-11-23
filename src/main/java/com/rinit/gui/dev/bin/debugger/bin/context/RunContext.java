@@ -7,6 +7,7 @@ public class RunContext {
 	
 	private Map<Class<?>, Object> context = new HashMap<Class<?>, Object>();
 	
+	@SuppressWarnings("unchecked")
 	public<T> T getContext(Class<T> contextClass) {
 		return (T) this.context.get(contextClass);
 	}

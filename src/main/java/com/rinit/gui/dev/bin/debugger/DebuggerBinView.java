@@ -8,9 +8,10 @@ import javax.swing.JButton;
 import javax.swing.JProgressBar;
 
 import com.rinit.gui.clibin.AbstractCliBinView;
-import com.rinit.gui.dev.bin.debugger.bin.RequestReportCallBack;
-import com.rinit.gui.dev.bin.debugger.bin.report.ReportItem;
-import com.rinit.gui.utils.TableView;
+import com.rinit.gui.dev.drivers.debugreport.DebugReportCliDriverView;
+import com.rinit.gui.view.Colors;
+import com.rinit.gui.view.ui.CLabel;
+import com.rinit.gui.view.ui.RInput;
 
 public class DebuggerBinView extends AbstractCliBinView {
 
@@ -22,11 +23,14 @@ public class DebuggerBinView extends AbstractCliBinView {
 
     private GroupLayout layout;
     
+    private CLabel debugRunLabel = new CLabel("Debug run name");
+    private RInput debugRun = new RInput();
+    
     private JButton runButton = new JButton("Run");
     private JButton stopButton = new JButton("Stop");
-    private ProgressTable progressTable = new ProgressTable();
-    private TestProgressBar progressBar = new TestProgressBar();
-	
+    
+	private DebugReportCliDriverView table;
+    
 	private DebuggerBinLogic logic;
 	
 	public DebuggerBinView(DebuggerBinLogic logic) {
@@ -49,18 +53,25 @@ public class DebuggerBinView extends AbstractCliBinView {
 	}
 	
 	public void constructGUI() {
+		this.setBackground(Colors.POPUP_BACKGROUND);
+		this.table = new DebugReportCliDriverView(null);
+		
 		this.layout.setHorizontalGroup(this.layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addComponent(this.progressBar)
 				.addGroup(this.layout.createSequentialGroup()
-						.addComponent(this.progressTable))
+						 .addComponent(this.debugRunLabel)
+						 .addComponent(this.debugRun))
+				.addGroup(this.layout.createSequentialGroup()
+						.addComponent(this.table))
 				.addGroup(this.layout.createSequentialGroup()
 						.addComponent(this.runButton)
 						.addComponent(this.stopButton))
 				);
 		
 		this.layout.setVerticalGroup(this.layout.createSequentialGroup()
-				.addComponent(this.progressBar)
-				.addComponent(this.progressTable)
+				.addGroup(this.layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+						.addComponent(this.debugRunLabel)
+						.addComponent(this.debugRun))
+				.addComponent(this.table)
 				.addGroup(this.layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addComponent(this.runButton)
 						.addComponent(this.stopButton))
@@ -81,7 +92,8 @@ public class DebuggerBinView extends AbstractCliBinView {
 	}
 	
 	private void runTest() {
-		this.logic.runTest(this.progressTable);
+		RunData runData = new RunData(this.table.getTableCallBack(), this.debugRun.getText());
+		this.logic.runTest(runData);
 	}
 	
 	@SuppressWarnings("serial")
@@ -101,19 +113,4 @@ public class DebuggerBinView extends AbstractCliBinView {
 		
 	}
 	
-	@SuppressWarnings("serial")
-	public static class ProgressTable extends TableView implements RequestReportCallBack {
-
-		private static final String[] COLUMNS = new String[] {"Element Name", "Element Type", "short report", "time"};
-		
-		public ProgressTable() {
-			super(COLUMNS);
-		}
-
-		@Override
-		public void addReport(ReportItem report) {
-			this.addRow(new String[] {report.elementName, report.elementType, report.shortReport, report.time});
-		}
-		
-	}
 }

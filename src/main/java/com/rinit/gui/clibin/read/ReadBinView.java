@@ -14,13 +14,11 @@ public class ReadBinView extends AbstractCliBinView {
 	 */
 	private static final long serialVersionUID = -5023907430217964228L;
 
-	private FileDTO readingFile;
 	private AbstractCliFileDriver readingFileDriver;
 	
 	public ReadBinView() {}
 	
 	public ReadBinView(FileDTO readingFile, AbstractCliFileDriver readingFileDriver) {
-		this.readingFile = readingFile;
 		this.readingFileDriver = readingFileDriver;
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.add(this.readingFileDriver.getView());

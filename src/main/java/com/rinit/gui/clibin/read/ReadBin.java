@@ -61,13 +61,11 @@ public class ReadBin extends AbstractCliBin  {
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public KeyStroke getKeyBinding() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

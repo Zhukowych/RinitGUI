@@ -26,6 +26,11 @@ import com.rinit.gui.view.ui.BorderedPanel;
 
 public class SetupView extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7277681233834948119L;
+
 	private SetupPanel setupPane = new SetupPanel();
 	private JPanel mainPane = new JPanel();
 
@@ -56,6 +61,11 @@ public class SetupView extends JFrame {
 	
 	public class SetupPanel extends BorderedPanel {
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1395314950491083792L;
+
 		private GroupLayout layout;
 		
 		private String[] hosts;
@@ -71,7 +81,6 @@ public class SetupView extends JFrame {
 				this.hosts = this.readHosts();
 				this.hostsBox = new JComboBox<String>(this.hosts);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -118,6 +127,7 @@ public class SetupView extends JFrame {
 			SwingUtilities.getWindowAncestor(this).dispose();
 		}
 		
+		@SuppressWarnings("null")
 		private String[] readHosts() throws IOException {
 			BufferedReader reader = null;
 			String[] result = null;

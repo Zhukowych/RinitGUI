@@ -14,6 +14,7 @@ public class ValidatorDriverImporter {
 	
 	public void parse() {
 		this.file.setRequiredHttpCode(Integer.parseInt(this.reader.getTagValueByName("requiredHttpCode", "requestValidator")));
+		this.file.setRequiredContent(this.reader.getTagValueByName("requiredContent", "requestValidator"));
 	}
 
 }

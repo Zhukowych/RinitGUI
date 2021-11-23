@@ -90,6 +90,9 @@ public abstract class AbstractPanelModel {
 	}
 	
 	public void deleteSelectedFile() {
+		try {
+			this.fileService.deleteAllChildrenOfPath(this.fileList.getSelectedFile().getChildrenPath());
+		} catch (ServiceException e) {e.printStackTrace();}
 		fileService.deleteFile(this.fileList.getSelectedFile());
 	}
 	
@@ -133,7 +136,6 @@ public abstract class AbstractPanelModel {
 		try {
 			this.fileService.saveFile(dto);
 		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

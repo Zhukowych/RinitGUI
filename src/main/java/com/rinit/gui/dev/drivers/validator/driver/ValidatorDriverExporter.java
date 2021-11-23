@@ -14,7 +14,8 @@ public class ValidatorDriverExporter {
 		XMLBuilder builder = new XMLBuilder();
 		return builder.addTag("requestValidator", 
 				builder.addGroup(
-							builder.addTag("requiredHttpCode", Integer.toString(this.file.getRequiredHttpCode()))
+							builder.addTag("requiredHttpCode", Integer.toString(this.file.getRequiredHttpCode())),
+							builder.addTag("requiredContent", this.file.getRequiredContent())
 						));
 	}
 	
