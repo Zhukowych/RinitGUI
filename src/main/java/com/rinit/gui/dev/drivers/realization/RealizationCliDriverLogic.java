@@ -8,7 +8,7 @@ import javax.swing.JDialog;
 import com.rinit.debugger.server.dto.FileDTO;
 import com.rinit.debugger.server.exception.ServiceException;
 import com.rinit.debugger.server.services.interfaces.IFileService;
-import com.rinit.gui.dev.bin.debugger.bin.DebuggerDriver;
+import com.rinit.gui.dev.bin.debugger.bin.interfaces.DebuggerDriver;
 import com.rinit.gui.dev.drivers.realization.driver.RealizationDriver;
 import com.rinit.gui.model.ModelFacade;
 import com.rinit.gui.model.fileDriver.FileDriverModel;

@@ -16,9 +16,9 @@ public class DebugReportImporter {
 	public void parse() {
 		if(!this.reader.isOk())
 			return;
-		String[][] table = reader.getTableData("reportItem", new String[] {"name", "type", "shortReport", "fullReport", "time"});
+		String[][] table = reader.getTableData("reportItem", new String[] {"name", "path",  "type", "shortReport", "fullReport", "time"});
 		for(String[] row : table) {
-			ReportItem reportItem = new ReportItem(row[0], row[1], row[2], row[3], row[4]);
+			ReportItem reportItem = new ReportItem(row[0], row[1], row[2], row[3], row[4], row[5]);
 			this.file.addReportItem(reportItem);
 		}
 	}

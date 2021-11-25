@@ -101,9 +101,8 @@ public class RequestBuilder {
 	}
 	
 	private void executeRequest(HttpUriRequest request) throws IOException {
-		try (CloseableHttpClient httpClient = HttpClients.createDefault()){
-			this.response = httpClient.execute(request);
-		}
+		CloseableHttpClient httpClient = HttpClients.createDefault();
+		this.response = httpClient.execute(request);
 	}
 
 		

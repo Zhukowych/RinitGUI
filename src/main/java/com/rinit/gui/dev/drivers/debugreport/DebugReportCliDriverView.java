@@ -2,16 +2,23 @@ package com.rinit.gui.dev.drivers.debugreport;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
 import javax.swing.GroupLayout;
+import javax.swing.InputMap;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
-import com.rinit.gui.dev.bin.debugger.bin.RequestReportCallBack;
+import com.fasterxml.jackson.databind.type.LogicalType;
+import com.rinit.gui.dev.bin.debugger.bin.interfaces.RequestReportCallBack;
 import com.rinit.gui.dev.bin.debugger.bin.report.ReportItem;
 import com.rinit.gui.dev.drivers.debugreport.driver.DebugReportDriver;
 import com.rinit.gui.model.fileDriver.AbstractCliFileDriverView;
@@ -126,13 +133,16 @@ public class DebugReportCliDriverView extends AbstractCliFileDriverView {
 	}
 	
 	@SuppressWarnings("serial")
-	public static class ReportsTable extends TableView implements RequestReportCallBack {
+	public class ReportsTable extends TableView implements RequestReportCallBack {
+			
+		
+		private static final String OPEN_FULL_REPORT = "OPEN_FULL_REPORT";
+		private static final String OPEN_ELEMENT = "OPEN_ELEMENT";		
 		
 		private List<ReportItem> reportItems = new ArrayList<ReportItem>();
-		private static final String[] COLUMNS = new String[] {"Element Name", "Element Type", "short report", "time"};
 		
 		public ReportsTable() {
-			super(COLUMNS);
+			super(new String[] {"Element Name", "Element Type", "short report", "time"});
 			this.bindListeners();
 		}
 
@@ -151,15 +161,34 @@ public class DebugReportCliDriverView extends AbstractCliFileDriverView {
 		}
 
 		public void bindListeners() {
-			this.table.addMouseListener(new java.awt.event.MouseAdapter() {
-			    @Override
-			    public void mouseClicked(java.awt.event.MouseEvent evt) {
-			        int row = table.rowAtPoint(evt.getPoint());
-			        if (row >= 0 ) {
-			        	JOptionPane.showMessageDialog((JFrame) SwingUtilities.getWindowAncestor(table),  reportItems.get(row).fullReport);
-			        }
-			    }
+			int condition = JComponent.WHEN_FOCUSED;
+			InputMap inputMap = table.getInputMap(condition);
+			ActionMap actionMap = table.getActionMap();
+
+			inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), OPEN_FULL_REPORT);
+			actionMap.put(OPEN_FULL_REPORT, new AbstractAction() {
+				public void actionPerformed(ActionEvent e) {
+					if (table.getSelectedRow() >= 0) openFullReport();
+				}
 			});
+
+			inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, KeyEvent.SHIFT_DOWN_MASK), OPEN_ELEMENT);
+			actionMap.put(OPEN_ELEMENT, new AbstractAction() {
+				public void actionPerformed(ActionEvent e) {
+					if (table.getSelectedRow() >= 0) openElement();
+				}
+			});
+			
+		}
+		
+		private void openFullReport() {
+			ReportItem reportItem = this.reportItems.get(this.table.getSelectedRow());
+		
+		}
+		
+		private void openElement() {
+			ReportItem reportItem = this.reportItems.get(this.table.getSelectedRow());
+			logic.openFile(reportItem);
 		}
 		
 	}

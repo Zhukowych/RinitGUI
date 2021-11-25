@@ -1,4 +1,4 @@
-package com.rinit.gui.dev.bin.debugger.bin;
+package com.rinit.gui.dev.bin.debugger.bin.interfaces;
 
 import com.rinit.gui.dev.bin.debugger.bin.report.ReportItem;
 

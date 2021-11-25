@@ -1,11 +1,14 @@
+
 package com.rinit.gui.dev.drivers.requestParams.dirver;
 
+import java.io.IOException;
+
 import com.rinit.debugger.server.file.AbstractDriver;
-import com.rinit.gui.dev.bin.debugger.bin.DebuggerDriver;
 import com.rinit.gui.dev.bin.debugger.bin.RequestBuilder;
 import com.rinit.gui.dev.bin.debugger.bin.context.RequestContext;
-import com.rinit.gui.dev.bin.debugger.bin.context.RequestReportContext;
+import com.rinit.gui.dev.bin.debugger.bin.context.ReportContext;
 import com.rinit.gui.dev.bin.debugger.bin.context.RunContext;
+import com.rinit.gui.dev.bin.debugger.bin.interfaces.DebuggerDriver;
 import com.rinit.gui.dev.bin.debugger.bin.report.ReportItem;
 import com.rinit.gui.utils.TimeUtils;
 
@@ -59,7 +62,7 @@ public class RequestParamsDriver extends AbstractDriver implements DebuggerDrive
 	@Override
 	public void run(RunContext context) {
 		RequestContext requestContext = context.getContext(RequestContext.class);
-		RequestReportContext reportContext = context.getContext(RequestReportContext.class);
+		ReportContext reportContext = context.getContext(ReportContext.class);
 		RequestBuilder builder = requestContext.peekRequest();
 		builder.setMethod(this.getMethod());
 		long startTime = System.nanoTime();
@@ -70,15 +73,14 @@ public class RequestParamsDriver extends AbstractDriver implements DebuggerDrive
 	@Override
 	public void outRun(RunContext context) {
 		RequestContext requestContext = context.getContext(RequestContext.class);
-		requestContext.popRequest();
+		RequestBuilder builder = requestContext.popRequest();
+		try {
+			builder.getResponse().close();
+		} catch (IOException e) {e.printStackTrace();}
 	}
 
 	private ReportItem createReport(long deltaTime) {
-		ReportItem item = new ReportItem();
-		item.elementName = this.getName();
-		item.elementType = this.getExtention();
-		item.shortReport = "Done";
-		item.fullReport = "Done";
+		ReportItem item = ReportItem.createDefaultReport(this);
 		item.time = String.format("%s ms",
 								Long.toString(TimeUtils.nanoToMiliSeconds(deltaTime)));
 		return item;

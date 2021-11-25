@@ -1,9 +1,9 @@
 package com.rinit.gui.dev.drivers.abstraction.driver;
 
 import com.rinit.debugger.server.file.AbstractDriver;
-import com.rinit.gui.dev.bin.debugger.bin.DebuggerDriver;
 import com.rinit.gui.dev.bin.debugger.bin.context.AbstractionContext;
 import com.rinit.gui.dev.bin.debugger.bin.context.RunContext;
+import com.rinit.gui.dev.bin.debugger.bin.interfaces.DebuggerDriver;
 
 public class AbstractionDriver extends AbstractDriver implements DebuggerDriver {
 

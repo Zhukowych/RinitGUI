@@ -15,7 +15,8 @@ public class DebuggerBinLogic {
 		Debugger debugger = new Debugger(modelFacade);
 		debugger.setRequestReportCallBack(runData.requestReportCallBack);
 		debugger.setRunName(runData.runName);
-		debugger.run();
+		Thread debugThread = new Thread(debugger);
+		debugThread.start();
 	}
 	
 }

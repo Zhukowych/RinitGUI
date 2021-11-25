@@ -3,10 +3,10 @@ package com.rinit.gui.dev.drivers.realization.driver;
 import com.rinit.debugger.server.dto.FileDTO;
 import com.rinit.debugger.server.file.AbstractDriver;
 import com.rinit.debugger.server.services.interfaces.IFileService;
-import com.rinit.gui.dev.bin.debugger.bin.DebuggerDriver;
 import com.rinit.gui.dev.bin.debugger.bin.context.AbstractionContext;
 import com.rinit.gui.dev.bin.debugger.bin.context.ModelContext;
 import com.rinit.gui.dev.bin.debugger.bin.context.RunContext;
+import com.rinit.gui.dev.bin.debugger.bin.interfaces.DebuggerDriver;
 import com.rinit.gui.exceptions.DriverNotFoundException;
 
 public class RealizationDriver extends AbstractDriver implements DebuggerDriver {

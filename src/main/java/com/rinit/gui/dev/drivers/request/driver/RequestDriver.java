@@ -1,10 +1,13 @@
 package com.rinit.gui.dev.drivers.request.driver;
 
 import com.rinit.debugger.server.file.AbstractDriver;
-import com.rinit.gui.dev.bin.debugger.bin.DebuggerDriver;
+
 import com.rinit.gui.dev.bin.debugger.bin.RequestBuilder;
+import com.rinit.gui.dev.bin.debugger.bin.context.ReportContext;
 import com.rinit.gui.dev.bin.debugger.bin.context.RequestContext;
 import com.rinit.gui.dev.bin.debugger.bin.context.RunContext;
+import com.rinit.gui.dev.bin.debugger.bin.interfaces.DebuggerDriver;
+import com.rinit.gui.dev.bin.debugger.bin.report.ReportItem;
 
 public class RequestDriver extends AbstractDriver implements DebuggerDriver {
 
@@ -63,15 +66,13 @@ public class RequestDriver extends AbstractDriver implements DebuggerDriver {
 	@Override
 	public void run(RunContext context) {
 		RequestContext requestContext = context.getContext(RequestContext.class);
+		ReportContext reportContext = context.getContext(ReportContext.class);
 		RequestBuilder requestBuilder = requestContext.createNewRequest();
 		requestBuilder.setUrl(this.toURL());
-		System.out.println("start");
+		reportContext.addReport(ReportItem.createDefaultReport(this));
 	}
 
 	@Override
-	public void outRun(RunContext context) {
-		System.out.println("end");
-		
-	}
+	public void outRun(RunContext context) {}
 
 }

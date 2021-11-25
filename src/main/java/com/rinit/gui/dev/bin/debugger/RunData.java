@@ -1,6 +1,6 @@
 package com.rinit.gui.dev.bin.debugger;
 
-import com.rinit.gui.dev.bin.debugger.bin.RequestReportCallBack;
+import com.rinit.gui.dev.bin.debugger.bin.interfaces.RequestReportCallBack;
 
 public class RunData {
 

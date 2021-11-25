@@ -12,15 +12,17 @@ import com.rinit.debugger.server.services.interfaces.IFileService;
 import com.rinit.gui.dev.bin.debugger.bin.context.AbstractionContext;
 import com.rinit.gui.dev.bin.debugger.bin.context.ModelContext;
 import com.rinit.gui.dev.bin.debugger.bin.context.RequestContext;
-import com.rinit.gui.dev.bin.debugger.bin.context.RequestReportContext;
+import com.rinit.gui.dev.bin.debugger.bin.context.ReportContext;
 import com.rinit.gui.dev.bin.debugger.bin.context.RunContext;
+import com.rinit.gui.dev.bin.debugger.bin.interfaces.DebuggerDriver;
+import com.rinit.gui.dev.bin.debugger.bin.interfaces.RequestReportCallBack;
 import com.rinit.gui.dev.drivers.debugreport.driver.DebugReportDriver;
 import com.rinit.gui.dev.drivers.directory.DirectoryDriver;
 import com.rinit.gui.exceptions.DriverNotFoundException;
 import com.rinit.gui.model.ModelFacade;
 import com.rinit.gui.model.fileDriver.FileDriverModel;
 
-public class Debugger {
+public class Debugger implements Runnable {
 	
 	private ModelFacade modelFacade;
 	private String runName;
@@ -49,6 +51,7 @@ public class Debugger {
 		this.runName = runName;
 	}
 	
+	@Override
 	public void run() {
 		this.runContext = this.createInitialRunContext();
 		this.initialPath = this.modelFacade.getPanelsModel().getCurrentPath();
@@ -58,7 +61,7 @@ public class Debugger {
 	
 	private void doReport() {
 		DirectoryDriver dir = this.createReportDir();
-		RequestReportContext reportContext = this.runContext.getContext(RequestReportContext.class);
+		ReportContext reportContext = this.runContext.getContext(ReportContext.class);
 		DebugReportDriver report = reportContext.getReportItem(); 
 		report.setPath(dir.getChildrenPath());
 		report.setName(String.format("report_%s", this.runName));
@@ -80,7 +83,7 @@ public class Debugger {
 	private RunContext createInitialRunContext() {
 		RunContext runContext = new RunContext();
 		RequestContext requestContext = new RequestContext();
-		RequestReportContext requestReportContext = new RequestReportContext(this.requestReportCallBack);
+		ReportContext requestReportContext = new ReportContext(this.requestReportCallBack);
 		AbstractionContext abstractionContext = new AbstractionContext();
 		ModelContext modelContext = new ModelContext();
 		modelContext.modelFacade = this.modelFacade;
