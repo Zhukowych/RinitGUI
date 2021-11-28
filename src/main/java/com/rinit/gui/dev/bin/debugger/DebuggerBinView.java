@@ -28,6 +28,7 @@ public class DebuggerBinView extends AbstractCliBinView {
     
     private JButton runButton = new JButton("Run");
     private JButton stopButton = new JButton("Stop");
+    private JButton clearButton = new JButton("Clear");
     
 	private DebugReportCliDriverView table;
     
@@ -54,7 +55,7 @@ public class DebuggerBinView extends AbstractCliBinView {
 	
 	public void constructGUI() {
 		this.setBackground(Colors.POPUP_BACKGROUND);
-		this.table = new DebugReportCliDriverView(null);
+		this.table = new DebugReportCliDriverView(this.logic.createDebugReportLogic());
 		
 		this.layout.setHorizontalGroup(this.layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(this.layout.createSequentialGroup()
@@ -64,7 +65,8 @@ public class DebuggerBinView extends AbstractCliBinView {
 						.addComponent(this.table))
 				.addGroup(this.layout.createSequentialGroup()
 						.addComponent(this.runButton)
-						.addComponent(this.stopButton))
+						.addComponent(this.stopButton)
+						.addComponent(this.clearButton))
 				);
 		
 		this.layout.setVerticalGroup(this.layout.createSequentialGroup()
@@ -74,26 +76,47 @@ public class DebuggerBinView extends AbstractCliBinView {
 				.addComponent(this.table)
 				.addGroup(this.layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addComponent(this.runButton)
-						.addComponent(this.stopButton))
+						.addComponent(this.stopButton)
+						.addComponent(this.clearButton))
 				);
 	}
 	
 	public void bindListeners() {
 		
 		this.runButton.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				runTest();
 			}
-		
 		});
 		
+		this.stopButton.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				stopTest();
+			}
+		});
+		
+		this.clearButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				clearTest();
+			}
+		});
 	}
 	
 	private void runTest() {
 		RunData runData = new RunData(this.table.getTableCallBack(), this.debugRun.getText());
 		this.logic.runTest(runData);
+	}
+	
+	private void stopTest() {
+		this.logic.stopTest();
+	}
+
+	private void clearTest() {
+		this.debugRun.setText("");
+		this.table.clear();
 	}
 	
 	@SuppressWarnings("serial")

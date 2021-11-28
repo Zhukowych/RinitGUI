@@ -49,7 +49,7 @@ public class TabsView extends AbstractView {
 		if (viewModel.isPopup == true) {
 			this.openPopUp(viewModel);
 		} else {
-			this.tabbedPane.addTab("test", viewModel.view);
+			this.tabbedPane.addTab(viewModel.binName, viewModel.view);
 			this.tabbedPane.setSelectedIndex(this.tabbedPane.getTabCount()-1);
 		}
 	}
@@ -60,7 +60,7 @@ public class TabsView extends AbstractView {
 		final int x = (int) ((screenSize.width - viewModel.popupSize.getWidth()) / 2);
 		final int y = (int) ((screenSize.height - viewModel.popupSize.getHeight()) / 2);
 		JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-		JDialog popUp = new JDialog(frame, "test", true);
+		JDialog popUp = new JDialog(frame, viewModel.binName, true);
 		viewModel.view.setPopUp(popUp);
 		popUp.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		popUp.setLocation(x, y);

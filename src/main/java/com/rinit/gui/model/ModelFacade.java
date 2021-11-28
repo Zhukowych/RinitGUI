@@ -15,11 +15,11 @@ public class ModelFacade {
 	private RinitClientModel rinitClientModel;
 	
 	public ModelFacade(IEventHandler eventHandler) {
+		this.rinitClientModel = new RinitClientModel(eventHandler); // must be first
 		this.tabsModel = new TabsModel(eventHandler); // must be before bin model
 		this.binModel = new BinModel(eventHandler, this);
 		this.panelsModel = new PanelsModel(eventHandler);
 		this.commandLineModel = new CommandLineModel(eventHandler);
-		this.rinitClientModel = new RinitClientModel(eventHandler);
 		this.fileDriverModel = new FileDriverModel(eventHandler, this);
 	}
 

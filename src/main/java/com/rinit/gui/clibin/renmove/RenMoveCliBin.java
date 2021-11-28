@@ -34,7 +34,7 @@ public class RenMoveCliBin extends AbstractCliBin {
 
 	@Override
 	public KeyStroke getKeyBinding() {
-		return KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0);
+		return KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0);
 	}
 
 	@Override

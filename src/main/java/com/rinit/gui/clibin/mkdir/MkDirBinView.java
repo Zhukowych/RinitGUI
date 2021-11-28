@@ -4,12 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.GroupLayout.Alignment;
 
 import com.rinit.gui.clibin.AbstractCliBinView;
+import com.rinit.gui.view.Colors;
+import com.rinit.gui.view.ui.RInput;
 
 public class MkDirBinView extends AbstractCliBinView {
 	
@@ -21,7 +22,7 @@ public class MkDirBinView extends AbstractCliBinView {
     private GroupLayout layout;
     
     private JLabel dirNameLabel = new JLabel("Dir name:");
-    private JTextField dirName = new JTextField();
+    private RInput dirName = new RInput();
     private JButton submitButton = new JButton("Save");
     
 	private MkDirBinLogic logic;
@@ -41,12 +42,16 @@ public class MkDirBinView extends AbstractCliBinView {
 	}
 	
 	private void constructGUI() {
+		this.setBackground(Colors.POPUP_BACKGROUND);
 		
 		this.layout.setHorizontalGroup(this.layout.createParallelGroup(Alignment.LEADING) 
 				.addGroup(this.layout.createSequentialGroup()
 						.addComponent(this.dirNameLabel)
 						.addComponent(this.dirName))
-				.addComponent(this.submitButton));
+				.addGroup(GroupLayout.Alignment.CENTER, 
+						this.layout.createSequentialGroup()
+							.addComponent(this.submitButton))
+				);
 
 		this.layout.setVerticalGroup(this.layout.createSequentialGroup()
 				.addGroup(this.layout.createParallelGroup(GroupLayout.Alignment.BASELINE)

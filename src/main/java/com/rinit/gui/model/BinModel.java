@@ -4,8 +4,14 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.rinit.debugger.server.client.interfaces.ILibraryServiceClient;
+import com.rinit.debugger.server.file.library.LibraryClassNotFoundException;
+import com.rinit.debugger.server.file.library.LibraryDriver;
+import com.rinit.debugger.server.file.library.LibraryNotFoundException;
+import com.rinit.debugger.server.services.interfaces.IBinService;
 import com.rinit.gui.clibin.AbstractCliBin;
 import com.rinit.gui.clibin.copy.CopyCliBin;
 import com.rinit.gui.clibin.edfile.EditFileCliBin;
@@ -69,6 +75,7 @@ public class BinModel extends AbstractModel{
 	private void addDefaultBin() {
 		DevCliBins devCliBins = new DevCliBins();
 		this.bins.putAll(devCliBins.getDevBins());
+		this.bins.putAll(getRemoteBins());
 		this.bins.put(UploadBin.NAME, UploadBin.class);
 		this.bins.put(MkDirBin.NAME, MkDirBin.class);
 		this.bins.put(ReadBin.NAME, ReadBin.class);
@@ -77,7 +84,27 @@ public class BinModel extends AbstractModel{
 		this.bins.put(CopyCliBin.NAME, CopyCliBin.class);
 		this.bins.put(RenMoveCliBin.NAME, RenMoveCliBin.class);
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	private Map<String, Class<? extends AbstractCliBin>> getRemoteBins(){
+		Map<String, Class<? extends AbstractCliBin>> remoteBins = new HashMap<String, Class<? extends AbstractCliBin>>();
+		IBinService binServiceClient = this.modelFacade.getRinitClientModel().getClient().getBinService();
+		ILibraryServiceClient libraryServiceClient = this.modelFacade.getRinitClientModel().getClient().getLibraryServiceClient();
+		List<String> binNames = binServiceClient.getAwailableBinsNames();
+		for(String binName : binNames) {
+			LibraryDriver binLibrary = null;
+			try {
+				binLibrary = libraryServiceClient.convertRemoteLibraryToLocal(libraryServiceClient.getLibraryByPathName("/lib/bin/", binName));
+			} catch (LibraryNotFoundException e) {e.printStackTrace();}
+			Class<? extends AbstractCliBin> cliBinClass = null;
+			try {
+				cliBinClass = (Class<? extends AbstractCliBin>) binLibrary.getClassWithName(binName);
+			} catch (LibraryClassNotFoundException e) {e.printStackTrace();}
+			remoteBins.put(binName, cliBinClass);
+		}
+		return remoteBins;
+	}
+	
 	private String getBinName(String command) {
 		return command.split("\\s+")[0];
 	}

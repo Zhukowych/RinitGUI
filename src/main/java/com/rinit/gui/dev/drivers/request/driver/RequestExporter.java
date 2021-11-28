@@ -16,7 +16,7 @@ public class RequestExporter {
 					builder.addGroup(
 					    builder.addTag("protocol", file.getProtocol()),
 					    builder.addTag("adress", file.getAdress()),
-					    builder.addTag("path", file.getPath())
+					    builder.addTag("path", file.getUrlPath())
 					)
 				);
 	}

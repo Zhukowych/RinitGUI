@@ -1,10 +1,12 @@
 package com.rinit.gui.dev.bin.debugger;
 
 import com.rinit.gui.dev.bin.debugger.bin.Debugger;
+import com.rinit.gui.dev.drivers.debugreport.DebugReportCliDriverLogic;
 import com.rinit.gui.model.ModelFacade;
 
 public class DebuggerBinLogic {
 
+	private Thread debugThread;
 	private ModelFacade modelFacade;
 	
 	public DebuggerBinLogic(ModelFacade modelFacade) {
@@ -15,8 +17,15 @@ public class DebuggerBinLogic {
 		Debugger debugger = new Debugger(modelFacade);
 		debugger.setRequestReportCallBack(runData.requestReportCallBack);
 		debugger.setRunName(runData.runName);
-		Thread debugThread = new Thread(debugger);
-		debugThread.start();
+		this.debugThread = new Thread(debugger);
+		this.debugThread.start();
 	}
 	
+	public void stopTest() {
+		this.debugThread.interrupt();
+	}
+	
+	public DebugReportCliDriverLogic createDebugReportLogic() {
+		return new DebugReportCliDriverLogic(null, modelFacade);
+	}
 }

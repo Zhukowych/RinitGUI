@@ -1,6 +1,7 @@
 package com.rinit.gui.dev.drivers.debugreport;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -12,12 +13,9 @@ import javax.swing.GroupLayout;
 import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
 
-import com.fasterxml.jackson.databind.type.LogicalType;
 import com.rinit.gui.dev.bin.debugger.bin.interfaces.RequestReportCallBack;
 import com.rinit.gui.dev.bin.debugger.bin.report.ReportItem;
 import com.rinit.gui.dev.drivers.debugreport.driver.DebugReportDriver;
@@ -63,6 +61,10 @@ public class DebugReportCliDriverView extends AbstractCliFileDriverView {
 		this.bindListener();
 	}
 	
+	public void clear() {
+		this.table.clear();
+	}
+	
 	private void getInitialData() {
 		try{
 			DebugReportDriver report = this.logic.getInitialData();
@@ -96,7 +98,7 @@ public class DebugReportCliDriverView extends AbstractCliFileDriverView {
 									.addComponent(this.table));
 	}
 	
-	public void bindListener() {
+	private void bindListener() {
 		this.filter.addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -160,6 +162,11 @@ public class DebugReportCliDriverView extends AbstractCliFileDriverView {
 			return this.reportItems;
 		}
 
+		public void clear() {
+			this.reportItems.clear();
+			this.removeAll();
+		}
+		
 		public void bindListeners() {
 			int condition = JComponent.WHEN_FOCUSED;
 			InputMap inputMap = table.getInputMap(condition);
@@ -183,12 +190,15 @@ public class DebugReportCliDriverView extends AbstractCliFileDriverView {
 		
 		private void openFullReport() {
 			ReportItem reportItem = this.reportItems.get(this.table.getSelectedRow());
-		
+			JOptionPane.showMessageDialog(this, reportItem.fullReport);
 		}
 		
 		private void openElement() {
 			ReportItem reportItem = this.reportItems.get(this.table.getSelectedRow());
-			logic.openFile(reportItem);
+			if (reportItem.shortReport == "INTERRUPTED")
+				JOptionPane.showMessageDialog(this, "interrupt don't have file");			
+			else
+				logic.openFile(reportItem);
 		}
 		
 	}

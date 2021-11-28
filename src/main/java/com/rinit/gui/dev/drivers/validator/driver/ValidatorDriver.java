@@ -26,6 +26,7 @@ public class ValidatorDriver extends AbstractDriver implements DebuggerDriver {
 		ValidatorDriverImporter importer = new ValidatorDriverImporter(this);
 		importer.parse();
 		this.reportItem = ReportItem.createDefaultReport(this);
+		this.reportItem.fullReport = "";
 	}
 
 	@Override

@@ -34,7 +34,7 @@ public class CopyCliBin extends AbstractCliBin {
 
 	@Override
 	public KeyStroke getKeyBinding() {
-		return KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0);
+		return KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0);
 	}
 
 	@Override

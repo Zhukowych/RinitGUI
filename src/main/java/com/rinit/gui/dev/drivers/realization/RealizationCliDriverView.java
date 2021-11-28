@@ -1,6 +1,7 @@
 package com.rinit.gui.dev.drivers.realization;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -8,11 +9,12 @@ import java.util.Arrays;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
 import com.rinit.gui.model.fileDriver.AbstractCliFileDriverView;
+import com.rinit.gui.view.Colors;
+import com.rinit.gui.view.ui.RComboBox;
 
 
 public class RealizationCliDriverView extends AbstractCliFileDriverView {
@@ -25,7 +27,7 @@ public class RealizationCliDriverView extends AbstractCliFileDriverView {
 	private GroupLayout layout;
 	
 	private JLabel extentionLabel = new JLabel("ext");
-	private JComboBox<String> extentions = new JComboBox<String>();
+	private RComboBox<String> extentions = new RComboBox<String>();
 		
 	private RealizationCliDriverSubmitData initialData;
 	private RealizationCliDriverLogic logic;
@@ -56,6 +58,7 @@ public class RealizationCliDriverView extends AbstractCliFileDriverView {
 	}
 	
 	private void constructGUI() {
+		this.setBackground(Colors.POPUP_BACKGROUND);
 		
 		this.layout.setAutoCreateContainerGaps(true);
 		this.layout.setAutoCreateGaps(true);

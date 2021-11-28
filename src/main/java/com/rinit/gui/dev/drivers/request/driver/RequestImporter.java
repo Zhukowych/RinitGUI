@@ -17,7 +17,7 @@ public class RequestImporter {
 			return;
 		this.file.setProtocol(this.reaader.getTagValueByName("protocol", "request"));
 		this.file.setAdress(this.reaader.getTagValueByName("adress", "request"));
-		this.file.setPath(this.reaader.getTagValueByName("path", "request"));
+		this.file.setUrlPath(this.reaader.getTagValueByName("path", "request"));
 	}
 	
 }

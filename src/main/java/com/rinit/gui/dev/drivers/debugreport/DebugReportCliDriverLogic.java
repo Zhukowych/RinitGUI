@@ -14,7 +14,8 @@ public class DebugReportCliDriverLogic {
 	
 	public DebugReportCliDriverLogic(FileDTO readingFile, ModelFacade modelFacade) {
 		this.readingFile = readingFile;
-		this.driver.fromDTO(this.readingFile);
+		if (this.readingFile != null)
+			this.driver.fromDTO(this.readingFile);
 		this.binModel = modelFacade.getBinModel();
 	}
 	

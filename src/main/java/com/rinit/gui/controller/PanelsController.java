@@ -64,8 +64,6 @@ public class PanelsController {
 			this.panelsModel.getSelectedPanelModel().goDeepHight(true);
 		else if (selectedFile.getExtention().equals(UtilExtentions.HIGH))
 			this.panelsModel.getSelectedPanelModel().goDeepHight(false);			
-		else  
-			this.binModel.execute(this.createReadCommandForFile(selectedFile));
 		this.updateCurrentPath();
 	}
 	
@@ -140,7 +138,7 @@ public class PanelsController {
 				forceEnterOnFile();
 			}
 			
-		}, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, KeyEvent.SHIFT_DOWN_MASK), Mode.DEFAULT);
+		}, KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0), Mode.DEFAULT);
 		
 		this.eventHandler.subscribeForKeyEvent(new IListener() {
 			
@@ -149,7 +147,7 @@ public class PanelsController {
 				deleteFile();
 			}
 			
-		}, KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), Mode.DEFAULT);
+		}, KeyStroke.getKeyStroke(KeyEvent.VK_F8, 0), Mode.DEFAULT);
 		
 		this.eventHandler.subscribeForKeyEvent(new IListener() {
 			

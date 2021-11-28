@@ -21,6 +21,7 @@ public class TabsModel extends AbstractModel {
 	public void addTab(AbstractCliBin bin) {
 		this.tabs.add(bin);
 		CliBinViewModel viewModel = new CliBinViewModel();
+		viewModel.binName = bin.getName();
 		viewModel.view = bin.getView();
 		viewModel.isPopup = bin.isPopUp();
 		viewModel.popupSize = bin.getPopUpSize();

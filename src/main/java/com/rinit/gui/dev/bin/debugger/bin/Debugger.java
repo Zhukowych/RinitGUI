@@ -16,6 +16,7 @@ import com.rinit.gui.dev.bin.debugger.bin.context.ReportContext;
 import com.rinit.gui.dev.bin.debugger.bin.context.RunContext;
 import com.rinit.gui.dev.bin.debugger.bin.interfaces.DebuggerDriver;
 import com.rinit.gui.dev.bin.debugger.bin.interfaces.RequestReportCallBack;
+import com.rinit.gui.dev.bin.debugger.bin.report.ReportItem;
 import com.rinit.gui.dev.drivers.debugreport.driver.DebugReportDriver;
 import com.rinit.gui.dev.drivers.directory.DirectoryDriver;
 import com.rinit.gui.exceptions.DriverNotFoundException;
@@ -53,15 +54,17 @@ public class Debugger implements Runnable {
 	
 	@Override
 	public void run() {
-		this.runContext = this.createInitialRunContext();
+        this.runContext = this.createInitialRunContext();
 		this.initialPath = this.modelFacade.getPanelsModel().getCurrentPath();
 		this.moveToChildrenPaths(initialPath);
 		this.doReport();
-	}
+    }
 	
 	private void doReport() {
 		DirectoryDriver dir = this.createReportDir();
 		ReportContext reportContext = this.runContext.getContext(ReportContext.class);
+		if (Thread.currentThread().isInterrupted())
+			reportContext.addReport(this.createInterruptionContext());
 		DebugReportDriver report = reportContext.getReportItem(); 
 		report.setPath(dir.getChildrenPath());
 		report.setName(String.format("report_%s", this.runName));
@@ -80,6 +83,10 @@ public class Debugger implements Runnable {
 		return dir;
 	}
 	
+	private ReportItem createInterruptionContext() {
+		return new ReportItem("-", "", "-", "INTERRUPTED", "Test interrupted by user", "O ms");
+	}
+	
 	private RunContext createInitialRunContext() {
 		RunContext runContext = new RunContext();
 		RequestContext requestContext = new RequestContext();
@@ -96,11 +103,11 @@ public class Debugger implements Runnable {
 	
 	private void moveToChildrenPaths(String initialPath) {
 		this.fileStack.push(this.getPathFilesDeque(this.fileServiceClient.getFilesByPath(initialPath)));
-		while(!this.fileStack.empty()) {
-			while(this.fileStack.peek().peek() != null) {
+		while(!this.fileStack.empty() && !Thread.currentThread().isInterrupted()) {
+			while(this.fileStack.peek().peek() != null && !Thread.currentThread().isInterrupted()) {
 				this.processUpPathElement(this.fileStack.peek().pop());
 			}
-			if (this.fileStack.peek().isEmpty()) 
+			if (this.fileStack.peek().isEmpty() && !Thread.interrupted()) 
 				this.processDown();
 		}
 	}

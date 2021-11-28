@@ -20,8 +20,17 @@ public class RComboBox<E> extends JComboBox<E>{
 	 */
 	private static final long serialVersionUID = 7933711527532169246L;
 
+	public RComboBox() {
+		super();
+		this.constructUI();
+	}
+	
 	public RComboBox(E[] selection){
 		super(selection);
+		this.constructUI();
+	}
+	
+	public void constructUI() {
 		UIManager.put("ComboBox.background", new ColorUIResource(Colors.INPUT_BACKGROUND));
 		UIManager.put("ComboBox.foreground", new ColorUIResource(Color.BLACK));
 		UIManager.put("ComboBox.selectionBackground", new ColorUIResource(Colors.INPUT_BACKGROUND));
@@ -29,8 +38,7 @@ public class RComboBox<E> extends JComboBox<E>{
 
 		this.setBackground(Colors.INPUT_BACKGROUND);
 		this.setUI(RComboBoxUI.createUI(this));
-		this.setBackground(Colors.INPUT_BACKGROUND);
-
+		this.setBackground(Colors.INPUT_BACKGROUND);		
 	}
 	
 	static class RComboBoxUI extends BasicComboBoxUI {

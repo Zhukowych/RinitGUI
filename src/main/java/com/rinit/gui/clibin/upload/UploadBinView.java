@@ -1,5 +1,8 @@
 package com.rinit.gui.clibin.upload;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -28,9 +31,8 @@ public class UploadBinView extends JPanel {
     private JFilePicker jarFile = new JFilePicker("Jar file path", "Browse");
     
     private JButton submitButton = new JButton("Save");
-    
-	@SuppressWarnings("unused")
-	private UploadBinLogic logic;
+   
+    private UploadBinLogic logic;
 	
 	public UploadBinView(UploadBinLogic logic) {
 		this.logic = logic;
@@ -42,6 +44,7 @@ public class UploadBinView extends JPanel {
 		this.setLayout(this.layout);
 
 		this.constructGUI();
+		this.bindListeners();
 		
 	}
 
@@ -68,6 +71,20 @@ public class UploadBinView extends JPanel {
 						.addComponent(this.classPath))
 				.addComponent(this.jarFile)
 				.addComponent(this.submitButton));
+		
+	}
+	
+	private void bindListeners() {
+		this.submitButton.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				submit();
+			}
+		});
+	}
+	
+	public void submit() {
+		logic.submit(new UploadBinSubmitData(this.name.getText(), this.classPath.getText(), this.jarFile.getSelectedFilePath()));
 		
 	}
 	

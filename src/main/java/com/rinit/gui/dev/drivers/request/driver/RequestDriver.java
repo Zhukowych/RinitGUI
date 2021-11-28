@@ -51,11 +51,11 @@ public class RequestDriver extends AbstractDriver implements DebuggerDriver {
 		this.adress = adress;
 	}
 
-	public String getPath() {
+	public String getUrlPath() {
 		return path;
 	}
 
-	public void setPath(String path) {
+	public void setUrlPath(String path) {
 		this.path = path;
 	}
 	
