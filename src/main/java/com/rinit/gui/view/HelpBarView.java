@@ -1,4 +1,4 @@
-package com.rinit.gui.view;
+  package com.rinit.gui.view;
 
 import java.awt.Color;
 

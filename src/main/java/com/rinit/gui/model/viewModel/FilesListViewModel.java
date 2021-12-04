@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Stack;
 
 import com.rinit.debugger.server.dto.FileDTO;
-import com.rinit.gui.dev.FilePanelConfig;
 import com.rinit.gui.event.IEventContext;
+import com.rinit.gui.setup.FilePanelConfig;
 
 public class FilesListViewModel implements IEventContext{
 
@@ -18,12 +18,13 @@ public class FilesListViewModel implements IEventContext{
 
 	public FilesListViewModel() {
 		String partsPath = "";
-		String[] basePathParts = FilePanelConfig.BASE_PATH.split("/");
+		String[] basePathParts = FilePanelConfig.INITIAL_PATH.split("/");
 		for (String part : basePathParts) {
 			partsPath = partsPath + part + "/";
 			this.paths.push(partsPath);
 		}
-		System.out.println(this.paths);
+		if (this.paths.size() == 0) 
+			this.paths.push("/");
 	}
 	
 	public void setSelectedIndex(int selectedIndex) {

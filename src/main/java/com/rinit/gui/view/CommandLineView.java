@@ -1,6 +1,5 @@
 package com.rinit.gui.view;
 import java.awt.Color;
-
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
@@ -50,9 +49,10 @@ public class CommandLineView extends JPanel {
 		this.commandLine.setFont(font);
 		this.commandLine.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		this.commandLine.setBackground(Color.BLACK);
+		this.commandLine.setBackground(Color.BLACK);
 		this.commandLine.setForeground(Color.WHITE);
 		this.commandLine.setCaretColor(Color.WHITE);
-		
+
 		
 		this.layout.setHorizontalGroup(this.layout.createSequentialGroup()
 				.addGap(5)

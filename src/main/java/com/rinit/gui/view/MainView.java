@@ -2,10 +2,10 @@
 package com.rinit.gui.view;
 
 import javax.swing.BoxLayout;
-import javax.swing.JFrame;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
+import javax.swing.JFrame;
+
+import com.github.weisj.darklaf.LafManager;
 import com.rinit.gui.event.IEventHandler;
 
 public class MainView extends JFrame {
@@ -45,21 +45,7 @@ public class MainView extends JFrame {
 	}
 	
 	private void setLookAndFeel() {
-	    try {
-	        UIManager.setLookAndFeel(
-	                UIManager.getSystemLookAndFeelClassName());
-	    }catch (UnsupportedLookAndFeelException e) {
-	       // handle exception
-	    }
-	    catch (ClassNotFoundException e) {
-	       // handle exception
-	    }
-	    catch (InstantiationException e) {
-	       // handle exception
-	    }
-	    catch (IllegalAccessException e) {
-	       // handle exception
-	    }
+		LafManager.install();		
 	}
 	
 }

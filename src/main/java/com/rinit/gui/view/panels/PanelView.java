@@ -1,12 +1,12 @@
 package com.rinit.gui.view.panels;
 
 import java.awt.Color;
+
 import java.awt.Component;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -32,34 +32,32 @@ public abstract class PanelView extends JPanel {
 
 	protected IEventHandler eventHandler;
 	
-	 private static final Color BACKGROUND = new Color(0,65,100);
+	private static final Color BACKGROUND = new Color(0,65,100);
 	 
-	 private DefaultTableModel tableModel;
-	 private JTable table;
-	 private Object[] columnsNames = new String[] {"Name", "Extention", "Position"};
+	private DefaultTableModel tableModel;
+	private JTable table;
+	private Object[] columnsNames = new String[] {"Name", "Extention", "Position"};
+	
+	private JScrollPane scroll;
 	 
-	 private JScrollPane scroll;
-	 
-	 public PanelView(IEventHandler eventHandler) {
-		 this.configureTable();
-		 this.scroll = new JScrollPane(this.table);
-		 
-		 this.table.setBackground(Color.white);
-		 this.table.setOpaque(true);
-		 this.scroll.setBackground(Color.white);
-		 this.scroll.setOpaque(true);
-		 this.scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-		 this.scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		 this.scroll.setBorder(null);
-		 
-		 this.scroll.getViewport().setBackground(BACKGROUND);
-		 this.table.setBackground(BACKGROUND);
-		 
-		 this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-		 this.add(scroll);
-		 this.eventHandler = eventHandler;
-		 this.subscribeForListeners();
-	 }
+	public PanelView(IEventHandler eventHandler) {
+		this.configureTable();
+		this.scroll = new JScrollPane(this.table);
+			 
+		this.table.setBackground(Color.white);
+		this.table.setOpaque(true);
+		this.scroll.setBackground(Color.white);
+		this.scroll.setOpaque(true);
+		this.scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+		this.scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		this.scroll.setBorder(null);
+			 
+		this.scroll.getViewport().setBackground(BACKGROUND);
+		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+		this.add(scroll);
+		this.eventHandler = eventHandler;
+		this.subscribeForListeners();
+	}
 	 
 	protected void updateFilesList(FilesListViewModel viewModel) {
 		List<String[]> rows = this.dtosToRow(viewModel.getFiles());
@@ -100,23 +98,24 @@ public abstract class PanelView extends JPanel {
 		       
 		       public Component prepareRenderer( TableCellRenderer renderer, int row, int column) {
 		           JComponent jc = (JComponent)super.prepareRenderer(renderer, row, column);
-		    	   if (row == 0) {
-		    		   jc.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Colors.BORDER));
-		    	   }
+		           if (row == this.getSelectedRow()) 
+		        	   jc.setBackground(Colors.SELECTED);
 		           return jc;
 		       }
 		 };
+		 
+		 
 		 this.table.setShowHorizontalLines(false);
 		 this.table.setGridColor(Colors.BORDER);
 		 this.table.setFocusable(false);
 		 this.table.getTableHeader().setReorderingAllowed(false);
 		 this.table.setRowHeight(20);
 		 this.table.setFont(new Font("Consolal", Font.PLAIN, 13));
+		 this.table.setBackground(Colors.BACKGROUD);
 		 TableColumnModel columnModel = this.table.getColumnModel();
 		 columnModel.getColumn(0).setPreferredWidth(100);
 		 columnModel.getColumn(1).setPreferredWidth(500);
 	 
-		 this.table.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
 		 
 		 this.table.setDefaultRenderer(Double.class, new DefaultTableCellRenderer(){
 
@@ -129,6 +128,7 @@ public abstract class PanelView extends JPanel {
             public Component getTableCellRendererComponent(JTable table,Object value,boolean isSelected,boolean hasFocus,int row,int column) {
                 Component c = super.getTableCellRendererComponent(table,value,isSelected,hasFocus,row,column);
                 c.setForeground(Color.WHITE);
+                c.setBackground(Colors.BACKGROUD);
                 return c;
             }
 		 });

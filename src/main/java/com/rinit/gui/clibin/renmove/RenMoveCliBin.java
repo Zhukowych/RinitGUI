@@ -59,12 +59,10 @@ public class RenMoveCliBin extends AbstractCliBin {
 	
 	@Override
 	public void run() {
-		System.out.println(84923482);
 		FileDTO fileToCopy = this.panelsModel.getSelectedPanelModel().getSelectedFile();
 		String destination = this.panelsModel.getNotSelectedModel().getCurrentPath();
 		this.fileServiceClient.renMove(fileToCopy, destination);
 		this.panelsModel.reUpdatePanels();
-		System.out.println(destination);
 	}
 	
 }

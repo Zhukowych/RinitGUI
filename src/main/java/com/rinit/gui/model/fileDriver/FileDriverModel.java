@@ -82,7 +82,6 @@ public class FileDriverModel extends AbstractModel {
 		if (driverClass == null)
 			throw new DriverNotFoundException("Driver not found");
 		try {
-			System.out.println(driverClass);
 			AbstractDriver driver = driverClass.getDeclaredConstructor().newInstance();
 			driver.fromDTO(file);
 			return driver;
@@ -146,14 +145,14 @@ public class FileDriverModel extends AbstractModel {
 	
 	@SuppressWarnings("unchecked")
 	private Map<String, Class<? extends AbstractCliFileDriver>> getRemoteDrivers(){
+		Map<String, Class<? extends AbstractCliFileDriver>> remoteCliDrivers = new HashMap<String, Class<? extends AbstractCliFileDriver>>();
 		IFileDriverService fileDriverServiceClient = this.modelFacade.getRinitClientModel().getClient().getFileDriverService();
 		Map<String, LibraryDriver> driversLibraries = null;
 		try {
 			driversLibraries = fileDriverServiceClient.getFileDrivers();
-		} catch (ServiceException e1) {
-			e1.printStackTrace();
-		}
-		Map<String, Class<? extends AbstractCliFileDriver>> remoteCliDrivers = new HashMap<String, Class<? extends AbstractCliFileDriver>>();
+		} catch (Exception  e1) {e1.printStackTrace();}
+		if (driversLibraries == null)
+			return remoteCliDrivers;
 		for (Entry<String, LibraryDriver> entry : driversLibraries.entrySet()) {
 			try {
 				remoteCliDrivers.put(entry.getKey(), (Class<? extends AbstractCliFileDriver>) entry.getValue().getClassWithName(entry.getKey()));

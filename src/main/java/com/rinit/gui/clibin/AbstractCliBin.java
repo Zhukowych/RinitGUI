@@ -4,7 +4,6 @@ import java.awt.Dimension;
 
 import javax.swing.JDialog;
 import javax.swing.KeyStroke;
-
 import com.rinit.gui.model.ModelFacade;
 
 public abstract class AbstractCliBin {
