@@ -68,8 +68,11 @@ public class TableView extends JPanel {
 		int colCount = this.tableModel.getColumnCount();
 		String[][] tableData = new String[rowCount][colCount];
 		for (int row = 0; row < rowCount; row++){
-			for (int col = 0; col < colCount; col++)
-				tableData[row][col] = this.tableModel.getValueAt(row, col).toString();
+			for (int col = 0; col < colCount; col++) {
+				Object obj = this.tableModel.getValueAt(row, col);
+				if (obj != null)
+					tableData[row][col] = obj.toString();
+			}
 		}
 		return tableData;
 	}

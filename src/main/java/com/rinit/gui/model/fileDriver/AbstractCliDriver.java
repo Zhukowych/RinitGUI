@@ -7,7 +7,7 @@ import com.rinit.debugger.server.dto.FileDTO;
 import com.rinit.debugger.server.file.AbstractDriver;
 import com.rinit.gui.model.ModelFacade;
 
-public abstract class AbstractCliFileDriver implements Serializable {
+public abstract class AbstractCliDriver implements Serializable {
 	
 
 	/**
@@ -18,15 +18,15 @@ public abstract class AbstractCliFileDriver implements Serializable {
 	protected FileDTO readingFile;
 	protected ModelFacade modelFacade;
 	
-	public AbstractCliFileDriver() {}
+	public AbstractCliDriver() {}
 	
-	public AbstractCliFileDriver(FileDTO readingFile, ModelFacade modelFacade) {
+	public AbstractCliDriver(FileDTO readingFile, ModelFacade modelFacade) {
 		this.readingFile = readingFile;
 		this.modelFacade = modelFacade;
 	}
 
 	public abstract String getName();
-	public abstract AbstractCliFileDriverView getView();
+	public abstract AbstractCliDriverView getView();
 	public abstract boolean isPopup();
 	public abstract boolean isDirable();
 	public abstract Dimension getPopUpSize();

@@ -6,10 +6,10 @@ import com.rinit.debugger.server.dto.FileDTO;
 import com.rinit.debugger.server.file.AbstractDriver;
 import com.rinit.gui.dev.drivers.requestParams.dirver.RequestParamsDriver;
 import com.rinit.gui.model.ModelFacade;
-import com.rinit.gui.model.fileDriver.AbstractCliFileDriver;
-import com.rinit.gui.model.fileDriver.AbstractCliFileDriverView;
+import com.rinit.gui.model.fileDriver.AbstractCliDriver;
+import com.rinit.gui.model.fileDriver.AbstractCliDriverView;
 
-public class RequestParamsCliDriver extends AbstractCliFileDriver {
+public class RequestParamsCliDriver extends AbstractCliDriver {
 
 	/**
 	 * 
@@ -19,7 +19,7 @@ public class RequestParamsCliDriver extends AbstractCliFileDriver {
 	private static final String NAME = "request.params";
 	
 	private RequestParamsCliDriverLogic logic;
-	private AbstractCliFileDriverView view;
+	private AbstractCliDriverView view;
 
 	public RequestParamsCliDriver() {}
 	
@@ -35,7 +35,7 @@ public class RequestParamsCliDriver extends AbstractCliFileDriver {
 	}
 
 	@Override
-	public AbstractCliFileDriverView getView() {
+	public AbstractCliDriverView getView() {
 		return this.view;
 	}
 

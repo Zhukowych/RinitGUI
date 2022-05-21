@@ -65,6 +65,16 @@ public class RequestParamsDriver extends AbstractDriver implements DebuggerDrive
 		ReportContext reportContext = context.getContext(ReportContext.class);
 		RequestBuilder builder = requestContext.peekRequest();
 		builder.setMethod(this.getMethod());
+//		
+//		if (this.getName().equals("videosFiltered")) {
+//			System.out.println(this.getExtention());
+//			getParams[0][0] = "channel";
+//			getParams[0][1] = "OverSimplified";
+//			builder.setGetParameters(getParams);
+//		}
+		if (getParams[0][0] != null)
+			builder.setGetParameters(getParams);
+		
 		long startTime = System.nanoTime();
 		builder.doRequest();
 		reportContext.addReport(this.createReport(System.nanoTime() - startTime));
@@ -72,11 +82,7 @@ public class RequestParamsDriver extends AbstractDriver implements DebuggerDrive
 
 	@Override
 	public void outRun(RunContext context) {
-		RequestContext requestContext = context.getContext(RequestContext.class);
-		RequestBuilder builder = requestContext.popRequest();
-		try {
-			builder.getResponse().close();
-		} catch (IOException e) {e.printStackTrace();}
+
 	}
 
 	private ReportItem createReport(long deltaTime) {

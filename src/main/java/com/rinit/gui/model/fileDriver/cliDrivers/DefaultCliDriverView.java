@@ -12,9 +12,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import com.rinit.gui.exceptions.LogicException;
-import com.rinit.gui.model.fileDriver.AbstractCliFileDriverView;
+import com.rinit.gui.model.fileDriver.AbstractCliDriverView;
 
-public class DefaultCliDriverView extends AbstractCliFileDriverView {
+public class DefaultCliDriverView extends AbstractCliDriverView {
 
 	/**
 	 * 

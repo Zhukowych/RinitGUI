@@ -38,10 +38,9 @@ public class SetupView extends JFrame {
 	public SetupView() {
 		
 		
-		this.setTitle("Runit GUI setup");
+		this.setTitle("Runit Client setup");
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.getContentPane().setBackground(Colors.POPUP_BACKGROUND);
-        this.setUndecorated(true);
         
         mainPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         mainPane.add(this.setupPane);
@@ -49,7 +48,7 @@ public class SetupView extends JFrame {
         mainPane.setBackground(Colors.POPUP_BACKGROUND);
         this.add(mainPane);
         
-        this.setSize(600, this.getPreferredSize().height);
+        this.setSize(600, this.getPreferredSize().height+40);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));

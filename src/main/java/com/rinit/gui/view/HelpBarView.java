@@ -32,7 +32,7 @@ public class HelpBarView extends JPanel {
 		this.add(new HelpBarElement("F6", "RenMove"));
 		this.add(new HelpBarElement("F7", "Mkdir"));
 		this.add(new HelpBarElement("F8", "Delete"));
-		this.add(new HelpBarElement("F9", ""));
+		this.add(new HelpBarElement("F9", "Bins"));
 		this.add(new HelpBarElement("F10", ""));
 		this.add(new HelpBarElement("F11", ""));
 		this.add(new HelpBarElement("F12", ""));

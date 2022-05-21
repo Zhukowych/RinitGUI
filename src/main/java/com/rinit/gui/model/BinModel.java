@@ -13,6 +13,7 @@ import com.rinit.debugger.server.file.library.LibraryDriver;
 import com.rinit.debugger.server.file.library.LibraryNotFoundException;
 import com.rinit.debugger.server.services.interfaces.IBinService;
 import com.rinit.gui.clibin.AbstractCliBin;
+import com.rinit.gui.clibin.binlist.BinListBin;
 import com.rinit.gui.clibin.copy.CopyCliBin;
 import com.rinit.gui.clibin.edfile.EditFileCliBin;
 import com.rinit.gui.clibin.mkdir.MkDirBin;
@@ -83,6 +84,7 @@ public class BinModel extends AbstractModel{
 		this.bins.put(EditFileCliBin.NAME, EditFileCliBin.class);
 		this.bins.put(CopyCliBin.NAME, CopyCliBin.class);
 		this.bins.put(RenMoveCliBin.NAME, RenMoveCliBin.class);
+		this.bins.put(BinListBin.NAME, BinListBin.class);
 	}
 	
 	@SuppressWarnings("unchecked")

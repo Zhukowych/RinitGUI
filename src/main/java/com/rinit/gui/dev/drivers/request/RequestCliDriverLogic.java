@@ -20,7 +20,7 @@ public class RequestCliDriverLogic {
 
 	public RequestSubmitData getInitialData() {
 		if (!this.readingFile.getContent().isEmpty()) {
-			RequestSubmitData submitData = new RequestSubmitData(this.request.getProtocol(), this.request.getAdress(), this.request.getPath());
+			RequestSubmitData submitData = new RequestSubmitData(this.request.getProtocol(), this.request.getAdress(), this.request.getUrlPath());
 			return submitData;
 		} else {
 			return new RequestSubmitData("", "", "");
@@ -37,7 +37,7 @@ public class RequestCliDriverLogic {
 		file.fromDTO(this.readingFile);
 		file.setProtocol(submitData.protocol);
 		file.setAdress(submitData.adress);
-		file.setPath(submitData.path);
+		file.setUrlPath(submitData.path);
 		
 		return file;
 	}

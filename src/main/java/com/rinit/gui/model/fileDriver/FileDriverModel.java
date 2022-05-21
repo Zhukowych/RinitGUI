@@ -1,6 +1,7 @@
 package com.rinit.gui.model.fileDriver;
 
 import java.lang.reflect.Constructor;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +10,6 @@ import java.util.Map.Entry;
 
 import com.rinit.debugger.server.core.Extentions;
 import com.rinit.debugger.server.dto.FileDTO;
-import com.rinit.debugger.server.exception.ServiceException;
 import com.rinit.debugger.server.file.AbstractDriver;
 import com.rinit.debugger.server.file.library.LibraryClassNotFoundException;
 import com.rinit.debugger.server.file.library.LibraryDriver;
@@ -25,7 +25,7 @@ import com.rinit.gui.model.fileDriver.dev.DevDrivers;
 public class FileDriverModel extends AbstractModel {
 
 	private ModelFacade modelFacade;
-	private Map<String, Class<? extends AbstractCliFileDriver>> cliFileDriver = new HashMap<String, Class<? extends AbstractCliFileDriver>>();
+	private Map<String, Class<? extends AbstractCliDriver>> cliFileDriver = new HashMap<String, Class<? extends AbstractCliDriver>>();
 	private Map<String, Class<? extends AbstractDriver>> fileDrivers = new HashMap<String, Class<? extends AbstractDriver>>();
 	
 	
@@ -57,11 +57,11 @@ public class FileDriverModel extends AbstractModel {
 		return driver;
 	}
 
-	public AbstractCliFileDriver getCliFileDriverForExtention(FileDTO readingFile) {
-		Class<? extends AbstractCliFileDriver> driver = this.cliFileDriver.get(readingFile.getExtention());
+	public AbstractCliDriver getCliFileDriverForExtention(FileDTO readingFile) {
+		Class<? extends AbstractCliDriver> driver = this.cliFileDriver.get(readingFile.getExtention());
 		if (driver == null)
 			driver = this.cliFileDriver.get(DefaultCliDriver.NAME);
-		Constructor<? extends AbstractCliFileDriver> cons = null;
+		Constructor<? extends AbstractCliDriver> cons = null;
 		try {
 			cons = driver.getConstructor(FileDTO.class, ModelFacade.class);
 		} catch (NoSuchMethodException | SecurityException e1) {
@@ -109,10 +109,10 @@ public class FileDriverModel extends AbstractModel {
 		if (extention.equals(Extentions.DIRECTORY))
 			return true;
 		
-		Class<? extends AbstractCliFileDriver> driverClass = this.cliFileDriver.get(extention);
+		Class<? extends AbstractCliDriver> driverClass = this.cliFileDriver.get(extention);
 		if (driverClass == null)
 			return false;
-		AbstractCliFileDriver cliDriver = null;
+		AbstractCliDriver cliDriver = null;
 		try {
 			cliDriver = driverClass.getDeclaredConstructor().newInstance();
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
@@ -138,14 +138,14 @@ public class FileDriverModel extends AbstractModel {
 	}
 	
 	private void addFileDrivers() {
-		for (Entry<String, Class<? extends AbstractCliFileDriver>> entry : cliFileDriver.entrySet()) {
+		for (Entry<String, Class<? extends AbstractCliDriver>> entry : cliFileDriver.entrySet()) {
 			this.fileDrivers.put(entry.getKey(), this.getCliDriverInstence(entry.getValue()).getDriver());
 		}
 	}
 	
 	@SuppressWarnings("unchecked")
-	private Map<String, Class<? extends AbstractCliFileDriver>> getRemoteDrivers(){
-		Map<String, Class<? extends AbstractCliFileDriver>> remoteCliDrivers = new HashMap<String, Class<? extends AbstractCliFileDriver>>();
+	private Map<String, Class<? extends AbstractCliDriver>> getRemoteDrivers(){
+		Map<String, Class<? extends AbstractCliDriver>> remoteCliDrivers = new HashMap<String, Class<? extends AbstractCliDriver>>();
 		IFileDriverService fileDriverServiceClient = this.modelFacade.getRinitClientModel().getClient().getFileDriverService();
 		Map<String, LibraryDriver> driversLibraries = null;
 		try {
@@ -155,7 +155,7 @@ public class FileDriverModel extends AbstractModel {
 			return remoteCliDrivers;
 		for (Entry<String, LibraryDriver> entry : driversLibraries.entrySet()) {
 			try {
-				remoteCliDrivers.put(entry.getKey(), (Class<? extends AbstractCliFileDriver>) entry.getValue().getClassWithName(entry.getKey()));
+				remoteCliDrivers.put(entry.getKey(), (Class<? extends AbstractCliDriver>) entry.getValue().getClassWithName(entry.getKey()));
 			} catch (LibraryClassNotFoundException e) {
 				e.printStackTrace();
 			}
@@ -163,7 +163,7 @@ public class FileDriverModel extends AbstractModel {
 		return remoteCliDrivers;
 	}
 
-	private AbstractCliFileDriver getCliDriverInstence(Class<? extends AbstractCliFileDriver> driverClass) {
+	private AbstractCliDriver getCliDriverInstence(Class<? extends AbstractCliDriver> driverClass) {
 		try {
 			return driverClass.getDeclaredConstructor().newInstance();
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {

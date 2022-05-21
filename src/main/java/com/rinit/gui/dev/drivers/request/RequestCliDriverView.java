@@ -6,13 +6,13 @@ import java.awt.event.ActionListener;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 
-import com.rinit.gui.model.fileDriver.AbstractCliFileDriverView;
+import com.rinit.gui.model.fileDriver.AbstractCliDriverView;
 import com.rinit.gui.view.Colors;
 import com.rinit.gui.view.ui.CLabel;
 import com.rinit.gui.view.ui.RInput;
 
 
-public class RequestCliDriverView extends AbstractCliFileDriverView {
+public class RequestCliDriverView extends AbstractCliDriverView {
 
 	/**
 	 * 

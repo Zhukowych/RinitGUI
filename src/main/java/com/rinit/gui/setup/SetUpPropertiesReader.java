@@ -23,7 +23,6 @@ public class SetUpPropertiesReader {
 	}
 	
 	public void readProperties() {
-		System.out.println(this.properties.getProperty(INITIAL_PATH_KEY));
 		FilePanelConfig.INITIAL_PATH = this.properties.getProperty(INITIAL_PATH_KEY);
 	}
 }

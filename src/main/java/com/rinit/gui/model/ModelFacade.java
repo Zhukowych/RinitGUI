@@ -13,6 +13,7 @@ public class ModelFacade {
 	private CommandLineModel commandLineModel;
 	private FileDriverModel fileDriverModel;
 	private RinitClientModel rinitClientModel;
+	private FileOperationModel fileOperationModel;
 	
 	public ModelFacade(IEventHandler eventHandler) {
 		this.rinitClientModel = new RinitClientModel(eventHandler); // must be first
@@ -21,6 +22,7 @@ public class ModelFacade {
 		this.panelsModel = new PanelsModel(eventHandler);
 		this.commandLineModel = new CommandLineModel(eventHandler);
 		this.fileDriverModel = new FileDriverModel(eventHandler, this);
+		this.fileOperationModel = new FileOperationModel(eventHandler, this);
 	}
 
 	public BinModel getBinModel() {
@@ -46,5 +48,9 @@ public class ModelFacade {
 	public FileDriverModel getFileDriverModel() {
 		return fileDriverModel;
 	}
-	
+
+	public FileOperationModel getFileOperationModel() {
+		return fileOperationModel;
+	}
+		
 }

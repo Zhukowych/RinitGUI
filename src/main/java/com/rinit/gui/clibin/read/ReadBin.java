@@ -9,7 +9,7 @@ import com.rinit.debugger.server.dto.FileDTO;
 import com.rinit.gui.clibin.AbstractCliBin;
 import com.rinit.gui.clibin.AbstractCliBinView;
 import com.rinit.gui.model.ModelFacade;
-import com.rinit.gui.model.fileDriver.AbstractCliFileDriver;
+import com.rinit.gui.model.fileDriver.AbstractCliDriver;
 
 public class ReadBin extends AbstractCliBin  {
 
@@ -19,7 +19,7 @@ public class ReadBin extends AbstractCliBin  {
 	private String fileName;
 	private RinitClient rinitClient;
 	private FileDTO readingFile;
-	private AbstractCliFileDriver readingFileDriver;
+	private AbstractCliDriver readingFileDriver;
 	
 	public ReadBin() {}
 	

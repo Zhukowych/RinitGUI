@@ -13,6 +13,7 @@ public class RequestParamsDriverExporter {
 	
 	public String export() {
 		XMLBuilder builder = new XMLBuilder();
+
 		return builder.addTag("requestParams", builder.addGroup(
 					builder.addTag("method", this.file.getMethod()),
 					builder.addTag("getParams", builder.addTable("param", paramCols, this.file.getGetParams())),

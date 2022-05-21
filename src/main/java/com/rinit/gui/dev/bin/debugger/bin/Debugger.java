@@ -71,6 +71,7 @@ public class Debugger implements Runnable {
 		try {
 			this.fileServiceClient.saveFile(report);
 		} catch (ServiceException e) {}
+		this.modelFacade.getPanelsModel().reUpdatePanels();
 	}
 	
 	private DirectoryDriver createReportDir() {

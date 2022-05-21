@@ -8,11 +8,11 @@ import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;
 
 import com.rinit.debugger.server.file.AbstractDriver;
-import com.rinit.gui.model.fileDriver.AbstractCliFileDriver;
+import com.rinit.gui.model.fileDriver.AbstractCliDriver;
 
 public class DevDrivers {
 	
-	private Map<String, Class<? extends AbstractCliFileDriver>> cliFileDrivers = new HashMap<String, Class<? extends AbstractCliFileDriver>>();
+	private Map<String, Class<? extends AbstractCliDriver>> cliFileDrivers = new HashMap<String, Class<? extends AbstractCliDriver>>();
 	private Map<String, Class<? extends AbstractDriver>> fileDrivers = new HashMap<String, Class<? extends AbstractDriver>>();
 
 	public DevDrivers() {
@@ -20,7 +20,7 @@ public class DevDrivers {
 		this.createDevDrivers();
 	}
 	
-	public Map<String, Class<? extends AbstractCliFileDriver>> getCliFileDrivers(){
+	public Map<String, Class<? extends AbstractCliDriver>> getCliFileDrivers(){
 		return this.cliFileDrivers;
 	}
 	
@@ -38,8 +38,8 @@ public class DevDrivers {
 	
 	private void createDevCliDrivers() {
 		Reflections reflections = new Reflections("com.rinit.gui.dev.drivers", new SubTypesScanner(false));
-		for(Class<? extends AbstractCliFileDriver> cliFileDriverClass : reflections.getSubTypesOf(AbstractCliFileDriver.class)) {
-			AbstractCliFileDriver cliFileDriver = this.getCliFileDriverClass(cliFileDriverClass);
+		for(Class<? extends AbstractCliDriver> cliFileDriverClass : reflections.getSubTypesOf(AbstractCliDriver.class)) {
+			AbstractCliDriver cliFileDriver = this.getCliFileDriverClass(cliFileDriverClass);
 			this.cliFileDrivers.put(cliFileDriver.getName(), cliFileDriverClass);
 		}
 	}
@@ -53,7 +53,7 @@ public class DevDrivers {
 		return null;
 	}
 	
-	public AbstractCliFileDriver getCliFileDriverClass(Class<? extends AbstractCliFileDriver> cliFileDriverClass) {
+	public AbstractCliDriver getCliFileDriverClass(Class<? extends AbstractCliDriver> cliFileDriverClass) {
 		try {
 			return cliFileDriverClass.getConstructor().newInstance();
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {

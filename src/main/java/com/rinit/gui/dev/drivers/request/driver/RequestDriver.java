@@ -1,5 +1,7 @@
 package com.rinit.gui.dev.drivers.request.driver;
 
+import java.io.IOException;
+
 import com.rinit.debugger.server.file.AbstractDriver;
 
 import com.rinit.gui.dev.bin.debugger.bin.RequestBuilder;
@@ -73,6 +75,12 @@ public class RequestDriver extends AbstractDriver implements DebuggerDriver {
 	}
 
 	@Override
-	public void outRun(RunContext context) {}
+	public void outRun(RunContext context) {
+		RequestContext requestContext = context.getContext(RequestContext.class);
+		RequestBuilder builder = requestContext.popRequest();
+		try {
+			builder.getResponse().close();
+		} catch (IOException e) {e.printStackTrace();}
+	}
 
 }

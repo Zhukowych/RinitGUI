@@ -2,9 +2,9 @@ package com.rinit.gui.dev.drivers.abstraction;
 
 import javax.swing.JLabel;
 
-import com.rinit.gui.model.fileDriver.AbstractCliFileDriverView;
+import com.rinit.gui.model.fileDriver.AbstractCliDriverView;
 
-public class AbstractionCliDriverView extends AbstractCliFileDriverView {
+public class AbstractionCliDriverView extends AbstractCliDriverView {
 
 	/**
 	 * 

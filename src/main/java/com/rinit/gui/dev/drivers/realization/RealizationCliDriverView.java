@@ -12,12 +12,12 @@ import javax.swing.GroupLayout;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
-import com.rinit.gui.model.fileDriver.AbstractCliFileDriverView;
+import com.rinit.gui.model.fileDriver.AbstractCliDriverView;
 import com.rinit.gui.view.Colors;
 import com.rinit.gui.view.ui.RComboBox;
 
 
-public class RealizationCliDriverView extends AbstractCliFileDriverView {
+public class RealizationCliDriverView extends AbstractCliDriverView {
 
 	/**
 	 * 
@@ -31,7 +31,7 @@ public class RealizationCliDriverView extends AbstractCliFileDriverView {
 		
 	private RealizationCliDriverSubmitData initialData;
 	private RealizationCliDriverLogic logic;
-	private AbstractCliFileDriverView realizationView;
+	private AbstractCliDriverView realizationView;
 	
 	public RealizationCliDriverView(RealizationCliDriverLogic logic) {
 		this.logic = logic;

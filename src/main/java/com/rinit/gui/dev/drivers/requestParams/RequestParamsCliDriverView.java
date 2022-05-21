@@ -13,13 +13,13 @@ import javax.swing.plaf.ComboBoxUI;
 import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 
-import com.rinit.gui.model.fileDriver.AbstractCliFileDriverView;
+import com.rinit.gui.model.fileDriver.AbstractCliDriverView;
 import com.rinit.gui.utils.TableView;
 import com.rinit.gui.view.Colors;
 import com.rinit.gui.view.ui.RComboBox;
 
 
-public class RequestParamsCliDriverView extends AbstractCliFileDriverView {
+public class RequestParamsCliDriverView extends AbstractCliDriverView {
 
 	/**
 	 * 

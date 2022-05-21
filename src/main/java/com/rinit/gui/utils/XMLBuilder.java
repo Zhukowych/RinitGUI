@@ -6,7 +6,7 @@ public class XMLBuilder {
 	
 	public String addTag(String tagName, String tagValue) {
 		StringBuilder builder = new StringBuilder();
-		if (tagValue.isEmpty()) {
+		if (tagValue == null || tagValue.isEmpty()) {
 			builder.append(String.format("<%s/>", tagName));
 		} else {
 			builder.append(String.format("<%s>", tagName));

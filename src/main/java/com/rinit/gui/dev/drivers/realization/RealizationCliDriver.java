@@ -6,10 +6,10 @@ import com.rinit.debugger.server.dto.FileDTO;
 import com.rinit.debugger.server.file.AbstractDriver;
 import com.rinit.gui.dev.drivers.realization.driver.RealizationDriver;
 import com.rinit.gui.model.ModelFacade;
-import com.rinit.gui.model.fileDriver.AbstractCliFileDriver;
-import com.rinit.gui.model.fileDriver.AbstractCliFileDriverView;
+import com.rinit.gui.model.fileDriver.AbstractCliDriver;
+import com.rinit.gui.model.fileDriver.AbstractCliDriverView;
 
-public class RealizationCliDriver extends AbstractCliFileDriver {
+public class RealizationCliDriver extends AbstractCliDriver {
 
 	/**
 	 * 
@@ -35,7 +35,7 @@ public class RealizationCliDriver extends AbstractCliFileDriver {
 	}
 
 	@Override
-	public AbstractCliFileDriverView getView() {
+	public AbstractCliDriverView getView() {
 		return this.view;
 	}
 

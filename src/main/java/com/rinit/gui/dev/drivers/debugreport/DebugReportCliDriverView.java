@@ -19,14 +19,14 @@ import javax.swing.KeyStroke;
 import com.rinit.gui.dev.bin.debugger.bin.interfaces.RequestReportCallBack;
 import com.rinit.gui.dev.bin.debugger.bin.report.ReportItem;
 import com.rinit.gui.dev.drivers.debugreport.driver.DebugReportDriver;
-import com.rinit.gui.model.fileDriver.AbstractCliFileDriverView;
+import com.rinit.gui.model.fileDriver.AbstractCliDriverView;
 import com.rinit.gui.utils.TableView;
 import com.rinit.gui.view.Colors;
 import com.rinit.gui.view.ui.CLabel;
 import com.rinit.gui.view.ui.RInput;
 
 
-public class DebugReportCliDriverView extends AbstractCliFileDriverView {
+public class DebugReportCliDriverView extends AbstractCliDriverView {
 
 	/**
 	 * 

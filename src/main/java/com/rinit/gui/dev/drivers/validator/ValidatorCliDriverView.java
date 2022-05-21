@@ -8,14 +8,14 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 
-import com.rinit.gui.model.fileDriver.AbstractCliFileDriverView;
+import com.rinit.gui.model.fileDriver.AbstractCliDriverView;
 import com.rinit.gui.view.Colors;
 import com.rinit.gui.view.ui.CLabel;
 import com.rinit.gui.view.ui.RInput;
 import com.rinit.gui.view.ui.RTextArea;
 
 
-public class ValidatorCliDriverView extends AbstractCliFileDriverView {
+public class ValidatorCliDriverView extends AbstractCliDriverView {
 	
 	/**
 	 * 
