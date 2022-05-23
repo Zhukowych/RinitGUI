@@ -43,7 +43,7 @@ public class GraphqlCliDriver extends AbstractCliDriver {
 
 	@Override
 	public Dimension getPopUpSize() {
-		return null;
+		return new Dimension(400, 600);
 	}
 	
 	@Override

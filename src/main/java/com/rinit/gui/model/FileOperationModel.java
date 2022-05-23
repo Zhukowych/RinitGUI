@@ -37,6 +37,7 @@ public class FileOperationModel extends AbstractModel {
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
+		this.panelsModel.reUpdatePanels();	
 	}
 	
 	public void deleteFile(AbstractDriver file) {

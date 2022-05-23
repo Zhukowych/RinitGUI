@@ -6,9 +6,17 @@ import com.rinit.gui.model.ModelFacade;
 public class ModelContext {
 
 	public ModelFacade modelFacade;
-	
+
 	public IFileService getFileService() {
 		return this.modelFacade.getRinitClientModel().getClient().getFileService();
 	}
-	
+
+	public ModelFacade getModelFacade() {
+		return modelFacade;
+	}
+
+	public void setModelFacade(ModelFacade modelFacade) {
+		this.modelFacade = modelFacade;
+	}
+		
 }

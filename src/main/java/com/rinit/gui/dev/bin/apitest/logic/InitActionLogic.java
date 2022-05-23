@@ -4,6 +4,7 @@ import java.nio.file.FileAlreadyExistsException;
 
 import com.rinit.gui.AbstractCliBinLogic;
 import com.rinit.gui.dev.drivers.apitestconfig.driver.ApiTestConfiigDriver;
+import com.rinit.gui.dev.drivers.apitesttestsdir.ApiTestTestsDirectoryDriver;
 import com.rinit.gui.model.FileOperationModel;
 import com.rinit.gui.model.ModelFacade;
 import com.rinit.gui.model.panels.PanelsModel;
@@ -14,6 +15,7 @@ public class InitActionLogic extends AbstractCliBinLogic {
 	public static final String OBJECTS_FOLDER_NAME = "objects";
 	public static final String CHANGES_FOLDER_NAME = "changes";
 	public static final String CONFIG_FILE_NAME = "config";
+	public static final String TESTS_FOLDER_NAME = "tests";
 	
 	private String message;
 	private String apiTestFolderPath;
@@ -39,6 +41,7 @@ public class InitActionLogic extends AbstractCliBinLogic {
 		this.createQueriesFiolder();
 		this.createApiTestConfigFile();	
 		this.createChangesFolder();
+		this.createTestsFolder();
 	}
 	
 	private void createApiTestFolder() {
@@ -75,6 +78,17 @@ public class InitActionLogic extends AbstractCliBinLogic {
 		} catch (FileAlreadyExistsException e) {
 			e.printStackTrace();
 		}	
+	}
+	
+	private void createTestsFolder() {
+		try {
+			ApiTestTestsDirectoryDriver apiTestTestsDirectory = new ApiTestTestsDirectoryDriver();
+			apiTestTestsDirectory.setName("tests");
+			apiTestTestsDirectory.setPath(this.panelsModel.getCurrentPath());
+			this.fileOperationModel.mkFile(apiTestTestsDirectory);
+		} catch (FileAlreadyExistsException e) {
+			e.printStackTrace();
+		}		
 	}
 		
 }

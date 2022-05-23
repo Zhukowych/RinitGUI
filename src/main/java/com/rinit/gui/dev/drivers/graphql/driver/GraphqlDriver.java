@@ -12,28 +12,28 @@ import com.rinit.gui.utils.XMLBuilder;
 
 public class GraphqlDriver extends AbstractDriver implements DebuggerDriver {
 
-	private String query;
+	public static final String EXTENTION = "graphql";
 	
-	public String getQuery() {
-		return query;
-	}
+	private String queryName;
 	
-	public void setQuery(String query) {
-		this.query = query;
-	}
+	private String apiUrl;
 	
-	@Override
-	protected void buildFromDTO() {		
-		XMLReader reader = new XMLReader(this.getContent());
-		this.setQuery(reader.getTagValueByName("query", "graphql"));
+	public String getApiUrl() {
+		return apiUrl;
 	}
 
-	@Override
-	public String buildContent() {
-		XMLBuilder builder = new XMLBuilder();
-		return builder.addTag("graphql", builder.addTag("query", this.getQuery()));
+	public void setApiUrl(String apiUrl) {
+		this.apiUrl = apiUrl;
 	}
 
+	public String getQueryName() {
+		return queryName;
+	}
+
+	public void setQueryName(String queryName) {
+		this.queryName = queryName;
+	}
+	
 	@Override
 	public void run(RunContext context) {
 		ReportContext reportContext = context.getContext(ReportContext.class);
@@ -42,9 +42,19 @@ public class GraphqlDriver extends AbstractDriver implements DebuggerDriver {
 	}
 
 	@Override
-	public void outRun(RunContext context) {
-		// TODO Auto-generated method stub
-		
+	public void outRun(RunContext context) {}
+
+	@Override
+	protected void buildFromDTO() {
+		GraphqlImporter importer = new GraphqlImporter(this);
+		importer.parse();
+	}
+
+	@Override
+	public String buildContent() {
+		this.setExtention(EXTENTION);
+		GraphqlExporter exporter = new GraphqlExporter(this);
+		return exporter.export();
 	}
 
 }
