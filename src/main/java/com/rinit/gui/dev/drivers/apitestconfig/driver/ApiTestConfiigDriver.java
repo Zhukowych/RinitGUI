@@ -1,14 +1,17 @@
 package com.rinit.gui.dev.drivers.apitestconfig.driver;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.rinit.debugger.server.file.AbstractDriver;
 
 public class ApiTestConfiigDriver extends AbstractDriver {
 
 	public static final String NAME = "apitest.config";
 	
-	private String queryFindFolderPath;
-	private String queryFileName;
-	private String variablesFileName;
+	private String rootParseFolderPath;
+	
+	private List<FileToParse> filesToParse = new ArrayList<FileToParse>();
 	
 	public ApiTestConfiigDriver() {
 		this.setExtention(NAME);
@@ -26,28 +29,24 @@ public class ApiTestConfiigDriver extends AbstractDriver {
 		return exporeter.export();
 	}
 
-	public String getQueryFindFolderPath() {
-		return queryFindFolderPath;
+	public String getRootParseFolderPath() {
+		return rootParseFolderPath;
 	}
 
-	public void setQueryFindFolderPath(String queryFindFolderPath) {
-		this.queryFindFolderPath = queryFindFolderPath;
+	public void setRootParseFolderPath(String rootParseFolderPath) {
+		this.rootParseFolderPath = rootParseFolderPath;
 	}
 
-	public String getQueryFileName() {
-		return queryFileName;
+	public List<FileToParse> getFilesToParse() {
+		return filesToParse;
 	}
 
-	public void setQueryFileName(String queryFileName) {
-		this.queryFileName = queryFileName;
+	public void setFilesToParse(List<FileToParse> filesToParse) {
+		this.filesToParse = filesToParse;
 	}
 
-	public String getVariablesFileName() {
-		return variablesFileName;
-	}
-
-	public void setVariablesFileName(String variablesFileName) {
-		this.variablesFileName = variablesFileName;
+	public void addFileToParse(FileToParse fileToParse) {
+		this.filesToParse.add(fileToParse);
 	}
 	
 }

@@ -14,6 +14,11 @@ public class RTextArea extends JTextArea {
 	 */
 	private static final long serialVersionUID = 7744369744676457708L;
 
+	public RTextArea(int rows) {
+		this();
+		this.setRows(rows);
+	}
+	
 	public RTextArea() {
 		super();
 		this.setBackground(Colors.INPUT_BACKGROUND);

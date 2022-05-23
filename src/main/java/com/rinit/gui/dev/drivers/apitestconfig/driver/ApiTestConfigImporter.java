@@ -15,9 +15,13 @@ public class ApiTestConfigImporter {
 	public void parse() {
 		if (!this.reader.isOk())
 			return;
-		this.file.setQueryFindFolderPath(this.reader.getTagValueByName("queryFindFolderPath", "apitestconfig"));
-		this.file.setQueryFileName(this.reader.getTagValueByName("queryFileName", "apitestconfig"));
-		this.file.setVariablesFileName(this.reader.getTagValueByName("variablesFileName", "apitestconfig"));
+		this.file.setRootParseFolderPath(this.reader.getTagValueByName("rootParseFolderPath", "apitestconfig"));
+		for (String innerXml : this.reader.innerXmls("fileToParse")){
+			FileToParse fileToParse = new FileToParse();
+			fileToParse.deserialize(innerXml);
+			this.file.addFileToParse(fileToParse);
+		}
+		
 	}
 	
 }

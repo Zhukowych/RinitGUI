@@ -36,9 +36,8 @@ public class InitActionView extends AbstractCliBinView {
 	
 	private void constructGUI() {
 		this.setBackground(Colors.POPUP_BACKGROUND);
-		
 		this.messageLabel.setText(this.logic.getMessaage());
-		
+				
 		this.layout.setHorizontalGroup(this.layout.createParallelGroup(Alignment.LEADING)
 										.addGroup(GroupLayout.Alignment.CENTER, this.layout.createSequentialGroup()
 												.addComponent(this.messageLabel)));

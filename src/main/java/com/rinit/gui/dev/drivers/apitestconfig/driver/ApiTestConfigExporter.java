@@ -12,13 +12,10 @@ public class ApiTestConfigExporter {
 	
 	public String export() {
 		XMLBuilder builder = new XMLBuilder();
-		return builder.addTag("apitestconfig", 
-					builder.addGroup(
-						builder.addTag("queryFindFolderPath", this.file.getQueryFindFolderPath()),
-						builder.addTag("queryFileName", this.file.getQueryFileName()),
-						builder.addTag("variablesFileName", this.file.getVariablesFileName())
-					)
-				);
+		return builder.addTag("apitestconfig",  builder.addGroup(
+					builder.addTag("rootParseFolderPath", this.file.getRootParseFolderPath()),
+					builder.addTag("filesToParse", builder.concat(this.file.getFilesToParse()))
+				));
 	}
 	
 }

@@ -29,13 +29,17 @@ public class JFilePicker extends JPanel {
     private JButton button;
     
     private GroupLayout layout; 
-     
+    
     private JFileChooser fileChooser;
      
     private int mode;
+    private String initialDirectory;
+    
+    public boolean selectOnlyDirectory = false;
     public static final int MODE_OPEN = 1;
     public static final int MODE_SAVE = 2;
-     
+    
+    
     public JFilePicker(String textFieldLabel, String buttonLabel) {
     	this.setBackground(Colors.POPUP_BACKGROUND);
         this.layout = new GroupLayout(this);
@@ -73,8 +77,11 @@ public class JFilePicker extends JPanel {
     }
      
     private void buttonActionPerformed(ActionEvent evt) {
-        this.fileChooser = new JFileChooser();
-    	if (mode == MODE_OPEN) {
+        this.fileChooser = new JFileChooser(this.initialDirectory);
+        if (this.selectOnlyDirectory)
+        	this.fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        
+        if (mode == MODE_OPEN) {
             if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
                 textField.setText(fileChooser.getSelectedFile().getAbsolutePath());
             }
@@ -90,6 +97,15 @@ public class JFilePicker extends JPanel {
         fileChooser.addChoosableFileFilter(filter);
     }
      
+    public void selectOnlyFolders() {
+    	this.setMode(MODE_OPEN);
+    	this.selectOnlyDirectory = true;
+    }
+    
+    public void setInitialDirectory(String dirPath) {
+    	this.initialDirectory = dirPath;
+    }
+    
     public void setMode(int mode) {
         this.mode = mode;
     }
@@ -97,7 +113,11 @@ public class JFilePicker extends JPanel {
     public String getSelectedFilePath() {
         return textField.getText();
     }
-     
+    
+    public void setSelectedFilePath(String filePaths) {
+    	this.textField.setText(filePaths);
+    }
+    
     public JFileChooser getFileChooser() {
         return this.fileChooser;
     }

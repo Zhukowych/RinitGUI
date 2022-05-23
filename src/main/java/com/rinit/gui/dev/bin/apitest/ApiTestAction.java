@@ -4,12 +4,18 @@ import java.lang.reflect.InvocationTargetException;
 
 import com.rinit.gui.AbstractCliBinLogic;
 import com.rinit.gui.clibin.AbstractCliBinView;
+import com.rinit.gui.dev.bin.apitest.logic.ChangesActionLogic;
 import com.rinit.gui.dev.bin.apitest.logic.InitActionLogic;
+import com.rinit.gui.dev.bin.apitest.logic.ParseActionLogic;
+import com.rinit.gui.dev.bin.apitest.view.ChangesActionView;
 import com.rinit.gui.dev.bin.apitest.view.InitActionView;
+import com.rinit.gui.dev.bin.apitest.view.ParseActionView;
 import com.rinit.gui.model.ModelFacade;
 
 public enum ApiTestAction {
-	INIT(InitActionView.class, InitActionLogic.class, true, new Dimension(400, 200), true);
+	INIT(InitActionView.class, InitActionLogic.class, true, new Dimension(400, 200), true),
+	PARSE(ParseActionView.class, ParseActionLogic.class, true, new Dimension(600, 600), true),
+	CHANGES(ChangesActionView.class, ChangesActionLogic.class, false, null, true);
 	
 	private Class<? extends AbstractCliBinView> actionView;
 	private Class<? extends AbstractCliBinLogic> actionLogic;

@@ -11,7 +11,8 @@ import com.rinit.gui.model.panels.PanelsModel;
 public class InitActionLogic extends AbstractCliBinLogic {
 
 	public static final String API_TEST_FOLDER_NAME = ".apitest";
-	public static final String QUERIES_FOLDER_NAME = "queries";
+	public static final String OBJECTS_FOLDER_NAME = "objects";
+	public static final String CHANGES_FOLDER_NAME = "changes";
 	public static final String CONFIG_FILE_NAME = "config";
 	
 	private String message;
@@ -37,6 +38,7 @@ public class InitActionLogic extends AbstractCliBinLogic {
 		this.createApiTestFolder();
 		this.createQueriesFiolder();
 		this.createApiTestConfigFile();	
+		this.createChangesFolder();
 	}
 	
 	private void createApiTestFolder() {
@@ -49,7 +51,7 @@ public class InitActionLogic extends AbstractCliBinLogic {
 
 	private void createQueriesFiolder() {
 		try {
-			this.fileOperationModel.mkDir(QUERIES_FOLDER_NAME, this.apiTestFolderPath);
+			this.fileOperationModel.mkDir(OBJECTS_FOLDER_NAME, this.apiTestFolderPath);
 		} catch (FileAlreadyExistsException e) {
 			e.printStackTrace();
 		}	
@@ -65,6 +67,14 @@ public class InitActionLogic extends AbstractCliBinLogic {
 		} catch (FileAlreadyExistsException e) {
 			e.printStackTrace();
 		}			
+	}
+	
+	private void createChangesFolder() {
+		try {
+			this.fileOperationModel.mkDir(CHANGES_FOLDER_NAME, this.apiTestFolderPath);
+		} catch (FileAlreadyExistsException e) {
+			e.printStackTrace();
+		}	
 	}
 		
 }

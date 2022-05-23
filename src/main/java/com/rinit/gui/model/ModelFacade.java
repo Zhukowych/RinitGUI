@@ -8,6 +8,7 @@ import com.rinit.gui.model.panels.PanelsModel;
 public class ModelFacade {
 	
 	private BinModel binModel;
+	private LibraryModel libraryModel;
 	private TabsModel tabsModel;
 	private PanelsModel panelsModel;	
 	private CommandLineModel commandLineModel;
@@ -19,6 +20,7 @@ public class ModelFacade {
 		this.rinitClientModel = new RinitClientModel(eventHandler); // must be first
 		this.tabsModel = new TabsModel(eventHandler); // must be before bin model
 		this.binModel = new BinModel(eventHandler, this);
+		this.libraryModel = new LibraryModel(eventHandler, this);
 		this.panelsModel = new PanelsModel(eventHandler);
 		this.commandLineModel = new CommandLineModel(eventHandler);
 		this.fileDriverModel = new FileDriverModel(eventHandler, this);

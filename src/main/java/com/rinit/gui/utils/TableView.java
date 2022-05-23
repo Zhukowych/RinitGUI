@@ -1,6 +1,7 @@
 package com.rinit.gui.utils;
 
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -45,6 +46,14 @@ public class TableView extends JPanel {
 		this.bindListeners();
 	}
 	
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+
 	public void removeAll() {
 		int rowCount = this.tableModel.getRowCount();
 		for (int i = rowCount - 1; i >= 0; i--) {
@@ -77,6 +86,14 @@ public class TableView extends JPanel {
 		return tableData;
 	}
 	
+	public String getDataAt(int row, int col) {
+		return (String) this.tableModel.getValueAt(row, col);
+	}
+	
+	public void setValueAt(int row, int col, String value) {
+		this.tableModel.setValueAt(value, row, col);
+	}
+	
 	private Object[] createColumns(String[] columns) {
 		ArrayList<String> newColumns = new ArrayList<String>();
 		for (String column : columns) {
@@ -103,6 +120,14 @@ public class TableView extends JPanel {
 		int selectedRow = this.table.getSelectedRow();
 		if (selectedRow >= 0)
 			this.tableModel.removeRow(selectedRow);
+	}
+
+	public int rowAtPoint(Point point) {
+		return this.table.rowAtPoint(point);
+	}
+
+	public int columnAtPoint(Point point) {
+		return this.table.columnAtPoint(point);
 	}
 	
 }
