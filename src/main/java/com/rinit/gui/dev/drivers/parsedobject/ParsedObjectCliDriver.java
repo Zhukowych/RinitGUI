@@ -11,11 +11,22 @@ import com.rinit.gui.model.fileDriver.AbstractCliDriverView;
 
 public class ParsedObjectCliDriver extends AbstractCliDriver {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5373021623088238856L;
+
 	public static final String NAME = "parsedobject";
+	
+	private ParsedObjectCliDriverView view;
+	private ParsedObjectCliDriverLogic logic;
+	
+	public ParsedObjectCliDriver() {}
 	
 	public ParsedObjectCliDriver(FileDTO readingFile, ModelFacade modelFacade) {
 		super(readingFile, modelFacade);
-
+		this.logic = new ParsedObjectCliDriverLogic(readingFile, modelFacade);
+		this.view = new ParsedObjectCliDriverView(this.logic);
 	}
 	
 	@Override
@@ -25,8 +36,7 @@ public class ParsedObjectCliDriver extends AbstractCliDriver {
 
 	@Override
 	public AbstractCliDriverView getView() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.view;
 	}
 
 	@Override
@@ -41,7 +51,7 @@ public class ParsedObjectCliDriver extends AbstractCliDriver {
 
 	@Override
 	public Dimension getPopUpSize() {
-		return new Dimension(400, 600);
+		return new Dimension(800, 600);
 	}
 
 	@Override

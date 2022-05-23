@@ -39,6 +39,10 @@ public class FileOperationModel extends AbstractModel {
 		}
 	}
 	
+	public void deleteFile(AbstractDriver file) {
+		this.fileService.deleteFile(file.toDTO());
+	}
+	
 	public void mkDir(String dirName) throws FileAlreadyExistsException {
 		this.mkDir(dirName, this.panelsModel.getCurrentPath());
 	}

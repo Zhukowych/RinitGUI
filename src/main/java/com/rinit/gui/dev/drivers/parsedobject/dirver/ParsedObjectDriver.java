@@ -40,6 +40,10 @@ public class ParsedObjectDriver extends AbstractDriver {
 		this.values.put(valueType, value);		
 	}
 	
+	public String getValue(String valueType) {
+		return this.values.get(valueType);
+	}
+	
 	@Override
 	protected void buildFromDTO() {
 		ParsedObjectImporter importer = new ParsedObjectImporter(this);

@@ -19,6 +19,7 @@ import com.rinit.debugger.server.dto.FileDTO;
 import com.rinit.gui.AbstractCliBinLogic;
 import com.rinit.gui.dev.drivers.apitestconfig.driver.ApiTestConfiigDriver;
 import com.rinit.gui.dev.drivers.apitestconfig.driver.FileToParse;
+import com.rinit.gui.dev.drivers.change.driver.ChangeDriver;
 import com.rinit.gui.dev.drivers.parsedobject.dirver.ParsedObjectDriver;
 import com.rinit.gui.model.FileOperationModel;
 import com.rinit.gui.model.ModelFacade;
@@ -33,6 +34,7 @@ public class ParseActionLogic extends AbstractCliBinLogic {
 	
 	private String apiTestFolderPath;
 	private String parsedObjectsFolderPath;
+	private String changesFolderPath;
 
 	private Map<String, ParsedObjectDriver> parsedObjects = new HashMap<String, ParsedObjectDriver>();
 	
@@ -112,15 +114,44 @@ public class ParseActionLogic extends AbstractCliBinLogic {
 		for (int i=0; i<keyMatches.size(); i++) 
 			this.addParsedObject(keyMatches.get(i), valueMatches.get(i), fileToParse);
 		
-		
 	}
 	
 	private void addParsedObject(String key, String value, FileToParse fileToParse) {
-		
-		if (this.parsedObjects.get(key) == null) 
+		if (this.parsedObjects.get(key) == null) {
 			this.parsedObjects.put(key, new ParsedObjectDriver(key));
-
+			this.createNewParsedObjectMessage(this.parsedObjects.get(key));
+		}
+		
+		if (this.parsedObjects.get(key).getValue(fileToParse.getName()) != null 
+				&& !this.parsedObjects.get(key).getValue(fileToParse.getName()).equals(value))
+			this.createUpdatedParsedObjectsValue(this.parsedObjects.get(key), fileToParse.getName(), value);
+			
 		this.parsedObjects.get(key).addValue(fileToParse.getName(), value);
+	}
+	
+	private void createNewParsedObjectMessage(ParsedObjectDriver newParsedObject) {
+		ChangeDriver change = new ChangeDriver();
+		change.setMessage(String.format("Parsed new object with key %s", newParsedObject.getKey()));
+		change.setChangedObjectPath(newParsedObject.getKey());
+		this.saveChange(change);
+	}
+	
+	private void createUpdatedParsedObjectsValue(ParsedObjectDriver changedParsedObject, String changedValueType, String newValue) {
+		ChangeDriver change = new ChangeDriver();
+		change.setMessage(String.format("In object with key %s changes value %s", changedParsedObject.getKey(), changedValueType));
+		change.setPreviousValue(changedParsedObject.getValue(changedValueType));
+		change.setCurrentValue(newValue);	
+		change.setChangedObjectPath(changedParsedObject.getKey());
+		this.saveChange(change);
+	}
+	
+	private void saveChange(ChangeDriver change) {
+		change.setPath(this.changesFolderPath);
+		try {
+			this.fileOperationModel.mkFile(change);
+		} catch (FileAlreadyExistsException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void loadConfigFile() {
@@ -129,7 +160,8 @@ public class ParseActionLogic extends AbstractCliBinLogic {
 			InitActionLogic.API_TEST_FOLDER_NAME
 		);
 		this.parsedObjectsFolderPath = this.fileOperationModel.joinPaths(this.apiTestFolderPath, InitActionLogic.OBJECTS_FOLDER_NAME);
-
+		this.changesFolderPath = this.fileOperationModel.joinPaths(this.apiTestFolderPath, InitActionLogic.CHANGES_FOLDER_NAME);
+		
 		FileDTO configFileDTO = this.fileOperationModel.getFilWithPathAndName(this.apiTestFolderPath, InitActionLogic.CONFIG_FILE_NAME);
 		this.apiTestConfig = new ApiTestConfiigDriver();
 		this.apiTestConfig.fromDTO(configFileDTO);

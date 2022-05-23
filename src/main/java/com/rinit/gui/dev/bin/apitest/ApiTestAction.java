@@ -15,7 +15,7 @@ import com.rinit.gui.model.ModelFacade;
 public enum ApiTestAction {
 	INIT(InitActionView.class, InitActionLogic.class, true, new Dimension(400, 200), true),
 	PARSE(ParseActionView.class, ParseActionLogic.class, true, new Dimension(600, 600), true),
-	CHANGES(ChangesActionView.class, ChangesActionLogic.class, false, null, true);
+	CHANGES(ChangesActionView.class, ChangesActionLogic.class, true, new Dimension(800, 600), true);
 	
 	private Class<? extends AbstractCliBinView> actionView;
 	private Class<? extends AbstractCliBinLogic> actionLogic;

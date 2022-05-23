@@ -116,7 +116,7 @@ public class TableView extends JPanel {
 		});
 	}
 	
-	private void removeSelectedRow() {
+	public void removeSelectedRow() {
 		int selectedRow = this.table.getSelectedRow();
 		if (selectedRow >= 0)
 			this.tableModel.removeRow(selectedRow);
