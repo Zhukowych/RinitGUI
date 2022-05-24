@@ -50,7 +50,7 @@ public class ApiTestTestsDirectoryCliDriver extends AbstractCliDriver {
 
 	@Override
 	public Class<? extends AbstractDriver> getDriver() {
-		return null;
+		return ApiTestTestsDirectoryDriver.class;
 	}
 
 }

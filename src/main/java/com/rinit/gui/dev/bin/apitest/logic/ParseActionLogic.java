@@ -102,14 +102,14 @@ public class ParseActionLogic extends AbstractCliBinLogic {
 		List<String> keyMatches = new ArrayList<String>();
 		List<String> valueMatches = new ArrayList<String>();
 		
-		Matcher keyMatcher = Pattern.compile(fileToParse.getKeyRegex()).matcher(fileContent);
-		Matcher valueMatcher = Pattern.compile(fileToParse.getValueRegex()).matcher(fileContent);
+		Matcher keyMatcher = Pattern.compile(fileToParse.getKeyRegex(), Pattern.MULTILINE).matcher(fileContent);
+		Matcher valueMatcher = Pattern.compile(fileToParse.getValueRegex(), Pattern.MULTILINE).matcher(fileContent);
 		
-		while (keyMatcher.find())
-			keyMatches.add(keyMatcher.group());
+		while (keyMatcher.find()) 
+			keyMatches.add(keyMatcher.group(keyMatcher.groupCount()));
 		
 		while (valueMatcher.find())
-			valueMatches.add(valueMatcher.group());
+			valueMatches.add(valueMatcher.group(valueMatcher.groupCount()));
 	
 		for (int i=0; i<keyMatches.size(); i++) 
 			this.addParsedObject(keyMatches.get(i), valueMatches.get(i), fileToParse);

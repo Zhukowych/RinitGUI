@@ -5,6 +5,6 @@ import com.rinit.gui.dev.bin.debugger.bin.report.ReportItem;
 
 public interface CodeValidator {
 	
-	public ReportItem validate(RunContext context);
+	public ReportItem validate(RunContext context, CodeValidatorDriver validatorDriver);
 
 }

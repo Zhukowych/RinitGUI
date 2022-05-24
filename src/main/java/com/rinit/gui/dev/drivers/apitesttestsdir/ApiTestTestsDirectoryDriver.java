@@ -7,7 +7,9 @@ import com.rinit.gui.dev.bin.apitest.logic.InitActionLogic;
 import com.rinit.gui.dev.bin.debugger.bin.context.ModelContext;
 import com.rinit.gui.dev.bin.debugger.bin.context.RunContext;
 import com.rinit.gui.dev.bin.debugger.bin.interfaces.DebuggerDriver;
+import com.rinit.gui.dev.drivers.graphql.driver.GraphqlQueriesResponseContext;
 import com.rinit.gui.dev.drivers.parsedobject.dirver.ParsedObjectDriver;
+import com.rinit.gui.dev.drivers.variables.driver.VariablesContext;
 import com.rinit.gui.model.FileOperationModel;
 import com.rinit.gui.model.ModelFacade;
 import com.rinit.gui.model.panels.PanelsModel;
@@ -30,6 +32,10 @@ public class ApiTestTestsDirectoryDriver extends AbstractDriver implements Debug
 		List<ParsedObjectDriver> parsedObjects = this.getAllParsedObjects(context);
 		ParsedObjectsContext parsedObjectsContext = new ParsedObjectsContext();
 		parsedObjectsContext.addAll(parsedObjects);
+		
+		context.addContext(parsedObjectsContext);
+		context.addContext(new GraphqlQueriesResponseContext());
+		context.addContext(new VariablesContext());
 	}
 
 	@Override
@@ -39,7 +45,7 @@ public class ApiTestTestsDirectoryDriver extends AbstractDriver implements Debug
 		ModelFacade modelFacade = context.getContext(ModelContext.class).getModelFacade();
 		FileOperationModel fileOperationModel = modelFacade.getFileOperationModel();
 		PanelsModel panelsModel = modelFacade.getPanelsModel();
-		String parsedObjectsDirPath = fileOperationModel.joinPaths(panelsModel.getCurrentPath(), InitActionLogic.OBJECTS_FOLDER_NAME);
+		String parsedObjectsDirPath = fileOperationModel.joinPaths(panelsModel.getCurrentPath(), InitActionLogic.API_TEST_FOLDER_NAME, InitActionLogic.OBJECTS_FOLDER_NAME);
 		return fileOperationModel.getAllFilesByDirExtention(parsedObjectsDirPath, ParsedObjectDriver.EXTENTION, ParsedObjectDriver.class);
 	}
 

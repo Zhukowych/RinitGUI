@@ -28,4 +28,8 @@ public class ParsedObjectsContext {
 		}
 	} 
 	
+	public ParsedObjectDriver getParsedObject(String key) {
+		return this.parsedObjects.get(key);
+	}
+	
 }

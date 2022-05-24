@@ -1,6 +1,7 @@
 package com.rinit.gui.dev.bin.debugger.bin;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
@@ -64,6 +65,17 @@ public class RequestBuilder {
 		}
 	}
 	
+	public String readContent() {
+		InputStream input = null;
+		try {
+			input = response.getEntity().getContent();
+		} catch (UnsupportedOperationException | IOException e) {e.printStackTrace();}
+		try {
+			return new String(input.readAllBytes());
+		} catch (IOException e) {e.printStackTrace();}
+		return "";
+	}
+	
 	private HttpUriRequest createGetRequest() {
 		HttpGet request = new HttpGet(this.createURI());
 		return request;
@@ -104,6 +116,5 @@ public class RequestBuilder {
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		this.response = httpClient.execute(request);
 	}
-
 		
 }

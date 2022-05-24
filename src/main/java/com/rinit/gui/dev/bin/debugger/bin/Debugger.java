@@ -117,11 +117,14 @@ public class Debugger implements Runnable {
 		AbstractDriver file = null;
 		try {
 			file = this.fileDriverModel.getDriverForFile(dto);
-		} catch (DriverNotFoundException e) {}
+		} catch (DriverNotFoundException e) {
+			e.printStackTrace();
+		}
 		
 		
 		if (file != null)
 			this.runDebuggerDriver(file);
+		
 		if (this.fileDriverModel.isExtentionDirable(dto.getExtention())) {
 			this.fileStack.push(this.getPathFilesDeque(this.fileServiceClient.getFilesByPath(dto.getChildrenPath())));
 			this.openedDirableFiles.push(dto);

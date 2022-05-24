@@ -59,7 +59,7 @@ public class CodeValidatorDriver extends AbstractDriver implements DebuggerDrive
 	public void run(RunContext context) {
 		ReportContext reportContext = context.getContext(ReportContext.class);
 		CodeValidator validator = this.getValidatorInstance();
-		reportContext.addReport(validator.validate(context));
+		reportContext.addReport(validator.validate(context, this));
 	}
 
 	@Override
@@ -73,7 +73,6 @@ public class CodeValidatorDriver extends AbstractDriver implements DebuggerDrive
 	    } catch (MalformedURLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-	    
 	    return (CodeValidator)ReflectionUtils.createInstanceOf(validatorClass);
 	}
 

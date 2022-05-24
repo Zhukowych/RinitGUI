@@ -44,7 +44,7 @@ public class ParseActionView extends AbstractCliBinView {
 	private void constructGUI() {
 		this.setBackground(Colors.POPUP_BACKGROUND);
 		
-		this.parseRootFolder.setInitialDirectory("/home/zhukowych/proj/welard/shopcar_front/store");
+		this.parseRootFolder.setInitialDirectory("/home/zhukowych/proj/learn/man/books");
 		this.parseRootFolder.selectOnlyFolders();
 		
 		this.layout.setHorizontalGroup(this.layout.createParallelGroup(Alignment.LEADING)

@@ -12,6 +12,10 @@ public class ReportItem {
 	public String fullReport = "";
 	public String time;
 	
+	public static final String PASSED = "PASSED";
+	public static final String FAILED = "FAILED";
+	
+	
 	public static ReportItem createDefaultReport(AbstractDriver file) {
 		ReportItem reportItem = new ReportItem();
 		reportItem.elementName = file.getName();
@@ -48,6 +52,54 @@ public class ReportItem {
 				);
 	}
 	
+	public String getElementName() {
+		return elementName;
+	}
+
+	public void setElementName(String elementName) {
+		this.elementName = elementName;
+	}
+
+	public String getElementPath() {
+		return elementPath;
+	}
+
+	public void setElementPath(String elementPath) {
+		this.elementPath = elementPath;
+	}
+
+	public String getElementType() {
+		return elementType;
+	}
+
+	public void setElementType(String elementType) {
+		this.elementType = elementType;
+	}
+
+	public String getShortReport() {
+		return shortReport;
+	}
+
+	public void setShortReport(String shortReport) {
+		this.shortReport = shortReport;
+	}
+
+	public String getFullReport() {
+		return fullReport;
+	}
+
+	public void setFullReport(String fullReport) {
+		this.fullReport = fullReport;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
 	public String[] toRow() {
 		return new String[] {this.elementName, this.elementType, this.shortReport, this.time};
 	}
