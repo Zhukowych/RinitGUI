@@ -44,7 +44,6 @@ com/rinit/gui/view/ui/CLabel.class
 com/rinit/gui/dev/drivers/directory/DirectoryDriver.class
 com/rinit/gui/dev/bin/debugger/DebuggerBin.class
 com/rinit/gui/clibin/upload/UploadBinView$1.class
-com/rinit/gui/view/SetupView.class
 com/rinit/gui/controller/PanelsController.class
 com/rinit/gui/view/panels/LeftPanelView.class
 com/rinit/gui/model/viewModel/SelectTabModelView.class
@@ -62,7 +61,6 @@ com/rinit/gui/dev/drivers/realization/RealizationCliDriverView$1.class
 com/rinit/gui/dev/bin/debugger/bin/context/ReportContext.class
 com/rinit/gui/utils/XMLBuilder.class
 com/rinit/gui/controller/TabsController.class
-com/rinit/gui/view/SetupView$SetupPanel.class
 com/rinit/gui/clibin/upload/UploadBinLogic.class
 com/rinit/gui/controller/PanelsController$7.class
 com/rinit/gui/dev/drivers/request/RequestCliDriverLogic.class
@@ -137,7 +135,6 @@ com/rinit/gui/view/panels/RightPanelView.class
 com/rinit/gui/clibin/mkdir/MkDirBinView.class
 com/rinit/gui/view/CommandLineView.class
 com/rinit/gui/model/AbstractModel.class
-com/rinit/gui/model/fileDriver/AbstractCliFileDriver.class
 com/rinit/gui/clibin/edfile/EditFileCliBin.class
 com/rinit/gui/model/panels/Panel.class
 com/rinit/gui/clibin/newfile/NewFileBin.class
@@ -154,7 +151,6 @@ com/rinit/gui/event/IEventContext.class
 com/rinit/gui/dev/drivers/debugreport/DebugReportCliDriverView.class
 com/rinit/gui/view/CommandLineView$4.class
 com/rinit/gui/dev/bin/debugger/bin/Debugger.class
-com/rinit/gui/model/fileDriver/AbstractCliFileDriverView.class
 com/rinit/gui/view/TabsView$2.class
 com/rinit/gui/view/CommandLineView$1.class
 com/rinit/gui/model/panels/AbstractPanelModel.class
@@ -183,10 +179,8 @@ com/rinit/gui/view/panels/RightPanelView$3.class
 com/rinit/gui/clibin/mkdir/MkDirBinLogic.class
 com/rinit/gui/controller/TabsController$1.class
 com/rinit/gui/controller/CommandLineController$2.class
-com/rinit/gui/view/SetupView$SetupPanel$1.class
 com/rinit/gui/dev/bin/debugger/DebuggerBinView$2.class
 com/rinit/gui/dev/bin/debugger/bin/interfaces/RequestReportCallBack.class
-com/rinit/gui/dev/FilePanelConfig.class
 com/rinit/gui/event/IListener.class
 com/rinit/gui/controller/AbstractController.class
 com/rinit/gui/clibin/mkdir/MkDirBinView$1.class

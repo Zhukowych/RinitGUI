@@ -33,7 +33,7 @@ public class BinController {
 		AbstractCliBin bin = null;
 		try {
 			bin = binClass.getDeclaredConstructor().newInstance();
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException | ClassCastException  e ) {
+		} catch (Exception  e ) {
 			e.printStackTrace();
 		} 
 		if (bin != null) {

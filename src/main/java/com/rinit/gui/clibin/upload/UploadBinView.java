@@ -7,6 +7,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.rinit.gui.utils.JFilePicker;
@@ -84,7 +85,13 @@ public class UploadBinView extends JPanel {
 	}
 	
 	public void submit() {
-		logic.submit(new UploadBinSubmitData(this.name.getText(), this.classPath.getText(), this.jarFile.getSelectedFilePath()));
+		try {
+			logic.submit(new UploadBinSubmitData(this.name.getText(), this.classPath.getText(), this.jarFile.getSelectedFilePath()));
+			JOptionPane.showMessageDialog(null, "Bin is loaded", "Success", JOptionPane.INFORMATION_MESSAGE); 
+		} catch (Exception e) {
+			 e.printStackTrace();
+			 JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE); 
+		}
 		
 	}
 	

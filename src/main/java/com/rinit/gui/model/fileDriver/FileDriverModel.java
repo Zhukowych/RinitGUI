@@ -139,7 +139,11 @@ public class FileDriverModel extends AbstractModel {
 	
 	private void addFileDrivers() {
 		for (Entry<String, Class<? extends AbstractCliDriver>> entry : cliFileDriver.entrySet()) {
-			this.fileDrivers.put(entry.getKey(), this.getCliDriverInstence(entry.getValue()).getDriver());
+			try {
+				this.fileDrivers.put(entry.getKey(), this.getCliDriverInstence(entry.getValue()).getDriver());
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -161,6 +165,11 @@ public class FileDriverModel extends AbstractModel {
 			}
 		}
 		return remoteCliDrivers;
+	}
+	
+	public void reloadRemoteDrivers() {
+		this.modelFacade.getRinitClientModel().getClient().getLibraryServiceClient().autodiscover();
+		this.cliFileDriver.putAll(this.getRemoteDrivers());
 	}
 
 	private AbstractCliDriver getCliDriverInstence(Class<? extends AbstractCliDriver> driverClass) {

@@ -51,6 +51,7 @@ public class BinModel extends AbstractModel{
 	
 	private AbstractCliBin getBin(String binName, String[] params) {
 		Class<? extends AbstractCliBin> bin = this.bins.get(binName);
+		System.out.println(bin);
 		try {
 			Constructor<? extends AbstractCliBin> cons  = bin.getConstructor(String[].class, ModelFacade.class);
 			Object params_ = (Object)params;
@@ -97,14 +98,34 @@ public class BinModel extends AbstractModel{
 			LibraryDriver binLibrary = null;
 			try {
 				binLibrary = libraryServiceClient.convertRemoteLibraryToLocal(libraryServiceClient.getLibraryByPathName("/lib/bin/", binName));
-			} catch (LibraryNotFoundException e) {e.printStackTrace();}
+				binLibrary.loadClasses();
+			} catch (Exception e) {e.printStackTrace();}
 			Class<? extends AbstractCliBin> cliBinClass = null;
-			try {
-				cliBinClass = (Class<? extends AbstractCliBin>) binLibrary.getClassWithName(binName);
-			} catch (LibraryClassNotFoundException e) {e.printStackTrace();}
-			remoteBins.put(binName, cliBinClass);
+			if (binLibrary != null) {
+				try {
+					cliBinClass = (Class<? extends AbstractCliBin>) binLibrary.getClassWithName(binName);
+				} catch (LibraryClassNotFoundException e) {e.printStackTrace();}
+				remoteBins.put(this.createInstance(cliBinClass).getName(), cliBinClass);
+			}
 		}
 		return remoteBins;
+	}
+	
+	public void reloadRemoveBins() {
+		this.modelFacade.getRinitClientModel().getClient().getLibraryServiceClient().autodiscover();
+		this.modelFacade.getRinitClientModel().getClient().getBinService().autodiscoverBins();
+		
+		this.bins.putAll(this.getRemoteBins());
+	}
+	
+	public AbstractCliBin createInstance(Class<? extends AbstractCliBin> binClass) {
+		try {
+			return binClass.getDeclaredConstructor().newInstance();
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	private String getBinName(String command) {

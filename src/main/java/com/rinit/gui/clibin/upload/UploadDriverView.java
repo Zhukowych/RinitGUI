@@ -7,6 +7,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.rinit.gui.utils.JFilePicker;
@@ -86,7 +87,13 @@ public class UploadDriverView extends JPanel {
 	
 	private void submit() {
 		UploadDriverSubmitData submitData = new UploadDriverSubmitData(this.extention.getText(), this.classPath.getText(), this.jarFile.getSelectedFilePath());
-		this.logic.uploadDriver(submitData);
+		try {
+			this.logic.uploadDriver(submitData);
+			JOptionPane.showMessageDialog(null, "Driver loaded", "Success", JOptionPane.INFORMATION_MESSAGE); 
+		} catch (Exception e) {
+			 JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE); 
+		}
+		
 	}
 	
 }
