@@ -6,6 +6,51 @@
 [Emphasis](#emphasis)  
 
 
+<h2>Інсталяція продукту</h2>
+
+Для початку роботи потрібно інсталювати систему, спочатку потрібно скачати найновіший реліз із гітхабу.
+Після цього розпакувати архів: 
+```console
+zhukowych@zhukowych:~$ tar –xvzf <архів реліщу>.tar.gz
+```
+Також потрібно інсталювати БД mysql та створити в ній відповідну таблицю:
+```sql
+CREATE TABLE `files` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  `path` text,
+  `extention` varchar(20) DEFAULT NULL,
+  `position` int DEFAULT NULL,
+  `content` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+```
+Після цього у папці, куди був розпакований архів релізу, потрібно відредагувати файл application.properties
+
+```properties
+server.port = <потр, на якому буде запущена серверна частина>
+spring.datasource.url=jdbc:mysql://<адреса mysql>/<назва бази даних>
+spring.datasource.username=root
+spring.datasource.password=password
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+
+spring.servlet.multipart.enabled=true
+spring.servlet.multipart.max-file-size=200MB
+spring.servlet.multipart.max-request-size=215MB
+
+app.upload.dir = <шлях для збереження файлів>
+
+```
+
+В результаті для запуску системи потрібно запустити дві команди
+
+```console
+zhukowych@zhukowych:~$ java -jar RinitServer-0.0.1-SNAPSHOT.jar
+zhukowych@zhukowych:~$ java -jar RinitGUI-0.0.1-SNAPSHOT.jar
+
+```
+
 <h2>Наявний функціонал</h2>
 <a name="headers"></a>
 
